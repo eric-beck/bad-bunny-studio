@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>VILLAIN SCRAPBOOK - Encoder</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;700;900&amp;family=Plus+Jakarta+Sans:wght@300;400;600;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "inverse-primary": "#ffb4ab",
+                        "secondary-container": "#c3e8ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e9e9dd",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-primary-container": "#93000d",
+                        "on-primary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e4e3d7",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1b1c15",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303129",
+                        "on-secondary-fixed": "#001e2c",
+                        "on-secondary-container": "#004c69",
+                        "on-secondary": "#ffffff",
+                        "secondary": "#00668a",
+                        "primary-fixed": "#ffdad6",
+                        "background": "#fbfaee",
+                        "primary-container": "#ffdad6",
+                        "inverse-on-surface": "#f2f1e5",
+                        "tertiary": "#705d00",
+                        "tertiary-container": "#ffe16d",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed": "#c3e8ff",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-tertiary-fixed": "#221b00",
+                        "surface-bright": "#fbfaee",
+                        "tertiary-fixed": "#ffe16d",
+                        "on-surface-variant": "#474747",
+                        "outline-variant": "#c6c6c6",
+                        "primary": "#c00014",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#777777",
+                        "on-primary-fixed": "#410002",
+                        "surface-dim": "#dbdbcf",
+                        "surface-container-low": "#f5f4e8",
+                        "surface-container-highest": "#e4e3d7",
+                        "on-background": "#1b1c15",
+                        "surface-container": "#efeee3",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-tertiary-container": "#544600",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-tint": "#c00014",
+                        "surface": "#fbfaee"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+
+        .scribble-border {
+            border-style: solid;
+            border-image: linear-gradient(to right, #c00014, #705d00) 1;
+            clip-path: polygon(2% 0%, 98% 1%, 100% 4%, 99% 96%, 97% 100%, 3% 99%, 0% 95%, 1% 5%)
+        }
+
+        .crayon-strike {
+            position: relative;
+            display: inline-block
+        }
+
+        .crayon-strike::after {
+            content: "";
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            width: calc(100% + 10px);
+            height: 12px;
+            background: #ba1a1a;
+            opacity: 0.7;
+            transform: translatey(-50%) rotate(-2deg);
+            border-radius: 4px;
+            z-index: 10
+        }
+
+        .doodle-bunny {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 3px solid #705d00;
+            border-radius: 50% 50% 10% 10%;
+            top: -40px;
+            right: 20px;
+            transform: rotate(15deg)
+        }
+
+        .doodle-bunny::before,
+        .doodle-bunny::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 40px;
+            border: 3px solid #705d00;
+            border-radius: 50% 50% 0 0;
+            top: -35px
+        }
+
+        .doodle-bunny::before {
+            left: 5px;
+            transform: rotate(-10deg)
+        }
+
+        .doodle-bunny::after {
+            right: 5px;
+            transform: rotate(10deg)
+        }
+
+        .paper-texture {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDVuxkK0hPZT3kieKKUrJd_3OWQCeyUyEFPKZUggeTQkhapWWjTC6lftdoUVE6XRkfxrXve-piL-jZbgXDFq8lfWx9Xi_zeCJw-Cq7dFuxIhPMwRtEFoRVLOQ8PWHPEKAWt2O9oFwW9EZn76pNPXXfrsb3MKC4BFoX8BeYv_N-oIvShzt4X8iSV0ezGdYjayCss8PLf80e7yBqrMV4JPAUIvpPemIPYaxSg1iwE1zbZfeP7M65_ps9f_FMvYDls8wj_bhLQX49vOEE)
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background font-body text-on-background min-h-screen selection:bg-tertiary-container selection:text-on-tertiary-container overflow-x-hidden paper-texture">
+    <!-- TopAppBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-[#fbfaee] dark:bg-stone-950 flex justify-between items-center px-12 py-8 w-full border-b-[6px] border-[#f5f4e8] dark:border-stone-900 shadow-[0_20px_40px_rgba(27,28,21,0.06)]">
+        <div class="flex items-center gap-8">
+            <h1
+                class="font-['Spline_Sans'] font-black uppercase tracking-tighter text-4xl text-[#c00014] dark:text-red-600 -rotate-2 hover:rotate-1 transition-transform cursor-pointer">
+                badbunny.studio</h1>
+            <div class="hidden md:flex gap-8 items-center ml-8">
+                <a class="text-[#c00014] dark:text-red-500 underline decoration-wavy decoration-[4px] underline-offset-8 font-bold"
+                    href="#">Encoder</a>
+                <a class="text-stone-400 dark:text-stone-600 font-bold hover:text-[#705d00] dark:hover:text-yellow-500 hover:scale-105 transition-all"
+                    href="#">Decoder</a>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <span class="material-symbols-outlined text-3xl cursor-pointer hover:scale-110 transition-transform"
+                data-icon="pest_control">pest_control</span>
+            <span class="material-symbols-outlined text-3xl cursor-pointer hover:scale-110 transition-transform"
+                data-icon="settings">settings</span>
+        </div>
+    </nav>
+    <!-- SideNavBar -->
+    <aside
+        class="fixed left-0 top-0 h-full w-80 bg-[#f5f4e8] dark:bg-stone-900 flex flex-col gap-4 p-8 pt-40 rounded-r-[4rem] border-r-[8px] border-[#e4e3d7] dark:border-stone-800 shadow-2xl shadow-stone-900/10 z-40 hidden lg:flex">
+        <div class="mb-8 px-4">
+            <h2 class="text-2xl font-black text-[#c00014] dark:text-red-600 font-headline uppercase italic">MASTERMIND
+            </h2>
+            <p class="font-['Plus_Jakarta_Sans'] font-extrabold tracking-tight text-on-surface-variant">Plotting
+                Chaos...</p>
+        </div>
+        <nav class="space-y-4">
+            <div
+                class="bg-[#ffe16d] dark:bg-yellow-900/40 text-[#705d00] dark:text-yellow-200 rounded-[2.5rem] px-6 py-4 rotate-2 shadow-sm scale-105 flex items-center gap-4 cursor-pointer">
+                <span class="material-symbols-outlined" data-icon="science">science</span>
+                <span class="font-extrabold">Secret Lab</span>
+            </div>
+            <div
+                class="text-stone-500 dark:text-stone-400 px-6 py-4 hover:bg-white/50 dark:hover:bg-stone-800/50 rounded-full flex items-center gap-4 cursor-pointer hover:translate-x-3 hover:rotate-[-1deg] transition-all duration-300">
+                <span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                <span class="font-extrabold text-lg">Evidence Box</span>
+            </div>
+            <div
+                class="text-stone-500 dark:text-stone-400 px-6 py-4 hover:bg-white/50 dark:hover:bg-stone-800/50 rounded-full flex items-center gap-4 cursor-pointer hover:translate-x-3 hover:rotate-[-1deg] transition-all duration-300">
+                <span class="material-symbols-outlined" data-icon="format_paint">format_paint</span>
+                <span class="font-extrabold text-lg">Smudge Tool</span>
+            </div>
+            <div
+                class="text-stone-500 dark:text-stone-400 px-6 py-4 hover:bg-white/50 dark:hover:bg-stone-800/50 rounded-full flex items-center gap-4 cursor-pointer hover:translate-x-3 hover:rotate-[-1deg] transition-all duration-300">
+                <span class="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span>
+                <span class="font-extrabold text-lg">Burn After Reading</span>
+            </div>
+        </nav>
+        <div class="mt-auto p-4 flex items-center gap-4 grayscale hover:grayscale-0 transition-all cursor-crosshair">
+            <img alt="Profile" class="w-16 h-16 rounded-full border-4 border-on-surface object-cover rotate-[-5deg]"
+                data-alt="a gritty black and white sketch of a masked villainous figure with glowing red eyes in a messy artistic style"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGJyYNLiUrJxzMr-_ZtG290WyRuKz8pi1wwDBpKnzd0f0_72PcIrN_K_OWmRTDKLZHRfVtv6PUF4RXWXZ4reiVE1DBEVq5_lMN533h1Poupw8u_Bjt8R6-hUN5XXLaL1-szxT7vHQihL_cMQyy_as4N655phN_pvAKcwpdcDPRmS3rnbreWG7SV85CY8TaB2XEhwceoU7zu7U5_oTrs669uEV5I9LEqSrIzHdkXn7PrGYRREyczeV_hJRmngriizbxpfooKC7S20A" />
+            <div>
+                <p class="font-black text-on-surface">DR. MAYHEM</p>
+                <p class="text-xs uppercase tracking-widest text-error">Status: Unhinged</p>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="lg:ml-80 pt-48 pb-20 px-6 md:px-12 max-w-7xl relative">
+        <!-- Background Doodle: Carrot -->
+        <div class="absolute -right-10 top-60 opacity-20 pointer-events-none -rotate-12 hidden xl:block">
+            <div class="w-12 h-32 bg-orange-500 rounded-full relative">
+                <div class="absolute -top-6 left-2 w-4 h-12 bg-green-600 rounded-full rotate-[-10deg]"></div>
+                <div class="absolute -top-8 left-6 w-4 h-14 bg-green-700 rounded-full rotate-[15deg]"></div>
+            </div>
+        </div>
+        <div class="relative z-10">
+            <!-- Header Section -->
+            <div class="mb-16 -rotate-1 flex flex-col items-start gap-4">
+                <span
+                    class="bg-tertiary-container text-on-tertiary-container px-6 py-2 font-black text-xl rounded-full shadow-lg">PHASE
+                    1: ENCRYPTION</span>
+                <h2
+                    class="font-headline font-black text-7xl md:text-9xl text-on-surface uppercase leading-none tracking-tighter">
+                    THE HEX <br /> <span class="text-primary italic">VAULT</span>
+                </h2>
+                <div class="text-2xl font-bold text-on-surface-variant flex items-center gap-4 mt-4">
+                    <span>Targeting all</span>
+                    <span class="crayon-strike text-on-surface">HEROES</span>
+                    <span>with style.</span>
+                </div>
+            </div>
+            <!-- Bento Layout for Encoder -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                <!-- Input Section -->
+                <div
+                    class="md:col-span-7 bg-surface-container-low p-8 rounded-xl scribble-border relative shadow-2xl rotate-1">
+                    <div class="doodle-bunny"></div>
+                    <label
+                        class="block font-headline font-black text-3xl mb-6 text-[#705d00] uppercase tracking-tight">TYPE
+                        YOUR SECRETS HERE</label>
+                    <textarea
+                        class="w-full h-64 bg-transparent border-none focus:ring-0 text-3xl font-body font-bold text-stone-700 placeholder:text-stone-300 resize-none p-4"
+                        placeholder="My plan to take over the local bakery begins at dawn..."></textarea>
+                    <div class="mt-8 flex justify-end">
+                        <button
+                            class="group relative flex items-center gap-4 bg-primary text-on-primary px-10 py-6 rounded-full font-headline font-black text-2xl uppercase tracking-tighter hover:rotate-3 transition-transform shadow-[10px_10px_0px_#705d00] active:scale-95 active:shadow-none">
+                            <span>TURN INTO VILLAIN CODE</span>
+                            <span
+                                class="material-symbols-outlined text-4xl group-hover:translate-x-2 transition-transform"
+                                data-icon="bolt">bolt</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Decoration / Metadata Column -->
+                <div class="md:col-span-5 flex flex-col gap-8 -rotate-1">
+                    <!-- Glassmorphism Card -->
+                    <div
+                        class="bg-surface-variant/60 backdrop-blur-xl p-8 rounded-xl border-4 border-white/20 shadow-xl relative overflow-hidden">
+                        <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+                        <h3 class="font-black text-2xl mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-primary" data-icon="history">history</span>
+                            PAST SCHEMES
+                        </h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-center gap-3 font-bold text-on-surface-variant group cursor-pointer">
+                                <span
+                                    class="w-2 h-2 bg-tertiary rounded-full group-hover:scale-150 transition-transform"></span>
+                                <span>Steal the Royal Scepter</span>
+                            </li>
+                            <li class="flex items-center gap-3 font-bold text-on-surface-variant group cursor-pointer">
+                                <span
+                                    class="w-2 h-2 bg-error rounded-full group-hover:scale-150 transition-transform"></span>
+                                <span class="line-through opacity-50">Operation: Wet Socks</span>
+                            </li>
+                            <li class="flex items-center gap-3 font-bold text-on-surface-variant group cursor-pointer">
+                                <span
+                                    class="w-2 h-2 bg-tertiary rounded-full group-hover:scale-150 transition-transform"></span>
+                                <span>Monologue for 45 minutes</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- Image Box -->
+                    <div
+                        class="rounded-xl overflow-hidden border-8 border-surface-container-highest shadow-2xl rotate-2 group">
+                        <img alt="Evil Lair"
+                            class="w-full aspect-video object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100"
+                            data-alt="a dark gothic castle perched on a jagged cliff overlooking a stormy sea under a full moon with cinematic lighting"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh_6fZYFCQUmNCvOOQyTHaqS29ueT-NQPcNQ0eN-IwdNb9Wk-V9kQCV9hvsv_4vQG_hA0bTtE4u8HufamJp0VfYnXrtSoBOE0qcbnOJf2dZTRecLRqXAYW3nUVFFtktSeOXXX4pX24kb_mGbuuua5KTKJ9m9qglVZWY8M7Uo3JQkASlX55pLptgU63iMm1UvlCSd5wOsDETfhO1xEm2C3STosnjzVAoMSJQCIF3ogDEIBdNe4LflrZUNeyrXuCkA0JxkB2QOeqrgo" />
+                        <div class="p-4 bg-surface-container-highest font-black text-center uppercase tracking-tighter">
+                            HQ: THE SPOOKY CASTLE</div>
+                    </div>
+                </div>
+                <!-- Result Area - Spans full width -->
+                <div
+                    class="md:col-span-12 mt-12 bg-white p-12 rounded-[4rem] shadow-inner relative overflow-hidden min-h-[400px]">
+                    <!-- Scribbled background marks -->
+                    <div
+                        class="absolute top-10 right-20 text-9xl font-black text-surface-container-low opacity-50 select-none -rotate-12">
+                        0xDEADC0DE</div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-8">
+                            <h4
+                                class="font-headline font-black text-5xl text-on-surface italic uppercase tracking-tighter">
+                                THE HEX CODE</h4>
+                            <div class="flex gap-4">
+                                <button
+                                    class="p-4 bg-surface-container-high rounded-full hover:bg-tertiary-container transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
+                                </button>
+                                <button
+                                    class="p-4 bg-surface-container-high rounded-full hover:bg-error-container transition-colors">
+                                    <span class="material-symbols-outlined" data-icon="share">share</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div
+                            class="font-mono text-4xl md:text-6xl font-black text-on-surface leading-tight break-all p-4 border-l-8 border-tertiary">
+                            <span class="text-primary">4D 79 20 70 6C 61 6E 20 74 6F 20 74 61 6B 65 20 6F 76 65 72 20 74
+                                68 65 20 6C 6F 63 61 6C 20 62 61 6B 65 72 79 20 62 65 67 69 6E 73 20 61 74 20 64 61 77
+                                6E 2E 2E 2E</span>
+                            <span class="opacity-10">0F 2A 11 99 FF 42 01</span>
+                        </div>
+                        <!-- Manual Scribble Note -->
+                        <div class="mt-12 flex items-center gap-6">
+                            <div class="flex -space-x-4">
+                                <img alt="Henchman 1" class="w-12 h-12 rounded-full border-2 border-white object-cover"
+                                    data-alt="close up headshot of a person with messy hair and intense expression looking at the camera"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjHKLOsD14T5BmvBmA1mOD6UAYxaeVOnSgOvT-cDbN5F5lTC5if5Brc98MRAkH5omPK9y43EazdziBM3CMBBEzzCUE72fOBYsq_nEtC82dr4uMPwYhCSDeWB0LFbUKW0qVEKC_aWWwit3zhyxgq1WC8FyDRzLJzsv08ozBw0H6vkFTLU2e5tigCs-Xn741SIYmIehFYSszKoq_TZiwNHz8kBP0Yb7M8LP3q-Sc3724jgaqYhiNVW6wIL79HFs-aoatu1inigtlAu4" />
+                                <img alt="Henchman 2" class="w-12 h-12 rounded-full border-2 border-white object-cover"
+                                    data-alt="portrait of a man with a sharp jawline and mysterious eyes looking slightly away"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhb8kQui4tczwjCQ-xyHYQuDH60CCTlOaYHhcet1Pnm3TC7kzQ40J5XZVAQT3kQynA7X7V7pr0ACbhUarkhZC-2RjWZEHVHGVRBKhKL6gSd9gfrvRZ6vXmOxZbQ3GBqpAj5Sk9qoaDelx3CWwfIBN9bMVrNX_fpQjouZdm7RzwuiM1_q93xazZ_AcfrdMdcfyNWit3tXppX5OB7_PHP8KPT76yVnVP0hXYGhWPk_AUHfzQhnHnOp6GfcYSLTxWh2GuPiwND9YATr4" />
+                            </div>
+                            <p class="font-bold text-stone-400 italic">“This looks impossible to crack!” — Your loyal
+                                henchmen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Message -->
+            <footer class="mt-32 pb-12 border-t-8 border-dashed border-surface-container-highest pt-12 text-center">
+                <div
+                    class="inline-block bg-primary text-on-primary px-12 py-4 rounded-full font-headline font-black text-3xl uppercase rotate-[-2deg] shadow-2xl hover:rotate-2 transition-transform cursor-help">
+                    Burn After Reading
+                </div>
+                <p class="mt-8 font-black text-stone-400 uppercase tracking-[1em] text-xs">Property of Villain Corp • No
+                    Refunds for Failed Coups</p>
+            </footer>
+        </div>
+    </main>
+    <!-- FAB - Only on relevant pages as per mandate -->
+    <button
+        class="fixed bottom-10 right-10 w-24 h-24 bg-tertiary text-on-tertiary rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-90 transition-all z-50 rotate-6 group">
+        <span class="material-symbols-outlined text-5xl group-hover:rotate-45 transition-transform"
+            data-icon="add">add</span>
+        <div
+            class="absolute -top-12 right-0 bg-on-surface text-surface text-xs font-black py-1 px-3 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
+            NEW SCHEME</div>
+    </button>
+</body>
+
+</html>

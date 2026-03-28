@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:ital,wght@0,300..900;1,300..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary": "#705d00",
+                        "surface-dim": "#dbdbcf",
+                        "surface-container-highest": "#e4e3d7",
+                        "secondary-container": "#c3e8ff",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#777777",
+                        "inverse-surface": "#303129",
+                        "tertiary-fixed": "#ffe16d",
+                        "primary-container": "#ffdad6",
+                        "primary-fixed": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#c00014",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "on-background": "#1b1c15",
+                        "surface-bright": "#fbfaee",
+                        "inverse-on-surface": "#f2f1e5",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "surface-container-high": "#e9e9dd",
+                        "primary": "#c00014",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "secondary-fixed": "#c3e8ff",
+                        "on-secondary-container": "#004c69",
+                        "outline-variant": "#c6c6c6",
+                        "on-surface": "#1b1c15",
+                        "background": "#fbfaee",
+                        "on-surface-variant": "#474747",
+                        "on-primary-fixed": "#410002",
+                        "surface-variant": "#e4e3d7",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface": "#fbfaee",
+                        "secondary": "#00668a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-primary-container": "#93000d",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#ffe16d",
+                        "on-secondary-fixed": "#001e2c",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-tertiary-container": "#544600",
+                        "inverse-primary": "#ffb4ab",
+                        "surface-container": "#efeee3",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f5f4e8"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .scribble-border {
+            border-bottom: 6px solid #e4e3d7;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+
+        .tape-effect {
+            background: rgba(233, 233, 221, 0.6);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+            transform: rotate(-2deg);
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface font-body selection:bg-tertiary-container">
+    <!-- TopAppBar -->
+    <header
+        class="bg-[#fbfaee] dark:bg-stone-900 border-b-4 border-[#f5f4e8] dark:border-stone-800 docked full-width top-0 sticky z-50">
+        <div class="flex justify-between items-center w-full px-6 py-4">
+            <div class="font-['Spline_Sans'] uppercase tracking-widest text-2xl italic flex items-center gap-4">
+                <span class="text-3xl font-black text-[#c00014] dark:text-red-600 rotate-[-2deg]">SECRET_DOSSIER</span>
+            </div>
+            <div class="flex gap-4">
+                <button
+                    class="text-[#c00014] dark:text-red-500 hover:rotate-2 hover:scale-110 transition-transform active:scale-90 active:rotate-[-5deg]">
+                    <span class="material-symbols-outlined" data-icon="lock_open">lock_open</span>
+                </button>
+                <button
+                    class="text-[#c00014] dark:text-red-500 hover:rotate-2 hover:scale-110 transition-transform active:scale-90 active:rotate-[-5deg]">
+                    <span class="material-symbols-outlined" data-icon="more_vert">more_vert</span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="flex min-h-screen">
+        <!-- SideNavBar - Evidence is Active -->
+        <aside
+            class="fixed left-0 top-0 h-full w-64 z-40 flex flex-col p-6 bg-[#f5f4e8] dark:bg-stone-800 rounded-r-[3rem] shadow-[20px_0px_40px_rgba(27,28,21,0.06)] hidden md:flex">
+            <div class="mt-20 mb-8 px-4">
+                <div
+                    class="w-16 h-16 bg-surface-container-highest rounded-full mb-3 flex items-center justify-center border-2 border-primary rotate-3">
+                    <span class="material-symbols-outlined text-primary text-3xl">face</span>
+                </div>
+                <h2 class="font-['Plus_Jakarta_Sans'] font-black text-xl tracking-tight text-[#c00014]">THE ARCHITECT
+                </h2>
+                <p class="text-xs opacity-60 font-bold uppercase tracking-widest">Status: Mischievous</p>
+            </div>
+            <nav class="flex flex-col gap-2 flex-grow">
+                <a class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight bg-[#705d00] text-white rounded-full rotate-1 px-4 py-2 hover:bg-[#c00014] hover:text-white hover:rotate-[-2deg] transition-all active:skew-x-6"
+                    href="#">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+                        <span>Evidence</span>
+                    </div>
+                </a>
+                <a class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-[#1b1c15] dark:text-stone-300 px-4 py-2 opacity-60 hover:bg-[#c00014] hover:text-white hover:rotate-[-2deg] transition-all active:skew-x-6"
+                    href="#">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
+                        <span>Suspects</span>
+                    </div>
+                </a>
+                <a class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-[#1b1c15] dark:text-stone-300 px-4 py-2 opacity-60 hover:bg-[#c00014] hover:text-white hover:rotate-[-2deg] transition-all active:skew-x-6"
+                    href="#">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+                        <span>Heists</span>
+                    </div>
+                </a>
+                <a class="font-['Plus_Jakarta_Sans'] font-bold text-lg tracking-tight text-[#1b1c15] dark:text-stone-300 px-4 py-2 opacity-60 hover:bg-[#c00014] hover:text-white hover:rotate-[-2deg] transition-all active:skew-x-6"
+                    href="#">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined"
+                            data-icon="local_fire_department">local_fire_department</span>
+                        <span>Burn_After_Reading</span>
+                    </div>
+                </a>
+            </nav>
+            <button
+                class="mt-auto bg-primary text-on-primary font-black py-4 rounded-xl rotate-[-1deg] hover:rotate-2 transition-transform shadow-lg">
+                SELF_DESTRUCT
+            </button>
+        </aside>
+        <!-- Main Content Area -->
+        <main class="flex-grow md:ml-64 p-4 md:p-12 relative overflow-hidden">
+            <!-- Background Doodles -->
+            <div class="absolute top-20 right-10 opacity-20 rotate-12 pointer-events-none">
+                <span class="material-symbols-outlined text-9xl text-primary">toys_fan</span>
+            </div>
+            <div class="absolute bottom-20 left-10 opacity-10 -rotate-12 pointer-events-none">
+                <span class="material-symbols-outlined text-8xl text-secondary">draw</span>
+            </div>
+            <!-- Dossier Header -->
+            <div class="max-w-4xl mx-auto space-y-12 pb-24">
+                <div class="relative inline-block">
+                    <h1
+                        class="font-headline text-5xl md:text-7xl font-black text-on-surface leading-none rotate-[-1deg]">
+                        CLASSIFIED: <br />
+                        <span class="text-primary underline decoration-wavy decoration-tertiary">BUNNY'S MASTER
+                            PLAN</span>
+                    </h1>
+                    <div
+                        class="absolute -top-8 -right-16 md:-right-32 rotate-12 bg-tertiary-container p-4 rounded-lg shadow-xl border-2 border-tertiary hidden sm:block">
+                        <p class="font-bold text-tertiary transform -rotate-2">TOP SECRET!!</p>
+                    </div>
+                </div>
+                <!-- Password Section -->
+                <div
+                    class="bg-surface-container-low p-8 rounded-xl relative border-2 border-dashed border-outline-variant -rotate-[0.5deg]">
+                    <div class="absolute -top-6 left-10 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary rotate-180 text-4xl">south_east</span>
+                        <p class="text-primary font-bold italic text-sm mt-4">DO NOT READ!</p>
+                    </div>
+                    <label class="block text-2xl font-bold mb-4 transform -rotate-1 text-on-surface-variant">
+                        ENTER SECRET KEY (Hint: It rhymes with 'Page Coach'...)
+                    </label>
+                    <div class="relative max-w-md">
+                        <input
+                            class="w-full bg-transparent border-none scribble-border focus:ring-0 text-3xl font-black text-secondary tracking-tighter placeholder:opacity-30"
+                            placeholder="type here..." type="text" />
+                        <!-- The "Canceled" Word -->
+                        <div class="absolute -right-32 top-0 rotate-6">
+                            <span
+                                class="text-error font-black line-through decoration-4 text-2xl opacity-80">stagecoach</span>
+                            <div class="flex items-center gap-1 -mt-1">
+                                <span class="material-symbols-outlined text-error text-xl">west</span>
+                                <p class="text-[10px] text-error font-bold uppercase">Oops!</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-6 flex gap-4 items-center">
+                        <span class="material-symbols-outlined text-tertiary text-4xl">airport_shuttle</span>
+                        <p class="text-on-surface-variant font-bold text-sm tracking-tight">The getaway vehicle is
+                            ready.</p>
+                    </div>
+                </div>
+                <!-- Stolen Data Section -->
+                <section
+                    class="bg-surface-container-highest p-4 md:p-12 rounded-xl shadow-[0px_20px_40px_rgba(27,28,21,0.06)] relative overflow-visible rotate-[1deg]">
+                    <div class="flex justify-between items-start mb-8">
+                        <div>
+                            <h2 class="text-4xl font-black tracking-tighter text-on-surface">STOLEN DATA</h2>
+                            <p class="font-bold text-error">CRITICAL INTEL LEAKED</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="text-xs font-black uppercase tracking-widest opacity-40">Page: 042</span>
+                        </div>
+                    </div>
+                    <div class="relative bg-white p-4 shadow-inner group">
+                        <!-- Masking Tape Effects -->
+                        <div class="absolute -top-4 -left-6 w-32 h-10 tape-effect z-10"></div>
+                        <div class="absolute -bottom-4 -right-6 w-32 h-10 tape-effect z-10 rotate-45"></div>
+                        <div class="absolute top-1/2 -right-8 w-24 h-12 tape-effect z-10 -rotate-90"></div>
+                        <div class="overflow-hidden bg-surface-dim rounded-sm">
+                            <img alt="encrypted blueprint showing hidden bunny lair coordinates"
+                                class="w-full h-auto mix-blend-multiply grayscale hover:grayscale-0 transition-all duration-700"
+                                data-alt="encrypted blueprint showing hidden bunny lair coordinates"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_FG2eHukOoVG1-l7mR3fYbMO32iQqqZVENMvnQSBabHeDQjRZRBT-_eW1K7D6OslGvI-91O09xcG4HDLSZhotMN3-ekpezEMUAFjYAalZE6Ns4rMPYa5U4RHmFut5woC0i7op5Xecfjii8_gNIcQalni-hOln4lyb4grHxXrwwYvcMefy5Vut3_A-Eyfp-azB3UM8MmRFWebxPn9bcS_1SHCG1AONpWMjZEQmcWEbfS0zhKJgmWwODXXL_Vgz4jEGTJbb4u5EFas" />
+                        </div>
+                        <!-- Taunting Note -->
+                        <div
+                            class="absolute top-4 right-4 bg-tertiary text-white p-3 rounded-xl rotate-12 shadow-lg max-w-[150px]">
+                            <p class="text-xs font-black leading-tight">I'm the smartest!! <br /> No one can stop the
+                                carrot heist!</p>
+                        </div>
+                    </div>
+                    <div class="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+                        <div class="flex items-center gap-4">
+                            <div
+                                class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-white rotate-[-12deg]">
+                                <span class="material-symbols-outlined">download</span>
+                            </div>
+                            <p class="font-bold max-w-[200px] text-sm leading-tight opacity-70 italic">Click the
+                                scribble to claim your prize, villain...</p>
+                        </div>
+                        <button
+                            class="relative px-8 py-5 bg-primary text-white font-black text-xl rounded-[2rem_0.5rem_3rem_1rem] transform hover:scale-105 hover:-rotate-2 transition-all group overflow-hidden shadow-2xl">
+                            <span class="relative z-10">DOWNLOAD INTEL (FOR EVIL ONLY)</span>
+                            <!-- Scribble SVG overlay effect -->
+                            <div
+                                class="absolute inset-0 opacity-20 pointer-events-none bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent">
+                            </div>
+                        </button>
+                    </div>
+                </section>
+                <!-- Footer Doodles -->
+                <div class="flex justify-center gap-20 py-12">
+                    <div class="flex flex-col items-center">
+                        <span class="material-symbols-outlined text-error text-6xl">close</span>
+                        <p class="text-error font-black uppercase text-xs line-through">Authorized Access</p>
+                    </div>
+                    <div class="flex flex-col items-center rotate-6">
+                        <span class="material-symbols-outlined text-secondary text-6xl">psychology</span>
+                        <p class="text-secondary font-black uppercase text-xs">Evil Brain Power</p>
+                    </div>
+                    <div class="flex flex-col items-center -rotate-12">
+                        <span class="material-symbols-outlined text-tertiary text-6xl">pets</span>
+                        <p class="text-tertiary font-black uppercase text-xs">The Bunny Witness</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- Mobile Navigation -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-[#fbfaee] flex justify-around items-center p-4 z-50 border-t-4 border-[#f5f4e8]">
+        <button class="flex flex-col items-center gap-1 text-[#c00014] font-black underline decoration-wavy">
+            <span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+            <span class="text-[10px] uppercase font-bold">Evidence</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-[#1b1c15] opacity-70">
+            <span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
+            <span class="text-[10px] uppercase font-bold">Suspects</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-[#1b1c15] opacity-70">
+            <span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+            <span class="text-[10px] uppercase font-bold">Heists</span>
+        </button>
+        <button class="flex flex-col items-center gap-1 text-[#1b1c15] opacity-70">
+            <span class="material-symbols-outlined" data-icon="local_fire_department">local_fire_department</span>
+            <span class="text-[10px] uppercase font-bold">Burn</span>
+        </button>
+    </nav>
+</body>
+
+</html>

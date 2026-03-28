@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SEMAPHORE! - Encoder</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:ital,wght@0,300;0,800;1,300;1,800&amp;family=Plus+Jakarta+Sans:wght@300;400;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f4e8",
+                        "surface-container-high": "#e9e9dd",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "primary-container": "#ffdad6",
+                        "on-surface-variant": "#474747",
+                        "on-primary-fixed-variant": "#93000d",
+                        "surface-variant": "#e4e3d7",
+                        "tertiary-container": "#ffe16d",
+                        "inverse-on-surface": "#f2f1e5",
+                        "primary-fixed": "#ffdad6",
+                        "secondary": "#00668a",
+                        "surface-container": "#efeee3",
+                        "primary": "#c00014",
+                        "inverse-surface": "#303129",
+                        "surface-tint": "#c00014",
+                        "tertiary-fixed": "#ffe16d",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#544600",
+                        "secondary-fixed": "#c3e8ff",
+                        "surface-container-highest": "#e4e3d7",
+                        "surface-bright": "#fbfaee",
+                        "on-background": "#1b1c15",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#001e2c",
+                        "on-primary-fixed": "#410002",
+                        "inverse-primary": "#ffb4ab",
+                        "surface-dim": "#dbdbcf",
+                        "error": "#ba1a1a",
+                        "surface": "#fbfaee",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "outline-variant": "#c6c6c6",
+                        "secondary-container": "#c3e8ff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "outline": "#777777",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#93000d",
+                        "error-container": "#ffdad6",
+                        "background": "#fbfaee",
+                        "on-secondary-container": "#004c69",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1b1c15",
+                        "on-tertiary-fixed": "#221b00",
+                        "tertiary": "#705d00"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .crayon-stroke {
+            border-bottom: 6px solid #c00014;
+            border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+        }
+
+        .scribble-bg {
+            background-image: radial-gradient(#c00014 1px, transparent 0);
+            background-size: 24px 24px;
+            opacity: 0.05;
+        }
+
+        .bitten-edge {
+            clip-path: polygon(0% 0%, 100% 0%, 98% 35%, 100% 70%, 95% 100%, 0% 100%, 2% 50%);
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body text-on-background min-h-screen selection:bg-tertiary-container">
+    <!-- TopAppBar -->
+    <header
+        class="bg-[#fbfaee] dark:bg-slate-900 font-['Spline_Sans'] uppercase tracking-widest italic border-b-8 border-[#f5f4e8] dark:border-slate-800 border-dashed shadow-[0_10px_0_0_rgba(0,0,0,0.05)] fixed top-0 left-0 right-0 z-50 h-24 flex justify-between items-center w-full px-8 py-4">
+        <div class="text-4xl font-black text-[#c00014] dark:text-red-500 rotate-[-2deg] drop-shadow-sm">badbunny.studio
+        </div>
+        <nav class="hidden md:flex items-center gap-12 font-bold">
+            <a class="text-[#c00014] underline decoration-wavy decoration-4 underline-offset-8 transition-transform hover:rotate-3 hover:scale-110"
+                href="#">Encoder</a>
+            <a class="text-[#1b1c15] dark:text-slate-300 opacity-70 transition-transform hover:rotate-3 hover:scale-110"
+                href="#">Decoder</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <button class="material-symbols-outlined text-[#c00014] text-3xl hover:rotate-12 transition-transform"
+                data-icon="settings">settings</button>
+        </div>
+    </header>
+    <main class="pt-32 pb-40 px-6 max-w-5xl mx-auto relative overflow-hidden">
+        <!-- Background Scribbles -->
+        <div class="absolute inset-0 scribble-bg pointer-events-none"></div>
+        <!-- Decorative Bunny Ears -->
+        <div class="absolute top-20 right-10 rotate-12 opacity-20 pointer-events-none">
+            <span class="material-symbols-outlined text-9xl text-primary" data-icon="cruelty_free">cruelty_free</span>
+        </div>
+        <!-- Title Section -->
+        <section class="mb-20 -rotate-1">
+            <h1
+                class="font-headline text-6xl md:text-8xl font-extrabold italic text-primary leading-none tracking-tighter drop-shadow-md">
+                SEMAPHORE <br /> ENCODER
+            </h1>
+            <div class="mt-4 flex items-center gap-2">
+                <span
+                    class="bg-tertiary text-on-tertiary font-black px-4 py-1 rotate-[-3deg] uppercase text-xl shadow-lg">STRICTLY
+                    SECRET</span>
+                <span class="material-symbols-outlined text-tertiary text-4xl" data-icon="draw">draw</span>
+            </div>
+        </section>
+        <!-- Input Section -->
+        <section class="mb-20 relative">
+            <div
+                class="bg-surface-container-low p-8 rounded-xl border-4 border-dashed border-outline-variant -rotate-1 shadow-inner relative">
+                <!-- Floating Carrot Doodle -->
+                <div class="absolute -top-10 -right-4 rotate-45 text-tertiary">
+                    <span class="material-symbols-outlined text-6xl" data-icon="nutrition">nutrition</span>
+                </div>
+                <h2 class="font-headline text-3xl font-black mb-6 text-on-surface flex items-center gap-3">
+                    TYPE YOUR SECRETS HERE
+                    <span class="material-symbols-outlined text-primary" data-icon="edit_square">edit_square</span>
+                </h2>
+                <textarea
+                    class="w-full bg-transparent border-none focus:ring-0 text-4xl font-headline italic placeholder:opacity-30 text-secondary resize-none h-48"
+                    placeholder="Write your sneaky message..."></textarea>
+                <div class="crayon-stroke w-full mt-2"></div>
+                <p class="text-right font-black text-error mt-4 italic opacity-80">Don't let them see!!</p>
+            </div>
+        </section>
+        <!-- Action Button -->
+        <div class="flex justify-center mb-20">
+            <button class="group relative py-8 px-16 transition-all active:scale-95">
+                <div
+                    class="absolute inset-0 bg-primary rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] rotate-2 group-hover:rotate-6 group-hover:scale-105 transition-transform shadow-xl">
+                </div>
+                <span
+                    class="relative text-white font-headline text-4xl font-black uppercase tracking-widest flex items-center gap-4">
+                    WAVE THE FLAGS!
+                    <span class="material-symbols-outlined text-5xl" data-icon="flag">flag</span>
+                </span>
+                <!-- Crayon Smudge Effect -->
+                <div class="absolute -bottom-2 -left-2 w-full h-full bg-primary opacity-20 blur-xl rounded-full -z-10">
+                </div>
+            </button>
+        </div>
+        <!-- Output Section -->
+        <section class="relative">
+            <!-- TOP SECRET STAMP -->
+            <div
+                class="absolute -top-16 left-0 border-8 border-error text-error font-black px-6 py-2 text-4xl uppercase opacity-40 rotate-[-15deg] pointer-events-none bitten-edge">
+                TOP SECRET
+            </div>
+            <div class="bg-surface-container-highest p-10 rounded-xl rotate-1 shadow-2xl relative">
+                <h2 class="font-headline text-4xl font-black mb-10 text-on-surface-variant flex items-center gap-4">
+                    STOLEN FLAG CODE
+                    <span class="material-symbols-outlined" data-icon="visibility_lock">visibility_lock</span>
+                </h2>
+                <!-- Grid of Flag Figures -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
+                    <!-- Character Card 1 -->
+                    <div
+                        class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg -rotate-2 hover:rotate-0 transition-transform border-2 border-outline-variant">
+                        <div class="h-24 w-24 flex items-center justify-center mb-4 relative">
+                            <span class="material-symbols-outlined text-6xl text-on-surface"
+                                data-icon="accessibility_new">accessibility_new</span>
+                            <!-- Flag doodles -->
+                            <div class="absolute top-0 right-0 h-8 w-8 bg-primary rotate-45"></div>
+                            <div class="absolute bottom-0 left-0 h-8 w-8 bg-tertiary rotate-[-20deg]"></div>
+                        </div>
+                        <span class="font-headline font-bold text-2xl text-primary">A</span>
+                    </div>
+                    <!-- Character Card 2 -->
+                    <div
+                        class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg rotate-3 hover:rotate-0 transition-transform border-2 border-outline-variant">
+                        <div class="h-24 w-24 flex items-center justify-center mb-4 relative">
+                            <span class="material-symbols-outlined text-6xl text-on-surface"
+                                data-icon="accessibility_new">accessibility_new</span>
+                            <div class="absolute top-4 left-0 h-8 w-8 bg-primary -rotate-12"></div>
+                            <div class="absolute top-4 right-0 h-8 w-8 bg-tertiary rotate-12"></div>
+                        </div>
+                        <span class="font-headline font-bold text-2xl text-primary">B</span>
+                    </div>
+                    <!-- Character Card 3 (Messy/Smudged) -->
+                    <div
+                        class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg -rotate-1 hover:rotate-0 transition-transform border-2 border-outline-variant">
+                        <div class="h-24 w-24 flex items-center justify-center mb-4 relative overflow-hidden">
+                            <span class="material-symbols-outlined text-6xl text-on-surface blur-[1px]"
+                                data-icon="accessibility_new">accessibility_new</span>
+                            <div class="absolute inset-0 bg-primary opacity-20 mix-blend-multiply rounded-full"></div>
+                        </div>
+                        <span class="font-headline font-bold text-2xl text-primary">C?</span>
+                    </div>
+                    <!-- Placeholder for extra character -->
+                    <div
+                        class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg rotate-2 hover:rotate-0 transition-transform border-2 border-outline-variant">
+                        <div class="h-24 w-24 flex items-center justify-center mb-4 relative">
+                            <span class="material-symbols-outlined text-6xl text-on-surface opacity-30"
+                                data-icon="question_mark">question_mark</span>
+                        </div>
+                        <span class="font-headline font-bold text-2xl text-outline">_</span>
+                    </div>
+                    <!-- Hidden Note -->
+                    <div class="hidden md:flex flex-col items-center justify-center p-4">
+                        <span class="material-symbols-outlined text-5xl text-tertiary-fixed-dim rotate-12"
+                            data-icon="ink_eraser">ink_eraser</span>
+                        <p class="text-[10px] font-black uppercase text-center mt-2 opacity-40">Oops! <br /> Smudged it.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Giant Crayon Doodle Illustration -->
+        <div class="mt-32 flex flex-col md:flex-row items-center gap-12 opacity-80">
+            <img alt="A messy red crayon drawing of a dog wearing a crown"
+                class="w-full md:w-1/2 h-64 object-cover rounded-xl rotate-[-2deg] border-4 border-primary"
+                data-alt="A primitive child-like red crayon drawing of a mischievous bunny wearing a cape and holding a flag in a frantic scribbled style"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLA85WsdJFoaqKbph7MZhrMPK4yaP29FSfcLy7UtAzCejq4KsXC8eyOUK9DkjHOkJyD3AcBYk2yjFXHRpo8PFMnuzaD5rX4t7SVspAgDDLsb4uuDhNr8jG6TfAX2ThWcHkL4XG2C116aUpXHq7vvLc_hUxkNFCngVewbcWC179CJ06RAdTdR3sjGBWDuRHq-4Xepi_NMcO6TAshYTchHRQ2Qy1O57gf4mPUkFa_2XJ-3FxyHz1wVEnBAoz8d3cUV0FRC13Che-_XE" />
+            <div class="space-y-4">
+                <p class="text-3xl font-headline font-black italic text-on-surface leading-tight">
+                    "THEY'LL NEVER <br /> CRACK THE <br /> <span class="text-primary underline decoration-double">BUNNY
+                        CODE</span>"
+                </p>
+                <div class="flex gap-2">
+                    <span class="material-symbols-outlined text-tertiary" data-icon="star"
+                        style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined text-tertiary" data-icon="star"
+                        style="font-variation-settings: 'FILL' 1;">star</span>
+                    <span class="material-symbols-outlined text-tertiary" data-icon="star"
+                        style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar (Mobile Only) -->
+    <footer
+        class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-4 bg-[#fbfaee] dark:bg-slate-900 rounded-t-[3rem] border-t-4 border-[#c00014] shadow-[0_-10px_40px_rgba(27,28,21,0.06)]">
+        <a class="flex flex-col items-center justify-center bg-[#c00014] text-white rounded-[2rem] px-6 py-2 rotate-1 active:translate-y-1 transition-all"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="emergency_recording">emergency_recording</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase">Encoder</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-[#1b1c15] dark:text-slate-400 opacity-60 px-6 py-2 hover:bg-[#00668a] hover:text-white transition-colors active:translate-y-1 transition-all"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="visibility_lock">visibility_lock</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase">Decoder</span>
+        </a>
+    </footer>
+</body>
+
+</html>

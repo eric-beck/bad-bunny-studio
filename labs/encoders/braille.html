@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:ital,wght@0,300..900;1,300..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#001e2c",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#ffb4ab",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-tertiary-container": "#544600",
+                        "secondary": "#00668a",
+                        "on-primary-fixed-variant": "#93000d",
+                        "primary-fixed": "#ffdad6",
+                        "primary-container": "#ffdad6",
+                        "tertiary-fixed": "#ffe16d",
+                        "primary": "#c00014",
+                        "surface-variant": "#e4e3d7",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e4e3d7",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "inverse-surface": "#303129",
+                        "tertiary-container": "#ffe16d",
+                        "tertiary": "#705d00",
+                        "on-error": "#ffffff",
+                        "outline": "#777777",
+                        "on-background": "#1b1c15",
+                        "secondary-container": "#c3e8ff",
+                        "surface-container-high": "#e9e9dd",
+                        "inverse-on-surface": "#f2f1e5",
+                        "surface-bright": "#fbfaee",
+                        "on-primary-fixed": "#410002",
+                        "outline-variant": "#c6c6c6",
+                        "on-secondary-container": "#004c69",
+                        "surface-tint": "#c00014",
+                        "surface-container": "#efeee3",
+                        "on-surface-variant": "#474747",
+                        "background": "#fbfaee",
+                        "surface": "#fbfaee",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "surface-container-low": "#f5f4e8",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#c3e8ff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#93000d",
+                        "on-surface": "#1b1c15",
+                        "surface-dim": "#dbdbcf",
+                        "on-tertiary-fixed": "#221b00"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .crayon-stroke {
+            border-bottom: 6px solid;
+            border-image: linear-gradient(to right, #c00014 0%, #ba1a1a 100%) 1;
+            border-radius: 20% 80% 15% 85% / 95% 20% 80% 5%;
+        }
+
+        .paper-curl {
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1), 0 0 40px rgba(0, 0, 0, 0.05) inset;
+            transform: rotate(-0.5deg);
+        }
+
+        .braille-dot {
+            width: 12px;
+            height: 12px;
+            background: #1b1c15;
+            border-radius: 45% 55% 50% 50%;
+            display: inline-block;
+            margin: 2px;
+            filter: blur(0.5px);
+        }
+
+        .braille-dot-empty {
+            width: 12px;
+            height: 12px;
+            border: 2px solid #c6c6c6;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 2px;
+            opacity: 0.3;
+        }
+
+        .scribble-bg {
+            background-image: radial-gradient(#c00014 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body min-h-screen selection:bg-tertiary-container">
+    <!-- TopAppBar Section -->
+    <header
+        class="bg-[#fbfaee] dark:bg-stone-900 border-b-[6px] border-[#f5f4e8] dark:border-stone-800 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.05)] flex justify-between items-center w-full px-6 py-4 fixed top-0 z-50">
+        <div class="flex items-center gap-4">
+            <span
+                class="text-3xl font-black text-[#c00014] rotate-[-2deg] underline decoration-wavy font-['Spline_Sans'] uppercase tracking-tighter italic">badbunny.studio</span>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="text-[#c00014] font-bold scale-110 font-['Spline_Sans'] uppercase tracking-tighter italic hover:rotate-3 hover:scale-105 transition-transform active:scale-95 duration-100"
+                href="#">Normal Talk</a>
+            <a class="text-[#00668a] opacity-70 font-['Spline_Sans'] uppercase tracking-tighter italic hover:rotate-3 hover:scale-105 transition-transform active:scale-95 duration-100"
+                href="#">Stolen Braille</a>
+            <a class="text-[#00668a] opacity-70 font-['Spline_Sans'] uppercase tracking-tighter italic hover:rotate-3 hover:scale-105 transition-transform active:scale-95 duration-100"
+                href="#">My Vault</a>
+        </nav>
+        <div class="flex items-center gap-4 text-[#c00014]">
+            <span class="material-symbols-outlined hover:rotate-3 hover:scale-105 transition-transform cursor-pointer"
+                data-icon="edit_square">edit_square</span>
+            <span class="material-symbols-outlined hover:rotate-3 hover:scale-105 transition-transform cursor-pointer"
+                data-icon="help_outline">help_outline</span>
+        </div>
+    </header>
+    <main class="pt-32 pb-40 px-6 max-w-6xl mx-auto relative overflow-hidden">
+        <!-- Background Scribbles Decorative -->
+        <div class="absolute top-40 right-10 opacity-20 rotate-12 pointer-events-none">
+            <span class="material-symbols-outlined text-9xl text-primary" data-icon="edit">edit</span>
+        </div>
+        <div class="absolute bottom-60 left-10 opacity-10 -rotate-12 pointer-events-none">
+            <span class="material-symbols-outlined text-9xl text-secondary" data-icon="pets">pets</span>
+        </div>
+        <!-- Headline Area -->
+        <div class="mb-16 relative">
+            <h1
+                class="font-headline text-6xl md:text-8xl font-black text-primary uppercase tracking-tighter italic rotate-[-1deg] inline-block relative">
+                BRAILLE ENCODER
+                <div class="absolute -top-12 -right-16 rotate-12 opacity-80">
+                    <span class="material-symbols-outlined text-6xl text-tertiary"
+                        data-icon="cruelty_free">cruelty_free</span>
+                </div>
+            </h1>
+            <p class="font-body text-xl font-bold text-secondary mt-2 ml-4 opacity-80">STRICTLY FOR VILLAINS ONLY</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <!-- Left Side: Input Card -->
+            <div class="lg:col-span-7 space-y-12">
+                <div
+                    class="bg-surface-container-lowest p-8 rounded-xl paper-curl border-b-8 border-r-8 border-surface-container-high relative group">
+                    <!-- Faux Tape Marks -->
+                    <div
+                        class="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-tertiary-fixed opacity-40 rotate-2 mix-blend-multiply">
+                    </div>
+                    <div
+                        class="absolute top-1/2 -right-4 -translate-y-1/2 w-8 h-20 bg-tertiary-fixed opacity-30 -rotate-12 mix-blend-multiply">
+                    </div>
+                    <label
+                        class="block font-headline text-3xl font-extrabold text-on-surface mb-6 uppercase italic tracking-tight">
+                        NORMAL TALK
+                        <span
+                            class="text-sm block font-body font-normal opacity-60 normal-case tracking-normal mt-1">Type
+                            your secrets here if you dare...</span>
+                    </label>
+                    <div class="relative">
+                        <textarea
+                            class="w-full bg-transparent border-none focus:ring-0 text-2xl font-body font-bold text-on-surface placeholder:text-outline-variant italic leading-relaxed"
+                            placeholder="I am planning to steal the moon..." rows="6"></textarea>
+                        <!-- Crayon Underline -->
+                        <div class="w-full h-2 bg-surface-variant mt-2 rounded-full overflow-hidden">
+                            <div class="w-2/3 h-full bg-primary opacity-40"></div>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex justify-end">
+                        <button
+                            class="bg-primary text-white px-10 py-6 rounded-full font-black text-2xl uppercase tracking-widest shadow-xl hover:scale-105 active:scale-95 transition-all transform rotate-[-2deg] flex items-center gap-4 group relative">
+                            ENCODE!
+                            <span class="material-symbols-outlined text-4xl" data-icon="bolt">bolt</span>
+                            <!-- Button Smudge Effect -->
+                            <div
+                                class="absolute -inset-2 bg-primary opacity-10 blur-xl group-hover:opacity-20 transition-opacity rounded-full">
+                            </div>
+                        </button>
+                    </div>
+                    <!-- Rabbit Ear Doodle -->
+                    <div class="absolute -bottom-8 -left-4">
+                        <span class="material-symbols-outlined text-7xl text-primary opacity-40 -rotate-45"
+                            data-icon="rabbit">pets</span>
+                    </div>
+                </div>
+                <!-- Output Area -->
+                <div class="bg-surface-container-low p-10 rounded-xl border-l-[12px] border-primary relative">
+                    <h3 class="font-headline text-3xl font-black text-on-surface mb-8 italic">VILLAIN BRAILLE</h3>
+                    <div
+                        class="grid grid-cols-4 md:grid-cols-8 gap-6 min-h-[160px] bg-surface p-6 rounded-lg border-2 border-dashed border-outline-variant">
+                        <!-- Braille Block 1 -->
+                        <div class="flex flex-col gap-1 items-center">
+                            <div class="grid grid-cols-2 gap-1">
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot"></div>
+                            </div>
+                        </div>
+                        <!-- Braille Block 2 -->
+                        <div class="flex flex-col gap-1 items-center">
+                            <div class="grid grid-cols-2 gap-1">
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                            </div>
+                        </div>
+                        <!-- Braille Block 3 -->
+                        <div class="flex flex-col gap-1 items-center">
+                            <div class="grid grid-cols-2 gap-1">
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                            </div>
+                        </div>
+                        <!-- Braille Block 4 -->
+                        <div class="flex flex-col gap-1 items-center">
+                            <div class="grid grid-cols-2 gap-1">
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot-empty"></div>
+                            </div>
+                        </div>
+                        <!-- Decorative overflow dots -->
+                        <div class="hidden md:flex flex-col gap-1 items-center opacity-40">
+                            <div class="grid grid-cols-2 gap-1">
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot-empty"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                                <div class="braille-dot"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Scribble Overlay -->
+                    <div class="absolute -bottom-6 -right-6">
+                        <span class="material-symbols-outlined text-6xl text-tertiary rotate-12"
+                            data-icon="draw">draw</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Right Side: Sidebar Note -->
+            <aside class="lg:col-span-5 flex flex-col items-center lg:items-start">
+                <div
+                    class="relative p-10 bg-tertiary-container rounded-xl rotate-3 shadow-lg border-2 border-tertiary max-w-sm">
+                    <span class="material-symbols-outlined text-5xl text-on-tertiary-container mb-4"
+                        data-icon="sentiment_very_satisfied">sentiment_very_satisfied</span>
+                    <h4 class="font-headline text-4xl font-black text-on-tertiary-container leading-tight mb-4">
+                        CAN'T READ THE BUMPS? GOOD.
+                    </h4>
+                    <p class="font-body text-lg font-bold text-on-tertiary-container opacity-80">
+                        Stay in the dark, hero. This code is for the bunny ears only.
+                    </p>
+                    <!-- Bunny Laughing Doodle -->
+                    <div class="mt-8 flex justify-center">
+                        <div class="relative group">
+                            <span class="material-symbols-outlined text-9xl text-on-tertiary-container opacity-20"
+                                data-icon="cruelty_free">cruelty_free</span>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="w-24 h-12 bg-primary opacity-20 blur-xl rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Carrot Doodle -->
+                    <div class="absolute -top-6 -right-6 rotate-45">
+                        <span class="material-symbols-outlined text-5xl text-tertiary"
+                            data-icon="nutrition">nutrition</span>
+                    </div>
+                </div>
+                <div class="mt-16 w-full px-4">
+                    <img alt="Villainous mood board"
+                        class="w-full h-48 object-cover rounded-xl grayscale contrast-125 rotate-[-2deg] border-4 border-surface-container-highest"
+                        data-alt="a monochromatic close-up of a mischievous white rabbit peeking from behind a red velvet curtain, high contrast, film grain texture"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAkjg_ehBpK7bWJKDXyEAV2zlrF_b6dxUsMdiok2Yhw77QDWq6m7lOw_zxQmGaY8lrhfsFSugAi4vn9A-5U-kYcJP_gVnzioiV5x4IADchky8O8so1--6el1-OePqp6s-JOB5pP9XQq65HVPZCl5jsaw3P5WwqsISqdzUrM1scEPgzK_SIP4FaayMETnVCEPe949vYe_QuvEDQPhb3w34aeDDahrFVoNySIcwLMEe4JzONyDixj_GCBliBcWrcJpp68gmIHeqMqPo" />
+                    <div class="mt-4 font-headline text-primary font-black uppercase tracking-tighter italic">
+                        VIBE_CHECK.JPG</div>
+                </div>
+            </aside>
+        </div>
+    </main>
+    <!-- BottomNavBar Section -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#fbfaee] dark:bg-stone-900 rounded-t-[3rem] border-t-[8px] border-[#f5f4e8] shadow-[0_-15px_30px_rgba(0,0,0,0.08)]">
+        <a class="flex flex-col items-center justify-center bg-[#c00014] text-white rounded-[2rem] px-6 py-2 rotate-1 hover:bg-[#ffe16d] hover:text-[#1b1c15] transition-all duration-200 active:skew-x-6"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="record_voice_over">record_voice_over</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-widest mt-1">Normal Talk</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-[#00668a] p-2 opacity-60 hover:bg-[#ffe16d] hover:text-[#1b1c15] transition-all duration-200 active:skew-x-6"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="visibility_off">visibility_off</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-widest mt-1">Stolen
+                Braille</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-[#00668a] p-2 opacity-60 hover:bg-[#ffe16d] hover:text-[#1b1c15] transition-all duration-200 active:skew-x-6"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-widest mt-1">My Vault</span>
+        </a>
+    </nav>
+    <!-- FAB (Conditional - Hidden on subpages but included for context if user navigates) -->
+    <button
+        class="fixed right-6 bottom-32 bg-tertiary text-on-tertiary w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-40 lg:hidden">
+        <span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
+    </button>
+</body>
+
+</html>

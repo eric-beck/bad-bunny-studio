@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Bad Bunny's Scrapbook - Steganography Decoder</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline": "#777777",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "surface-container-high": "#e9e9dd",
+                        "inverse-on-surface": "#f2f1e5",
+                        "primary-fixed": "#ffdad6",
+                        "surface": "#fbfaee",
+                        "primary-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-container-low": "#f5f4e8",
+                        "secondary-container": "#c3e8ff",
+                        "secondary-fixed": "#c3e8ff",
+                        "on-primary-container": "#93000d",
+                        "on-tertiary-container": "#544600",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-secondary-fixed": "#001e2c",
+                        "on-primary-fixed": "#410002",
+                        "on-surface-variant": "#474747",
+                        "surface-tint": "#c00014",
+                        "surface-bright": "#fbfaee",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#221b00",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "surface-container-highest": "#e4e3d7",
+                        "on-surface": "#1b1c15",
+                        "surface-container": "#efeee3",
+                        "inverse-primary": "#ffb4ab",
+                        "tertiary-container": "#ffe16d",
+                        "tertiary": "#705d00",
+                        "tertiary-fixed": "#ffe16d",
+                        "primary": "#c00014",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fbfaee",
+                        "surface-variant": "#e4e3d7",
+                        "surface-dim": "#dbdbcf",
+                        "on-background": "#1b1c15",
+                        "on-secondary-container": "#004c69",
+                        "on-primary-fixed-variant": "#93000d",
+                        "inverse-surface": "#303129",
+                        "secondary": "#00668a",
+                        "outline-variant": "#c6c6c6",
+                        "on-secondary": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+
+        .crayon-border {
+            box-shadow: 0 0 0 4px #fbfaee, 0 0 0 8px #c00014;
+            border-radius: 40px 25px 55px 30px / 30px 50px 25px 45px;
+        }
+
+        .masking-tape {
+            background-color: #f3efd9;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            opacity: 0.9;
+            transform: rotate(-2deg);
+        }
+
+        .scribble-strike {
+            position: relative;
+        }
+
+        .scribble-strike::after {
+            content: '';
+            position: absolute;
+            left: -5%;
+            top: 50%;
+            width: 110%;
+            height: 12px;
+            background-color: #ba1a1a;
+            transform: rotate(-2deg);
+            opacity: 0.8;
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        .black-crayon-block {
+            background: #1b1c15;
+            mask-image: linear-gradient(to right, black 80%, transparent 100%);
+            clip-path: polygon(2% 0%, 98% 5%, 100% 95%, 0% 100%);
+        }
+
+        .bunny-ear-magnifier {
+            position: relative;
+        }
+
+        .bunny-ear-magnifier::before {
+            content: 'U';
+            font-family: 'cursive';
+            position: absolute;
+            top: -20px;
+            left: 5px;
+            font-size: 30px;
+            color: #c00014;
+            transform: rotate(-15deg);
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-surface font-body min-h-screen selection:bg-tertiary-container">
+    <!-- TopAppBar -->
+    <nav
+        class="bg-[#fbfaee] dark:bg-stone-900 border-b-4 border-[#f5f4e8] dark:border-stone-800 shadow-[0px_20px_40px_rgba(27,28,21,0.06)] flex justify-between items-center w-full px-6 py-4 max-w-none sticky top-0 z-50">
+        <div
+            class="text-3xl font-black text-[#c00014] dark:text-red-600 rotate-[-2deg] drop-shadow-sm font-['Spline_Sans'] uppercase tracking-tighter italic">
+            Bad Bunny's Scrapbook
+        </div>
+        <div class="hidden md:flex gap-8 items-center">
+            <a class="text-stone-500 hover:text-[#00668a] font-bold uppercase tracking-widest text-sm hover:rotate-3 transition-transform duration-200"
+                href="#">Archives</a>
+            <a class="text-[#c00014] underline decoration-wavy font-bold uppercase tracking-widest text-sm hover:rotate-3 transition-transform duration-200"
+                href="#">Find Lies</a>
+            <a class="text-stone-500 hover:text-[#00668a] font-bold uppercase tracking-widest text-sm hover:rotate-3 transition-transform duration-200"
+                href="#">The Vault</a>
+            <div class="flex gap-4 ml-4">
+                <span
+                    class="material-symbols-outlined text-[#c00014] cursor-pointer hover:rotate-12 transition-transform"
+                    data-icon="history">history</span>
+                <span
+                    class="material-symbols-outlined text-[#c00014] cursor-pointer hover:rotate-12 transition-transform"
+                    data-icon="settings">settings</span>
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-6xl mx-auto px-4 py-16">
+        <!-- Hero Section -->
+        <header class="mb-24 text-center md:text-left relative">
+            <div class="inline-block relative">
+                <h1
+                    class="font-headline text-6xl md:text-8xl font-black italic tracking-tighter uppercase leading-none">
+                    REVEAL THE <span class="scribble-strike text-on-surface-variant opacity-30">TRUTH</span>
+                </h1>
+                <h1
+                    class="font-headline text-7xl md:text-9xl font-black italic tracking-tighter uppercase leading-none text-primary -mt-4 md:-mt-8 ml-12 rotate-[3deg] drop-shadow-lg">
+                    LIES
+                </h1>
+            </div>
+            <div class="absolute -top-10 -right-5 md:right-20 transform rotate-12 opacity-80">
+                <div
+                    class="bg-tertiary-container px-6 py-3 rounded-xl border-4 border-tertiary transform -rotate-2 text-on-tertiary-container font-black text-xl shadow-xl">
+                    TOP SECRET!!
+                </div>
+            </div>
+        </header>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <!-- Left Column: Upload Area -->
+            <div class="lg:col-span-7 space-y-12">
+                <section
+                    class="relative bg-surface-container-low p-8 md:p-12 rounded-xl transform -rotate-1 border-b-8 border-r-8 border-surface-container-high">
+                    <!-- Masking Tape Accents -->
+                    <div class="absolute -top-4 left-1/4 w-32 h-10 masking-tape z-10"></div>
+                    <div class="absolute -bottom-4 right-1/4 w-32 h-10 masking-tape z-10"></div>
+                    <div class="absolute top-1/2 -right-4 w-10 h-32 masking-tape z-10 rotate-90"></div>
+                    <h2 class="font-headline text-3xl font-black mb-8 italic uppercase text-secondary">UPLOAD EVIDENCE
+                    </h2>
+                    <div
+                        class="relative aspect-video bg-surface-container-highest rounded-lg border-4 border-dashed border-outline-variant flex flex-col items-center justify-center overflow-hidden group hover:bg-surface-container transition-colors cursor-pointer">
+                        <img class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-multiply"
+                            data-alt="grungy texture of old crumpled paper with faint blue and red ink stains, moody lighting, dark corner shadows"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY_RVPlkVvbSqYYAng6eF-z88VLJ3koB_QqphVNuLZcaaEgvqgzYV-Eoz56Nfu3XlF2bNaolwDCXvvooHPRSIZOoi8KtanJAxeodzp_HtC3jXcw3RHG6qvWF5a4p2MxGYmK5HJodlXLzAFi1odAKgVZ_ETk-cWbwarS2ZM8v9ghwU4BHn9dAhYPbL-HwHzmb6nF10OZMvjMTiUgUaYwRT9RnVy-E4hn7Lp_8Zz1urOckm3YqRZOJPIgX1ZllqfVWlA_5CQikORBaQ" />
+                        <div class="relative z-20 flex flex-col items-center gap-4">
+                            <span class="material-symbols-outlined text-6xl text-secondary"
+                                data-icon="cloud_upload">cloud_upload</span>
+                            <p class="font-bold text-lg text-on-surface-variant uppercase tracking-widest">Drop the
+                                proof here...</p>
+                        </div>
+                    </div>
+                    <!-- Decorative Scribbles -->
+                    <div class="absolute -bottom-10 -left-6 transform -rotate-12">
+                        <span class="material-symbols-outlined text-6xl text-tertiary opacity-40"
+                            data-icon="edit">edit</span>
+                    </div>
+                </section>
+                <!-- Decode Button Area -->
+                <div class="flex justify-center md:justify-start pt-4">
+                    <button
+                        class="group relative bg-primary text-on-primary px-12 py-6 rounded-full font-headline text-2xl font-black uppercase tracking-tighter italic transform hover:scale-110 hover:rotate-2 active:scale-95 transition-all shadow-2xl flex items-center gap-4">
+                        <span class="bunny-ear-magnifier">
+                            <span class="material-symbols-outlined text-4xl" data-icon="search_insights"
+                                data-weight="fill" style="font-variation-settings: 'FILL' 1;">search_insights</span>
+                        </span>
+                        FIND THE SECRET MESSAGE
+                        <!-- Scribble under button -->
+                        <div class="absolute -bottom-4 left-0 w-full h-2 bg-tertiary/30 -z-10 rounded-full blur-sm">
+                        </div>
+                    </button>
+                </div>
+            </div>
+            <!-- Right Column: Results & Doodles -->
+            <div class="lg:col-span-5 space-y-8">
+                <!-- Revealed Message Box -->
+                <div
+                    class="bg-tertiary-container p-8 rounded-xl shadow-[10px_10px_0px_0px_#705d00] transform rotate-1 border-2 border-tertiary relative">
+                    <h3 class="font-headline text-2xl font-black mb-6 uppercase text-tertiary flex items-center gap-2">
+                        <span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+                        REVEALED MESSAGE
+                    </h3>
+                    <div class="space-y-4 font-bold text-xl leading-relaxed text-on-tertiary-container italic">
+                        <p>IT SAYS:</p>
+                        <div class="black-crayon-block w-full h-16 relative">
+                            <div
+                                class="absolute inset-0 flex items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <span class="text-white font-black tracking-widest uppercase">THE BUNNY KNOWS
+                                    EVERYTHING</span>
+                            </div>
+                        </div>
+                        <p class="text-sm mt-4 text-tertiary opacity-70">Decoded with 99.2% certainty of mischief.</p>
+                    </div>
+                    <!-- Stamp -->
+                    <div class="absolute -bottom-10 -right-6 transform rotate-[-15deg]">
+                        <div
+                            class="border-8 border-[#c00014] text-[#c00014] rounded-full p-4 flex flex-col items-center justify-center w-32 h-32 font-black uppercase leading-tight text-center">
+                            <span class="text-xs">STRICTLY</span>
+                            <span class="text-xl">YOU FOUND IT!</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Decodes Bento -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div
+                        class="bg-surface-container-highest p-4 rounded-xl transform -rotate-2 hover:rotate-0 transition-transform cursor-pointer overflow-hidden relative">
+                        <img class="absolute inset-0 w-full h-full object-cover opacity-40"
+                            data-alt="abstract bright red and orange paint swirls, heavy impasto texture, dramatic lighting"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkOOxeYgyQ1DLxTyEdmwq_AuHnjQHpTClDvCO4RDOwDULlGgrwP3JAioubXeAlUJntGQ3ARNVuzgznJaKBOo-kbVKstpudZS-mnDZoEvghDveeD38N0MGarGGpvYeomovKs68wClqZjakt-pw8tdM_DRCIRU_qkqJ8-N6ep-f3_HJiqSbjeMzcOqXxapLKY8ia1K9A_x_c6x2tlDsN8pwYPwlJAeeCh2eh27goLRYncOIeGtvwZidm5dyHU954DEj2C-l7DWq2InI" />
+                        <div class="relative z-10">
+                            <p class="text-[10px] font-black uppercase text-secondary">Yesterday</p>
+                            <p class="font-bold text-sm truncate">Lies_v1.jpg</p>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-surface-container-highest p-4 rounded-xl transform rotate-3 hover:rotate-0 transition-transform cursor-pointer overflow-hidden relative">
+                        <img class="absolute inset-0 w-full h-full object-cover opacity-40"
+                            data-alt="vibrant blue ink splatters on textured off-white background, energetic and messy aesthetic"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU-MOENT0MfujEdXdlseiACea9FzzLl4Riv0zK2HCgTcjQjBz3zRF_wRa3qfPaLIv_Lfcgi66l474q1jOcRxArIL5LMkknkniAoa8R9mMcmFasFFuWAqe9YbZ8vDf6z9YK4S7MatkAcmY_peNgmyBKZAO3M_UFk1eq3-LuvknHgURFMWZ-8xUoYWbESbZBZuiRx60ax7uD3dDYQLtYxGwPvMda8musqkUR2PtDhdoy6tuovfTOeJo_1fH3hyCvaxsfZCJtNmAPxXs" />
+                        <div class="relative z-10">
+                            <p class="text-[10px] font-black uppercase text-secondary">2 hours ago</p>
+                            <p class="font-bold text-sm truncate">evidence_final.png</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Villain Doodle Area -->
+                <div class="pt-12 flex flex-col items-center">
+                    <div class="relative">
+                        <span class="material-symbols-outlined text-9xl text-on-surface opacity-10"
+                            data-icon="pets">pets</span>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <p class="font-headline text-4xl font-black text-primary -rotate-12 opacity-80">STAY ALERT
+                            </p>
+                        </div>
+                    </div>
+                    <p
+                        class="font-bold text-center text-on-surface-variant max-w-[200px] mt-4 uppercase text-xs tracking-tighter">
+                        This scrapbook is self-destructing in... nevermind, I lost the timer.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full flex justify-around items-center pb-8 pt-4 px-4 bg-[#fbfaee]/90 dark:bg-stone-900/90 backdrop-blur-xl z-50 rounded-t-[3rem] border-t-8 border-[#f5f4e8] dark:border-stone-800 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+        <a class="flex flex-col items-center justify-center text-[#00668a] opacity-70 px-6 py-2 hover:opacity-100 transition-all hover:bg-[#ffe16d] hover:text-[#705d00] rounded-[2rem]"
+            href="#">
+            <span class="material-symbols-outlined text-2xl" data-icon="edit_square">edit_square</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-widest mt-1">Hide It</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-[#c00014] text-white rounded-[2rem] px-8 py-3 rotate-1 scale-110 active:translate-y-1 transition-transform"
+            href="#">
+            <span class="material-symbols-outlined text-2xl" data-icon="search_insights"
+                style="font-variation-settings: 'FILL' 1;">search_insights</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase tracking-widest mt-1">Find Lies</span>
+        </a>
+    </nav>
+    <!-- Decorative Corner Doodle -->
+    <div class="fixed bottom-24 right-8 pointer-events-none opacity-20 hidden md:block">
+        <span class="material-symbols-outlined text-8xl text-secondary" data-icon="ink_eraser">ink_eraser</span>
+    </div>
+</body>
+
+</html>

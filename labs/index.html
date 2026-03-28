@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>VILLAIN LAB | Secret Hub</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 48;
+        }
+
+        .crayon-stroke {
+            border-bottom: 6px solid;
+            border-image: url("data:image/svg+xml,%3Csvg width='100' height='10' viewBox='0 0 100 10' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 5C20 2 40 8 60 5C80 2 100 8 100 5' stroke='%23c00014' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") 10;
+        }
+
+        .blueprint-grid {
+            background-image: radial-gradient(#c6c6c6 1px, transparent 1px), linear-gradient(#f5f4e8 1px, transparent 1px), linear-gradient(90deg, #f5f4e8 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .coffee-stain {
+            background: radial-gradient(circle at center, rgba(112, 93, 0, 0.1) 0%, transparent 70%);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#fbfaee",
+                        "inverse-surface": "#303129",
+                        "surface": "#fbfaee",
+                        "on-primary-container": "#93000d",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e4e3d7",
+                        "on-tertiary-container": "#544600",
+                        "on-secondary-fixed": "#001e2c",
+                        "inverse-primary": "#ffb4ab",
+                        "surface-container-highest": "#e4e3d7",
+                        "primary-fixed": "#ffdad6",
+                        "tertiary": "#705d00",
+                        "on-primary-fixed-variant": "#93000d",
+                        "primary-container": "#ffdad6",
+                        "on-tertiary-fixed": "#221b00",
+                        "secondary-container": "#c3e8ff",
+                        "secondary": "#00668a",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "outline-variant": "#c6c6c6",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "secondary-fixed": "#c3e8ff",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffe16d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#efeee3",
+                        "tertiary-container": "#ffe16d",
+                        "on-secondary-container": "#004c69",
+                        "error-container": "#ffdad6",
+                        "surface-container-high": "#e9e9dd",
+                        "surface-container-low": "#f5f4e8",
+                        "outline": "#777777",
+                        "on-surface-variant": "#474747",
+                        "on-primary-fixed": "#410002",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-surface": "#1b1c15",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#c00014",
+                        "error": "#ba1a1a",
+                        "background": "#fbfaee",
+                        "inverse-on-surface": "#f2f1e5",
+                        "surface-dim": "#dbdbcf",
+                        "on-background": "#1b1c15",
+                        "primary": "#c00014"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+
+<body class="bg-background text-on-background font-body selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
+    <div class="flex min-h-screen overflow-hidden">
+        <!-- SideNavBar -->
+        <aside
+            class="hidden md:flex flex-col h-screen w-64 rounded-r-[3rem] border-r-8 border-surface-container-highest bg-surface-container-low dark:bg-slate-800/50 backdrop-blur-xl py-8 space-y-4 z-50 sticky top-0">
+            <div class="px-6 mb-8">
+                <h2 class="text-2xl font-black text-tertiary">THE HIDEAWAY</h2>
+                <p class="text-xs font-bold uppercase tracking-widest opacity-60">Authorized Villains Only</p>
+            </div>
+            <nav class="flex-1 space-y-2">
+                <a class="bg-tertiary-fixed text-on-surface rounded-full rotate-1 mx-2 p-3 flex items-center gap-3 font-bold"
+                    href="#">
+                    <span class="material-symbols-outlined"
+                        style="font-variation-settings: 'FILL' 1;">architecture</span>
+                    Blueprints
+                </a>
+                <a class="text-on-surface p-3 flex items-center gap-3 opacity-60 hover:bg-primary hover:text-white transition-all mx-2 rounded-xl group"
+                    href="#">
+                    <span class="material-symbols-outlined">science</span>
+                    Chemicals
+                </a>
+                <a class="text-on-surface p-3 flex items-center gap-3 opacity-60 hover:bg-primary hover:text-white transition-all mx-2 rounded-xl group"
+                    href="#">
+                    <span class="material-symbols-outlined">groups</span>
+                    Minions
+                </a>
+                <a class="text-on-surface p-3 flex items-center gap-3 opacity-60 hover:bg-primary hover:text-white transition-all mx-2 rounded-xl group"
+                    href="#">
+                    <span class="material-symbols-outlined">public</span>
+                    World Domination
+                </a>
+            </nav>
+            <div class="px-4 mt-auto">
+                <button
+                    class="w-full py-4 bg-surface-variant text-on-surface-variant font-black rounded-xl border-4 border-dashed border-outline-variant hover:rotate-[-2deg] transition-transform">
+                    REDACTED
+                </button>
+                <a class="mt-4 p-3 flex items-center gap-3 opacity-60 hover:text-primary transition-all" href="#">
+                    <span class="material-symbols-outlined">auto_fix_high</span>
+                    Erase Evidence
+                </a>
+            </div>
+        </aside>
+        <main class="flex-1 flex flex-col min-w-0 blueprint-grid relative">
+            <!-- TopAppBar -->
+            <header
+                class="bg-surface dark:bg-slate-900 docked full-width top-0 border-b-4 border-surface-container-low shadow-[0px_20px_40px_rgba(27,28,21,0.06)] flex justify-between items-center w-full px-6 py-4 z-40">
+                <div class="flex items-center gap-4">
+                    <h1
+                        class="font-headline uppercase tracking-widest text-3xl italic font-black text-primary rotate-[-2deg]">
+                        badbunny.studio</h1>
+                </div>
+                <nav class="hidden lg:flex items-center gap-8 font-label font-bold uppercase text-sm">
+                    <a class="text-on-background opacity-70 hover:rotate-2 hover:scale-110 transition-transform"
+                        href="#">Steganography</a>
+                    <a class="text-on-background opacity-70 hover:rotate-2 hover:scale-110 transition-transform"
+                        href="#">Spectrograms</a>
+                    <a class="text-primary underline decoration-wavy decoration-4 font-bold hover:rotate-2 hover:scale-110 transition-transform"
+                        href="#">Ciphers</a>
+                </nav>
+                <div class="flex items-center gap-4">
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:rotate-12 transition-transform">settings</span>
+                    <span
+                        class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:rotate-12 transition-transform">psychology</span>
+                    <div class="w-12 h-12 rounded-full overflow-hidden border-4 border-tertiary rotate-3">
+                        <img alt="Evil Genius Avatar"
+                            data-alt="close-up of a mischievous cartoon bunny wearing an eye patch and a lab coat, vibrant colors, comic book style"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0SfAWHXnPY71dYVY0kYm3N1_I8U-PCkRyQbcY-U1d7ABi7PCM29BOPwf8kXKkfN6g4eH9R50li3yPT5uOtSmsktEOLsMPYnDzY_nxD0d6yCLTbmBi8ud9VlVJE8x2X8qZE5TpYJ1jMmzvhQmI-J89DCl2iXWP541xMg4-3hpMUgAiDy0eyQVkPBtUrYcxXCLvsYH89XQTbF0qn9kvxI8fhPvVbhnI5egMS1bjB4sXwBNviuYJl9nDP5VgHk0yOezdPJIfOWS11eA" />
+                    </div>
+                </div>
+            </header>
+            <!-- Workshop Grid -->
+            <div class="p-8 md:p-12 space-y-12 max-w-7xl mx-auto w-full relative">
+                <!-- Coffee Stains & Scribbles Decoration -->
+                <div class="absolute top-20 right-10 w-48 h-48 coffee-stain -z-10 opacity-40"></div>
+                <div class="absolute bottom-40 left-20 w-32 h-32 coffee-stain -z-10 opacity-30"></div>
+                <div class="flex flex-col md:flex-row justify-between items-start gap-8">
+                    <div class="max-w-xl">
+                        <span
+                            class="inline-block bg-primary text-white px-4 py-1 rounded-full font-black text-xs rotate-[-3deg] mb-4">CONFIDENTIAL</span>
+                        <h2 class="text-6xl font-headline font-black text-on-surface leading-tight">THE SCRAPBOOK HUB
+                        </h2>
+                        <p class="mt-4 text-xl font-medium text-on-surface-variant italic">"Building the tools to take
+                            over the world... one doodle at a time."</p>
+                    </div>
+                    <div
+                        class="bg-tertiary-container p-6 rounded-xl rotate-2 shadow-xl border-4 border-tertiary max-w-xs">
+                        <h4 class="font-black text-on-tertiary-container mb-2">DO NOT TOUCH OR DIE!</h4>
+                        <p class="text-sm font-bold opacity-80">This station is strictly for Authorized Villains. Any
+                            unauth... un-autho... unauthorized users will be fed to the giant carrots.</p>
+                        <div
+                            class="mt-4 border-t-2 border-dashed border-on-tertiary-container pt-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined"
+                                style="font-variation-settings: 'FILL' 1;">warning</span>
+                            <span class="text-xs font-black uppercase">VILLAIN STATUS: ACTIVE</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bento Grid Workshop -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                    <!-- Category: SIGHT -->
+                    <div
+                        class="md:col-span-5 bg-surface-container-low rounded-xl p-8 border-t-8 border-l-4 border-primary/20 rotate-[-1deg] shadow-lg relative overflow-hidden group">
+                        <div
+                            class="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:scale-150 transition-transform">
+                        </div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-16 h-16 bg-white rounded-lg flex items-center justify-center border-4 border-primary rotate-3">
+                                <span class="material-symbols-outlined text-4xl text-primary"
+                                    style="font-variation-settings: 'FILL' 1;">visibility</span>
+                            </div>
+                            <h3 class="text-4xl font-black font-headline uppercase tracking-tighter">SIGHT</h3>
+                        </div>
+                        <p class="font-bold text-on-surface-variant mb-6">Visual tools for the discerning eye. Hide
+                            messages in plain sight.</p>
+                        <ul class="space-y-4">
+                            <li
+                                class="flex items-center gap-3 p-3 bg-white rounded-lg border-b-4 border-primary/30 hover:bg-primary hover:text-white transition-colors cursor-pointer group/item">
+                                <span
+                                    class="material-symbols-outlined text-secondary group-hover/item:text-white transition-colors">image_search</span>
+                                <span class="font-black">Steganography Encoder</span>
+                            </li>
+                            <li
+                                class="flex items-center gap-3 p-3 bg-white rounded-lg border-b-4 border-primary/30 hover:bg-primary hover:text-white transition-colors cursor-pointer group/item">
+                                <span
+                                    class="material-symbols-outlined text-secondary group-hover/item:text-white transition-colors">magnification_large</span>
+                                <span class="font-black">Steganography Decoder</span>
+                            </li>
+                        </ul>
+                        <div
+                            class="mt-6 text-error font-black uppercase text-xs tracking-widest italic flex items-center gap-1">
+                            <span class="material-symbols-outlined text-sm">edit</span>
+                            They won't see it coming...
+                        </div>
+                    </div>
+                    <!-- Category: SCRIBBLES (Large Center Piece) -->
+                    <div
+                        class="md:col-span-7 bg-surface-container-highest rounded-xl p-8 rotate-[1.5deg] shadow-2xl relative overflow-hidden border-4 border-on-surface/5">
+                        <div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+                        <div class="flex justify-between items-start mb-8">
+                            <div>
+                                <h3 class="text-5xl font-black font-headline text-secondary leading-none mb-2">SCRIBBLES
+                                </h3>
+                                <p class="text-sm font-bold opacity-60 uppercase tracking-widest">Text Ciphers &amp;
+                                    Secret Codes</p>
+                            </div>
+                            <span class="material-symbols-outlined text-6xl opacity-10">history_edu</span>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div
+                                class="p-4 bg-surface rounded-xl border-4 border-dashed border-secondary/30 hover:scale-[1.02] transition-transform">
+                                <h4 class="font-black mb-2 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary">radio</span> Morse Code
+                                </h4>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg">ENCODE</button>
+                                    <button
+                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg">DECODE</button>
+                                </div>
+                            </div>
+                            <div
+                                class="p-4 bg-surface rounded-xl border-4 border-dashed border-secondary/30 hover:scale-[1.02] transition-transform">
+                                <h4 class="font-black mb-2 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary">mobile_dots</span> Braille
+                                </h4>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg">ENCODE</button>
+                                    <button
+                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg">DECODE</button>
+                                </div>
+                            </div>
+                            <div
+                                class="p-4 bg-surface rounded-xl border-4 border-dashed border-secondary/30 hover:scale-[1.02] transition-transform">
+                                <h4 class="font-black mb-2 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary">numbers</span> Hexadecimal
+                                </h4>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg">ENCODE</button>
+                                    <button
+                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg">DECODE</button>
+                                </div>
+                            </div>
+                            <div
+                                class="p-4 bg-surface rounded-xl border-4 border-dashed border-secondary/30 hover:scale-[1.02] transition-transform">
+                                <h4 class="font-black mb-2 flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-secondary">grid_view</span> Pigpen
+                                    Cipher
+                                </h4>
+                                <div class="flex gap-2">
+                                    <button
+                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg">ENCODE</button>
+                                    <button
+                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg">DECODE</button>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Doodle Arrows -->
+                        <div class="mt-8 flex justify-center">
+                            <span
+                                class="material-symbols-outlined text-6xl text-primary animate-bounce">arrow_downward</span>
+                        </div>
+                    </div>
+                    <!-- Category: SOUND -->
+                    <div
+                        class="md:col-span-4 bg-tertiary/10 rounded-xl p-8 rotate-[-2deg] shadow-lg border-4 border-tertiary relative group">
+                        <div class="flex items-center gap-4 mb-6">
+                            <div
+                                class="w-12 h-12 bg-tertiary-fixed rounded-full flex items-center justify-center border-4 border-tertiary">
+                                <span class="material-symbols-outlined text-on-tertiary-fixed">hearing</span>
+                            </div>
+                            <h3 class="text-4xl font-black font-headline uppercase tracking-widest text-tertiary">SOUND
+                            </h3>
+                        </div>
+                        <p class="font-bold text-on-surface mb-6 italic opacity-80 leading-snug">"Listen closely. The
+                            frequencies speak to those who know how to watch."</p>
+                        <div class="space-y-3">
+                            <div
+                                class="p-4 bg-white/60 backdrop-blur rounded-lg border-l-8 border-tertiary hover:translate-x-2 transition-transform cursor-pointer">
+                                <div class="text-xs font-black text-tertiary uppercase">Audio to Vis</div>
+                                <div class="font-bold">Spectrogram Encoder</div>
+                            </div>
+                            <div
+                                class="p-4 bg-white/60 backdrop-blur rounded-lg border-l-8 border-tertiary hover:translate-x-2 transition-transform cursor-pointer">
+                                <div class="text-xs font-black text-tertiary uppercase">Vis to Audio</div>
+                                <div class="font-bold">Spectrogram Decoder</div>
+                            </div>
+                        </div>
+                        <!-- Scribble mark -->
+                        <div class="absolute -bottom-4 -right-2 text-error text-2xl font-black rotate-[-10deg]">
+                            AUTHORIZED VILLAINS ONLY!</div>
+                    </div>
+                    <!-- Current Project -->
+                    <div
+                        class="md:col-span-8 bg-surface-container rounded-xl p-8 flex flex-col md:flex-row gap-8 items-center border-4 border-dashed border-outline-variant relative">
+                        <div class="flex-1">
+                            <h3 class="text-3xl font-black font-headline mb-4 flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">pending_actions</span>
+                                Current Project: "The Golden Root"
+                            </h3>
+                            <p class="text-on-surface-variant font-medium mb-6">Status: 45% Complete. Need more orange
+                                pigment. The world's largest carrot won't draw itself. Phase 2 involves actual root
+                                vegetables and high-voltage capacitors.</p>
+                            <div
+                                class="w-full bg-surface-variant h-4 rounded-full overflow-hidden border-2 border-on-surface/10">
+                                <div class="bg-primary h-full w-[45%] rounded-full"></div>
+                            </div>
+                            <p class="mt-4 text-xs font-black uppercase text-secondary">Estimated completion: When I
+                                feel like it.</p>
+                        </div>
+                        <div
+                            class="w-64 h-64 bg-white rounded-xl shadow-inner flex items-center justify-center border-4 border-tertiary-fixed-dim rotate-1 relative">
+                            <img alt="Half-drawn carrot" class="w-40 h-40 opacity-70 grayscale contrast-125"
+                                data-alt="a hand-drawn sketch of a massive carrot on crumpled graph paper, unfinished lines, crayon texture, top-down perspective"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBz9Mp4YHAjM6pTzimbM5-cTR5jJ95yh5P3QI9-HWY-fBZJaAOTelk6-v_1m53jjLKKAzavgpNHXmWBEbmpvLRMgWPCvWcchzZbqOR_d46gznzVuRO8l9mBzdlhiPIh_BorywU00wqB53jL0aSp4bmGArOTxVlwsgriw7l0rr6LopXfhH9GtBkIzmppDPGoiGrFl3oD2ljhubbSProLqrpEN_6KFsuCAR6LXSqQ6_7DWb6oUQv8dEvtpVabMod7P_-9YzAE5rvG7nk" />
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="material-symbols-outlined text-6xl text-error/30">brush</span>
+                            </div>
+                            <span
+                                class="absolute -top-4 -right-4 bg-tertiary-fixed p-2 rounded-lg border-2 border-tertiary font-black text-[10px] rotate-12">WIP
+                                - DO NOT TOUCH!</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Footer Junk -->
+                <footer
+                    class="mt-12 flex flex-col md:flex-row justify-between items-center gap-8 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700 pb-12">
+                    <div class="flex items-center gap-6">
+                        <span class="font-black text-2xl rotate-[-5deg]">Bad Bunny Lab © 2024</span>
+                        <div class="h-1 w-24 bg-on-surface/20"></div>
+                        <span class="material-symbols-outlined text-4xl">skull</span>
+                    </div>
+                    <div class="flex gap-8 font-black uppercase text-xs tracking-widest">
+                        <a class="hover:text-primary" href="#">Erase History</a>
+                        <a class="hover:text-primary" href="#">Burn Evidence</a>
+                        <a class="hover:text-primary" href="#">Blame Minions</a>
+                    </div>
+                </footer>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

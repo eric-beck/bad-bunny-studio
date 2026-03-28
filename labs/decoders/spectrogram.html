@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>VILLAIN_SCRAPBOOK - FIND THE LIES</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "outline-variant": "#c6c6c6",
+                        "on-surface": "#1b1c15",
+                        "on-primary-fixed": "#410002",
+                        "inverse-surface": "#303129",
+                        "surface-container-low": "#f5f4e8",
+                        "secondary-fixed": "#c3e8ff",
+                        "surface-tint": "#c00014",
+                        "surface-variant": "#e4e3d7",
+                        "surface-bright": "#fbfaee",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#ffe16d",
+                        "inverse-primary": "#ffb4ab",
+                        "on-tertiary-fixed": "#221b00",
+                        "primary-container": "#ffdad6",
+                        "on-surface-variant": "#474747",
+                        "tertiary-fixed": "#ffe16d",
+                        "tertiary": "#705d00",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "secondary-container": "#c3e8ff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-tertiary": "#ffffff",
+                        "secondary": "#00668a",
+                        "surface-container-highest": "#e4e3d7",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-primary-container": "#93000d",
+                        "primary": "#c00014",
+                        "surface-container-high": "#e9e9dd",
+                        "on-background": "#1b1c15",
+                        "surface-container": "#efeee3",
+                        "on-secondary-container": "#004c69",
+                        "on-secondary-fixed": "#001e2c",
+                        "inverse-on-surface": "#f2f1e5",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "error": "#ba1a1a",
+                        "on-error-container": "#93000a",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-tertiary-container": "#544600",
+                        "surface": "#fbfaee",
+                        "outline": "#777777",
+                        "surface-dim": "#dbdbcf",
+                        "primary-fixed": "#ffdad6",
+                        "background": "#fbfaee",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .crayon-border {
+            border-bottom: 6px double #c00014;
+        }
+
+        .masking-tape {
+            background-color: #f3efd9;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            transform: rotate(-2deg);
+        }
+
+        .scribble-bg {
+            background-image: radial-gradient(#c00014 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-surface font-body text-on-surface selection:bg-tertiary-container">
+    <!-- TopAppBar -->
+    <header
+        class="fixed top-0 left-0 w-full h-24 z-50 bg-[#fbfaee] dark:bg-stone-900 border-b-8 border-[#c00014] border-double shadow-[10px_10px_0px_0px_rgba(27,28,21,0.06)] flex justify-between items-center px-8 py-4">
+        <div
+            class="text-4xl font-black text-[#c00014] rotate-[-2deg] drop-shadow-sm font-headline uppercase tracking-tighter italic">
+            VILLAIN_SCRAPBOOK
+        </div>
+        <nav class="hidden md:flex gap-8 items-center font-headline uppercase tracking-tighter italic">
+            <a class="text-stone-500 hover:text-[#00668a] transition-transform hover:rotate-3 hover:scale-110"
+                href="#">Encoder</a>
+            <a class="text-[#c00014] underline decoration-wavy decoration-4 underline-offset-8 hover:scale-110 transition-all"
+                href="#">Decoder</a>
+            <div class="flex gap-4 ml-4">
+                <span
+                    class="material-symbols-outlined text-stone-500 hover:scale-110 hover:rotate-2 transition-all cursor-pointer">history</span>
+                <span
+                    class="material-symbols-outlined text-stone-500 hover:scale-110 hover:rotate-2 transition-all cursor-pointer">settings</span>
+            </div>
+        </nav>
+    </header>
+    <!-- SideNavBar -->
+    <aside
+        class="fixed left-0 top-24 h-[calc(100vh-6rem)] w-64 p-6 z-40 bg-[#f5f4e8] dark:bg-stone-800 rounded-r-[3rem] border-r-4 border-dashed border-stone-400 hidden md:block">
+        <div class="flex flex-col gap-8 h-full">
+            <div class="flex items-center gap-3 py-4">
+                <div
+                    class="w-12 h-12 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary rotate-3">
+                    <img alt="MASTERMIND"
+                        data-alt="Crayon-drawn villain silhouette, minimalist scratchy portrait with dark red outlines on cream paper"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGpxCEjDHeyLYDhxLuWkdNGCbtNG-s6NpWDL-_nBI6eI5d4oAFAZH5YM4glpMzXS_JgdoSpLlmWkSrrZr6QnExKuSD5OqSmSySoVzxCGo1ICs0g8lmHybNSFw-MBBLxi-60bKE_2VzAg2JbLgDqr1VMtYE8KbMgXqInJNjra7Rzz249DF5x-ioYAcZaDJCPwFa9SxBgmCukl4xZDhn8h9Fj84FsrgNYMAcvE03eUamOr3cE3PE1i2CcgtWZsS5BoGw5wvW34wfqXY" />
+                </div>
+                <div>
+                    <h3 class="font-['Plus_Jakarta_Sans'] font-bold tracking-widest text-lg text-[#00668a]">MASTERMIND
+                    </h3>
+                    <p class="text-[10px] uppercase opacity-60">Top Secret Scrapbook</p>
+                </div>
+            </div>
+            <nav class="flex flex-col gap-4">
+                <a class="flex items-center gap-4 text-stone-600 hover:text-[#c00014] hover:translate-x-2 transition-transform font-bold tracking-widest text-sm"
+                    href="#">
+                    <span class="material-symbols-outlined">science</span> Secret Lab
+                </a>
+                <a class="flex items-center gap-4 bg-[#705d00] text-white rounded-full rotate-1 scale-105 p-3 transition-transform font-bold tracking-widest text-sm"
+                    href="#">
+                    <span class="material-symbols-outlined">folder_open</span> Evidence Box
+                </a>
+                <a class="flex items-center gap-4 text-stone-600 hover:text-[#c00014] hover:translate-x-2 transition-transform font-bold tracking-widest text-sm"
+                    href="#">
+                    <span class="material-symbols-outlined">brush</span> Smudge Tool
+                </a>
+                <a class="flex items-center gap-4 text-stone-600 hover:text-[#c00014] hover:translate-x-2 transition-transform font-bold tracking-widest text-sm"
+                    href="#">
+                    <span class="material-symbols-outlined">local_fire_department</span> Burn After Reading
+                </a>
+            </nav>
+        </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="pt-32 pb-24 md:pl-72 px-6 min-h-screen scribble-bg">
+        <div class="max-w-5xl mx-auto">
+            <!-- Page Title Area -->
+            <div class="relative mb-16">
+                <h1
+                    class="text-7xl md:text-9xl font-black font-headline text-on-surface rotate-[-1deg] leading-none mb-2">
+                    FIND THE <span
+                        class="text-primary underline decoration-double decoration-8 underline-offset-4">LIES</span>
+                </h1>
+                <div class="absolute -top-10 -right-4 w-32 h-32 opacity-80 rotate-12 pointer-events-none">
+                    <img alt="Taunting Bunny"
+                        data-alt="A taunting hand-drawn cartoon bunny with a mischievous smirk, drawn in rough red crayon lines"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqrvo2YwPeD_tWjkOfk8CSWrZj_jOkZbNJrbO4FX9IrPzZJQffRW_T72CrA66-wVvFvzGkwxT6rtaXOI4VBmYDENdUyyWb_N2SJiMrOyz4EmE78GJdBU3AOqKzf7Kv-8t8djVOC0Q362vkAq6XDi3aEKPhP5E2DZGkBMoYvODIpSKQSzH7ndV6q4aNR295ga904bYdw3o8hMDYVuzA1jBU8t1NeAf8ZCgAXYsZDFo1CTPuAYQ5_3yNaBnqhd4jEikeaOraqTPX1Ow" />
+                </div>
+                <p class="text-xl font-bold italic text-secondary tracking-widest mt-4">SPECTROGRAM DECODER V.0.4 -
+                    [UNAUTHORIZED ACCESS]</p>
+            </div>
+            <!-- Main Interactive Bento Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+                <!-- Upload Zone -->
+                <div
+                    class="md:col-span-5 bg-surface-container-low border-4 border-dashed border-stone-400 p-8 rounded-xl rotate-1 shadow-sm hover:rotate-0 transition-transform">
+                    <div
+                        class="border-4 border-white p-6 bg-white/50 backdrop-blur-sm rounded-lg flex flex-col items-center justify-center min-h-[300px] text-center">
+                        <span class="material-symbols-outlined text-6xl text-primary mb-4"
+                            style="font-variation-settings: 'FILL' 1;">upload_file</span>
+                        <h2 class="text-2xl font-black uppercase mb-2">Upload Evidence</h2>
+                        <p class="text-stone-500 text-sm font-medium mb-6">FEED THE MACHINE THE RAW AUDIO BITS. DON'T BE
+                            SHY.</p>
+                        <button
+                            class="bg-primary text-white font-black px-8 py-4 rounded-full text-lg hover:scale-110 hover:rotate-2 active:scale-95 duration-75 shadow-lg">
+                            SELECT BITS
+                        </button>
+                    </div>
+                </div>
+                <!-- Analysis Zone -->
+                <div class="md:col-span-7 space-y-8">
+                    <!-- Spectrogram View -->
+                    <div class="bg-inverse-surface p-6 rounded-xl -rotate-1 shadow-2xl relative overflow-hidden group">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-surface font-black text-xs tracking-widest uppercase">Signal Analysis:
+                                44.1kHz / 24-bit</span>
+                            <div class="flex gap-2">
+                                <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+                                <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                            </div>
+                        </div>
+                        <!-- The Spectrogram Drawing -->
+                        <div
+                            class="relative h-64 w-full bg-stone-900 rounded-lg overflow-hidden border border-stone-700">
+                            <div class="absolute inset-0 opacity-40">
+                                <img alt="Spectrogram Wave" class="w-full h-full object-cover mix-blend-screen"
+                                    data-alt="A chaotic hand-drawn audio spectrogram wave pattern, neon red and yellow scratchy lines on a pitch black background, resembling messy crayon scribbles of frequency spikes"
+                                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8hb3nH86Rfb9nUa1Yy9pVjCJofgVt-8kEG3U2aD7ubRj7bEKUMaOS1_t8mepbb_iCIW5pejPiTtpL9zEVizyGeasIx5TNf1-RC_Hcwex7S6OuSZjG7iymzunjjKXfNxQFM_SJ4bSAyyIPBYrnvBgk6PWWgBP0sYACJuErpyvyinCM03INyJsxpmN5zTiAtiPOGWjCEdTK-W0xeH6v-839_AGOR5h20V9v22WpPEJh3daAwlwixGINMi8yme15HIlCBYKNaul6qBA" />
+                            </div>
+                            <!-- Scrub line -->
+                            <div
+                                class="absolute left-1/3 top-0 bottom-0 w-1 bg-primary/80 shadow-[0_0_15px_#c00014] z-10">
+                            </div>
+                        </div>
+                        <div class="mt-4 flex justify-between">
+                            <button class="text-surface-container hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined text-4xl">play_circle</span>
+                            </button>
+                            <div class="text-surface-variant font-bold text-xs self-end">DECODING IN PROGRESS... 88%
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Truth Box -->
+                    <div class="relative pt-12">
+                        <div class="masking-tape absolute -top-4 left-10 w-40 h-10 z-10 opacity-90"></div>
+                        <div class="masking-tape absolute top-2 right-10 w-32 h-10 z-10 opacity-90 rotate-12"></div>
+                        <div
+                            class="bg-tertiary-container p-10 rounded-sm shadow-md border-b-4 border-r-4 border-black/10">
+                            <h3 class="text-3xl font-black mb-6 text-on-tertiary-container rotate-[-1deg]">REVEALED
+                                TRUTH:</h3>
+                            <div class="space-y-4">
+                                <p
+                                    class="text-4xl font-black tracking-tight leading-tight text-on-background bg-white/40 p-4 rounded-lg">
+                                    "THE VAULT KEY IS <span
+                                        class="bg-error text-white px-2 rounded -rotate-2 inline-block">HIDDEN</span>
+                                    UNDER THE OLD OAK TREE AT MIDNIGHT."
+                                </p>
+                            </div>
+                            <!-- Red Stamp -->
+                            <div
+                                class="absolute -bottom-8 -right-4 w-48 h-48 rotate-[-15deg] pointer-events-none drop-shadow-lg group-hover:scale-125 transition-transform">
+                                <div
+                                    class="w-full h-full border-8 border-error rounded-full flex items-center justify-center flex-col p-4 bg-transparent">
+                                    <span class="text-error font-black text-4xl text-center leading-none uppercase">YOU
+                                        FOUND IT!</span>
+                                    <div class="w-full h-1 bg-error my-1"></div>
+                                    <span class="text-error font-bold text-xs">VILLAIN APPROVED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Section Extra Info -->
+            <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div
+                    class="bg-surface-container-highest p-6 rounded-xl rotate-[-2deg] border-2 border-dashed border-stone-300">
+                    <h4 class="font-black mb-2 text-primary uppercase">Note 01:</h4>
+                    <p class="text-sm italic">The signal was heavily garbled by the storm. I had to use the Sunny Yellow
+                        wax to fill in the gaps.</p>
+                </div>
+                <div
+                    class="bg-surface-container-highest p-6 rounded-xl rotate-[1deg] border-2 border-dashed border-stone-300">
+                    <h4 class="font-black mb-2 text-secondary uppercase">Frequency Log:</h4>
+                    <p class="text-sm">High-pitch lies detected at 12kHz. Low-pitch truths buried under the bassline.
+                    </p>
+                </div>
+                <div
+                    class="bg-surface-container-highest p-6 rounded-xl rotate-[-1deg] border-2 border-dashed border-stone-300">
+                    <h4 class="font-black mb-2 text-tertiary uppercase">Status:</h4>
+                    <p class="text-sm">Mastermind is pleased. The scrapbook grows ever larger with their mistakes.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar (Mobile Only) -->
+    <footer
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 md:hidden bg-[#fbfaee] dark:bg-stone-900 rounded-t-[4rem] border-t-4 border-[#705d00] shadow-[0_-10px_20px_rgba(0,0,0,0.05)]">
+        <a class="flex flex-col items-center text-stone-400 p-2 hover:bg-stone-200" href="#">
+            <span class="material-symbols-outlined">lock_open</span>
+            <span class="font-['Plus_Jakarta_Sans'] text-xs font-black uppercase">Encipher</span>
+        </a>
+        <a class="flex flex-col items-center bg-[#ffe16d] text-black rounded-[2rem] p-4 rotate-[-3deg] scale-125 transition-all"
+            href="#">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">search</span>
+            <span class="font-['Plus_Jakarta_Sans'] text-xs font-black uppercase">Decipher</span>
+        </a>
+        <a class="flex flex-col items-center text-stone-400 p-2 hover:bg-stone-200" href="#">
+            <span class="material-symbols-outlined">delete_forever</span>
+            <span class="font-['Plus_Jakarta_Sans'] text-xs font-black uppercase">Burn</span>
+        </a>
+    </footer>
+</body>
+
+</html>

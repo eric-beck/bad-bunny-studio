@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>SEMAPHORE! - Decoder</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:ital,wght@0,300;0,800;1,300;1,800&amp;family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f4e8",
+                        "surface-container-high": "#e9e9dd",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "primary-container": "#ffdad6",
+                        "on-surface-variant": "#474747",
+                        "on-primary-fixed-variant": "#93000d",
+                        "surface-variant": "#e4e3d7",
+                        "tertiary-container": "#ffe16d",
+                        "inverse-on-surface": "#f2f1e5",
+                        "primary-fixed": "#ffdad6",
+                        "secondary": "#00668a",
+                        "surface-container": "#efeee3",
+                        "primary": "#c00014",
+                        "inverse-surface": "#303129",
+                        "surface-tint": "#c00014",
+                        "tertiary-fixed": "#ffe16d",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#544600",
+                        "secondary-fixed": "#c3e8ff",
+                        "surface-container-highest": "#e4e3d7",
+                        "surface-bright": "#fbfaee",
+                        "on-background": "#1b1c15",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed": "#001e2c",
+                        "on-primary-fixed": "#410002",
+                        "inverse-primary": "#ffb4ab",
+                        "surface-dim": "#dbdbcf",
+                        "error": "#ba1a1a",
+                        "surface": "#fbfaee",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "outline-variant": "#c6c6c6",
+                        "secondary-container": "#c3e8ff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "outline": "#777777",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-container": "#93000d",
+                        "error-container": "#ffdad6",
+                        "background": "#fbfaee",
+                        "on-secondary-container": "#004c69",
+                        "on-error-container": "#93000a",
+                        "on-surface": "#1b1c15",
+                        "on-tertiary-fixed": "#221b00",
+                        "tertiary": "#705d00"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .crayon-stroke {
+            border-bottom: 6px solid;
+            border-image: linear-gradient(to right, #c00014 0%, #ba1a1a 100%) 1;
+            border-radius: 50% 20% / 10% 40%;
+        }
+
+        .scribble-bg {
+            background-image: radial-gradient(#c6c6c6 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .rotated-card {
+            transform: rotate(-1deg);
+        }
+
+        .rotated-card-alt {
+            transform: rotate(1.5deg);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+
+<body class="bg-surface text-on-background font-body min-h-screen pb-32 overflow-x-hidden">
+    <!-- TopAppBar -->
+    <header
+        class="bg-[#fbfaee] dark:bg-slate-900 border-b-8 border-[#f5f4e8] dark:border-slate-800 border-dashed shadow-[0_10px_0_0_rgba(0,0,0,0.05)] dock-0 fixed top-0 w-full z-50 h-24 flex justify-between items-center px-8 py-4">
+        <div
+            class="text-4xl font-black text-[#c00014] dark:text-red-500 rotate-[-2deg] drop-shadow-sm font-['Spline_Sans'] uppercase tracking-widest italic">
+            badbunny.studio</div>
+        <nav class="hidden md:flex gap-8 items-center">
+            <a class="text-[#1b1c15] dark:text-slate-300 opacity-70 font-['Spline_Sans'] uppercase tracking-widest italic hover:rotate-3 hover:scale-110 transition-transform"
+                href="#">Encoder</a>
+            <a class="text-[#c00014] underline decoration-wavy decoration-4 underline-offset-8 font-['Spline_Sans'] uppercase tracking-widest italic hover:rotate-3 hover:scale-110 transition-transform"
+                href="#">Decoder</a>
+            <button
+                class="material-symbols-outlined text-[#c00014] dark:text-red-500 hover:rotate-3 hover:scale-110 transition-transform">settings</button>
+        </nav>
+    </header>
+    <main class="pt-32 px-6 max-w-5xl mx-auto relative">
+        <!-- Background Doodles -->
+        <div class="absolute top-40 -left-10 opacity-20 pointer-events-none rotate-12">
+            <span class="material-symbols-outlined text-9xl text-primary">egg</span>
+        </div>
+        <div class="absolute top-1/2 -right-12 opacity-10 pointer-events-none -rotate-12">
+            <span class="material-symbols-outlined text-[12rem] text-secondary">arrow_downward</span>
+        </div>
+        <!-- Main Title -->
+        <div class="mb-16 relative">
+            <h1
+                class="text-6xl md:text-8xl font-headline font-black text-primary italic leading-none drop-shadow-md -rotate-1">
+                SEMAPHORE DECODER
+            </h1>
+            <div
+                class="absolute -top-6 -right-4 bg-tertiary-container p-4 rounded-xl rotate-12 border-4 border-dashed border-tertiary shadow-lg">
+                <p class="text-tertiary font-bold text-sm tracking-tighter">STRICTLY YOU FOUND IT!</p>
+            </div>
+        </div>
+        <!-- Content Layout: Asymmetric Bento -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- Input Section -->
+            <section
+                class="lg:col-span-8 bg-surface-container-low p-8 rounded-xl rotated-card border-b-8 border-r-8 border-surface-variant relative shadow-sm">
+                <div class="flex items-center gap-4 mb-8">
+                    <h2 class="text-3xl font-headline font-extrabold text-secondary tracking-tight">STOLEN FLAG GRID
+                    </h2>
+                    <span class="material-symbols-outlined text-secondary text-4xl">ads_click</span>
+                </div>
+                <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
+                    <!-- Flag Grid Items -->
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span
+                            class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:scale-125 transition-transform"
+                            data-icon="accessibility">accessibility</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-secondary rounded-lg flex items-center justify-center p-2 relative">
+                        <span class="material-symbols-outlined text-4xl text-secondary"
+                            data-icon="accessibility_new">accessibility_new</span>
+                        <div
+                            class="absolute -top-2 -right-2 bg-primary text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                            1</div>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="boy">boy</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="directions_walk">directions_walk</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="directions_run">directions_run</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="skateboarding">skateboarding</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="sports_kabaddi">sports_kabaddi</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="surfing">surfing</span>
+                    </button>
+                    <!-- Repeating for visual density -->
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="snowboarding">snowboarding</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="self_care">self_care</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="nordic_walking">nordic_walking</span>
+                    </button>
+                    <button
+                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
+                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
+                            data-icon="kayaking">kayaking</span>
+                    </button>
+                </div>
+            </section>
+            <!-- Output Section -->
+            <aside class="lg:col-span-4 space-y-8">
+                <div
+                    class="bg-surface-container-highest p-8 rounded-xl rotated-card-alt border-4 border-dashed border-primary relative overflow-hidden">
+                    <div
+                        class="absolute top-0 right-0 p-2 bg-primary text-white text-xs font-bold uppercase tracking-widest -rotate-45 translate-x-6 translate-y-2">
+                        Top Secret</div>
+                    <h2 class="text-2xl font-headline font-black text-on-surface mb-6 uppercase">THE TRUTH!</h2>
+                    <div class="space-y-4 font-label">
+                        <div class="relative inline-block">
+                            <span
+                                class="text-2xl text-on-surface-variant line-through decoration-error decoration-[6px]">THE
+                                CAKE IS A LIE</span>
+                            <div class="absolute -top-2 -left-2 rotate-12">
+                                <span class="material-symbols-outlined text-error opacity-50">close</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-white/60 backdrop-blur-sm rounded-lg border-l-8 border-primary">
+                            <p class="text-4xl font-black text-primary leading-tight font-headline italic">I STOLE THE
+                                CARROTS</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex justify-end gap-2">
+                        <span class="material-symbols-outlined text-primary" data-weight="fill">egg</span>
+                        <span class="material-symbols-outlined text-primary" data-weight="fill">egg</span>
+                        <span class="material-symbols-outlined text-primary" data-weight="fill">egg</span>
+                    </div>
+                </div>
+                <!-- Primary CTA -->
+                <button
+                    class="w-full bg-tertiary-container py-8 px-4 rounded-full border-b-[12px] border-tertiary-fixed-dim text-tertiary font-headline font-black text-4xl italic hover:rotate-2 hover:scale-105 transition-all shadow-xl flex items-center justify-center gap-4 relative group">
+                    <span
+                        class="bg-tertiary/20 absolute inset-0 rounded-full blur-xl group-hover:blur-2xl transition-all"></span>
+                    <span class="relative">FIND THE LIES</span>
+                    <span class="material-symbols-outlined relative text-5xl">search</span>
+                </button>
+            </aside>
+        </div>
+        <!-- Decorative Scrapbook Items -->
+        <div class="mt-20 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="p-8 bg-surface-container rounded-xl -rotate-1 border-4 border-surface-variant">
+                <p class="text-lg italic font-medium text-on-surface-variant leading-relaxed">
+                    "Someone left the gate open. The carrots weren't even locked up. It was practically an invitation.
+                    Don't look at me like that, I saw you looking at the eggs too."
+                </p>
+                <div class="mt-4 flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-full bg-secondary flex items-center justify-center text-white">
+                        <span class="material-symbols-outlined">pets</span>
+                    </div>
+                    <span class="font-bold text-secondary">— The Rabbit</span>
+                </div>
+            </div>
+            <div class="relative group">
+                <div class="absolute inset-0 bg-primary/10 rounded-xl blur-lg transition-all group-hover:bg-primary/20">
+                </div>
+                <img alt="Close up of a fluffy bunny looking mischievous in a garden"
+                    class="relative w-full h-64 object-cover rounded-xl border-8 border-white shadow-2xl rotate-2"
+                    data-alt="close-up of a fluffy brown bunny with twitching nose looking mischievous in a lush green garden with soft sunlit background"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPpqmojLdphNJ2clN2YYBP2Pa9m01w5e2NYIiCQyTOOBPHMRysX0dlWsyx_6ZnqBbgrNeOh5d-XVOpfHU-He-bHsj-MvMz0wK96S2JfuA7Bl1nq07OvrvBKVk1d0Ct6vzF1nym2AfhgovZz5d2X1GxsgYoZGHl-0T9S7NsYm-g9oM18QGN4qO55Rg_Ho-2n7SN49ORmP-2Vh-Vr098FeM9oY-L37UBp0Ax-512RkCrJ0TNj9wpzGBYwgFeK9Qqp7ShuAekcbiu8QI" />
+                <div
+                    class="absolute -bottom-4 -left-4 bg-primary text-white p-3 rounded-lg rotate-[-10deg] font-black text-xl">
+                    WANTED!</div>
+            </div>
+        </div>
+    </main>
+    <!-- BottomNavBar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-4 bg-[#fbfaee] dark:bg-slate-900 shadow-[0_-10px_40px_rgba(27,28,21,0.06)] md:hidden rounded-t-[3rem] border-t-4 border-[#c00014]">
+        <a class="flex flex-col items-center justify-center text-[#1b1c15] dark:text-slate-400 opacity-60 px-6 py-2 transition-all"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="emergency_recording">emergency_recording</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase mt-1">Encoder</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-[#c00014] text-white rounded-[2rem] px-6 py-2 rotate-1 transition-all"
+            href="#">
+            <span class="material-symbols-outlined" data-icon="visibility_lock"
+                style="font-variation-settings: 'FILL' 1;">visibility_lock</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase mt-1">Decoder</span>
+        </a>
+    </nav>
+</body>
+
+</html>

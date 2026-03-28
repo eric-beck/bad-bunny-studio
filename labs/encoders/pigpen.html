@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>VILLAIN_SCRIBZ - Cipher Master</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:ital,wght@0,300..800;1,300..800&amp;family=Plus+Jakarta+Sans:wght@200..800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-high": "#e9e9dd",
+                        "primary-fixed": "#ffdad6",
+                        "on-tertiary-container": "#544600",
+                        "secondary": "#00668a",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-fixed": "#ffe16d",
+                        "secondary-container": "#c3e8ff",
+                        "surface": "#fbfaee",
+                        "inverse-primary": "#ffb4ab",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "on-tertiary-fixed": "#221b00",
+                        "primary": "#c00014",
+                        "outline": "#777777",
+                        "on-secondary-container": "#004c69",
+                        "on-background": "#1b1c15",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fbfaee",
+                        "surface-variant": "#e4e3d7",
+                        "surface-dim": "#dbdbcf",
+                        "on-secondary-fixed": "#001e2c",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#474747",
+                        "on-primary-fixed-variant": "#93000d",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "outline-variant": "#c6c6c6",
+                        "primary-container": "#ffdad6",
+                        "on-primary-container": "#93000d",
+                        "surface-tint": "#c00014",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#303129",
+                        "on-error": "#ffffff",
+                        "on-surface": "#1b1c15",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "surface-container-highest": "#e4e3d7",
+                        "on-primary-fixed": "#410002",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f2f1e5",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#c3e8ff",
+                        "surface-container": "#efeee3",
+                        "tertiary-container": "#ffe16d",
+                        "tertiary": "#705d00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f5f4e8",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "background": "#fbfaee"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .crayon-border {
+            border-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 5C20 8 35 2 50 5C65 8 80 3 95 5C92 20 98 35 95 50C92 65 97 80 95 95C80 92 65 98 50 95C35 92 20 97 5 95C8 80 2 65 5 50C8 35 3 20 5 5Z' stroke='%23c00014' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E") 20 stretch;
+        }
+
+        .scribble-bg {
+            background-image: radial-gradient(#e4e3d7 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background text-on-background font-body min-h-screen overflow-x-hidden selection:bg-tertiary-container selection:text-on-tertiary-container">
+    <!-- TopAppBar -->
+    <header
+        class="w-full h-24 flex items-center border-b-8 border-[#f5f4e8] dark:border-stone-800 bg-[#fbfaee] dark:bg-stone-900 shadow-[0px_20px_40px_rgba(27,28,21,0.06)] sticky top-0 z-[110]">
+        <div class="flex justify-between items-center px-8 w-full">
+            <div
+                class="font-['Spline_Sans'] uppercase tracking-widest text-4xl italic text-4xl font-black text-[#c00014] dark:text-red-600 rotate-[-2deg] drop-shadow-sm">
+                VILLAIN_SCRIBZ
+            </div>
+            <div class="flex items-center gap-8">
+                <button
+                    class="material-symbols-outlined text-[#c00014] hover:rotate-2 hover:scale-110 transition-transform duration-200"
+                    data-icon="draw">draw</button>
+                <button
+                    class="material-symbols-outlined text-stone-500 opacity-60 hover:rotate-2 hover:scale-110 transition-transform duration-200"
+                    data-icon="history">history</button>
+            </div>
+        </div>
+    </header>
+    <div class="flex min-h-[calc(100vh-6rem)]">
+        <!-- SideNavBar -->
+        <aside
+            class="fixed left-0 top-0 h-full flex flex-col py-10 z-[100] h-full w-72 rounded-r-[3rem] border-r-4 border-[#c00014]/20 bg-[#f5f4e8] dark:bg-stone-800/90 backdrop-blur-xl mt-24">
+            <div class="px-8 mb-12">
+                <div class="flex items-center gap-4 mb-4">
+                    <div
+                        class="w-16 h-16 rounded-full bg-surface-container-highest overflow-hidden border-2 border-primary rotate-3">
+                        <img alt="Villain Portrait"
+                            data-alt="Crayon-drawn villain portrait with messy hair and a mischievous smirk, hand-drawn aesthetic on yellow paper background"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCqskT8AuNfdkxodIGgqYElB2nu48Kpp5bxA4beuyp9I3pLoqrnc6uFmrUfr6DzdJ2f-gygqFpGA_N9MSc7ZUkYwM_RoHDhHPnEGoA5obGq1h6lB1YVZWfIPFBnMDF_ueoVgjSbA8TzCRMWXecBeN5h6cyl7twFx0r6yt7PvUbuTazlITgfn7PGys0JttmGLVhvp9WsVLCRy-5ftrBVE11blXxy267KSSgHni_VkKZb_O1oasoS_XAqyKcyxQLE_1sGOOFEXHmqiVg" />
+                    </div>
+                    <div>
+                        <p
+                            class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-tighter font-black text-[#c00014]">
+                            SCRIBBLE MASTER</p>
+                        <p class="text-xs font-bold text-secondary uppercase tracking-widest">Chaos Level: Max</p>
+                    </div>
+                </div>
+            </div>
+            <nav class="flex flex-col gap-2 px-4 flex-grow">
+                <!-- Cipher Tab (Active) -->
+                <a class="bg-[#ffe16d] text-[#1b1c15] rounded-[2rem] rotate-1 px-6 py-4 shadow-sm flex items-center gap-4 group"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="lock_open">lock_open</span>
+                    <span class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-tighter uppercase">Cipher</span>
+                </a>
+                <a class="text-stone-600 dark:text-stone-400 px-6 py-4 hover:bg-[#00668a] hover:text-white hover:-rotate-1 transition-all flex items-center gap-4 rounded-[2rem]"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="key_visualizer">key_visualizer</span>
+                    <span class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-tighter uppercase">Decoder</span>
+                </a>
+                <a class="text-stone-600 dark:text-stone-400 px-6 py-4 hover:bg-[#00668a] hover:text-white hover:-rotate-1 transition-all flex items-center gap-4 rounded-[2rem]"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="inventory_2">inventory_2</span>
+                    <span class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-tighter uppercase">Vault</span>
+                </a>
+                <a class="text-stone-600 dark:text-stone-400 px-6 py-4 hover:bg-[#00668a] hover:text-white hover:-rotate-1 transition-all flex items-center gap-4 rounded-[2rem]"
+                    href="#">
+                    <span class="material-symbols-outlined" data-icon="edit_pencil">edit</span>
+                    <span class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-tighter uppercase">Doodles</span>
+                </a>
+            </nav>
+            <div class="px-6 mt-auto">
+                <button
+                    class="w-full py-4 bg-primary text-on-primary font-black rounded-xl rotate-[-2deg] shadow-lg hover:rotate-0 transition-transform mb-6">
+                    BURN AFTER READING
+                </button>
+                <div class="flex items-center gap-4 text-stone-600 px-6 py-4">
+                    <span class="material-symbols-outlined" data-icon="settings">settings</span>
+                    <span class="font-bold uppercase tracking-tighter">Settings</span>
+                </div>
+            </div>
+        </aside>
+        <!-- Main Content Canvas -->
+        <main class="ml-72 flex-grow p-12 relative scribble-bg">
+            <!-- Absolute Doodles -->
+            <div class="absolute top-10 right-20 opacity-20 rotate-12 pointer-events-none">
+                <span class="material-symbols-outlined text-9xl text-primary"
+                    data-icon="cruelty_free">cruelty_free</span>
+                <p class="font-headline italic text-primary text-xl -mt-4">bunny ears!</p>
+            </div>
+            <div class="absolute bottom-20 left-10 opacity-10 -rotate-6 pointer-events-none">
+                <span class="material-symbols-outlined text-9xl text-tertiary" data-icon="nutrition">nutrition</span>
+                <p class="font-headline italic text-tertiary text-xl -mt-4">crunchy carrots</p>
+            </div>
+            <div class="absolute bottom-10 right-40 opacity-15 rotate-3 pointer-events-none">
+                <span class="material-symbols-outlined text-[12rem] text-secondary"
+                    data-icon="airport_shuttle">airport_shuttle</span>
+                <p class="font-headline italic text-secondary text-xl -mt-8 ml-10">stagecoach heist</p>
+            </div>
+            <div class="max-w-6xl mx-auto flex gap-12 items-start">
+                <!-- Left Column: Input -->
+                <div class="w-2/3 space-y-12">
+                    <div class="relative">
+                        <h1
+                            class="font-headline text-6xl font-extrabold text-on-background tracking-tighter rotate-[-1deg] mb-8">
+                            TYPE YOUR SECRETS HERE
+                        </h1>
+                        <div
+                            class="bg-surface-container-low p-8 rounded-xl border-8 border-surface-variant shadow-xl rotate-1 relative">
+                            <textarea
+                                class="w-full h-64 bg-transparent border-none focus:ring-0 text-3xl font-body font-bold placeholder:text-outline-variant text-on-surface"
+                                placeholder="Write your sneaky message..."></textarea>
+                            <!-- Fake Crayon Stroke -->
+                            <div class="absolute bottom-4 left-4 right-4 h-2 bg-primary/20 rounded-full"></div>
+                        </div>
+                    </div>
+                    <div class="flex justify-end">
+                        <button
+                            class="bg-primary hover:rotate-3 hover:scale-105 transition-all group active:scale-95 px-12 py-8 rounded-[3rem] shadow-[10px_10px_0px_#93000d] flex items-center gap-6">
+                            <span class="material-symbols-outlined text-4xl text-on-primary group-hover:animate-bounce"
+                                data-icon="bolt">bolt</span>
+                            <span class="font-headline text-3xl font-black text-on-primary uppercase italic">ENCRYPT
+                                INTO SCRIBBLES</span>
+                        </button>
+                    </div>
+                    <!-- Output Section -->
+                    <div class="relative mt-20">
+                        <div class="flex items-center gap-4 -mb-4 relative z-10">
+                            <h2
+                                class="font-headline text-5xl font-black bg-tertiary text-on-tertiary px-6 py-2 rotate-2 inline-block">
+                                PIGPEN CIPHER</h2>
+                            <div
+                                class="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white rotate-12">
+                                <span class="material-symbols-outlined" data-icon="priority_high">priority_high</span>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-surface-container-highest p-12 rounded-[4rem] border-4 border-dashed border-outline-variant min-h-[300px] flex flex-wrap gap-8 items-center justify-center">
+                            <!-- Pigpen Symbols Visualized -->
+                            <div class="grid grid-cols-6 gap-8">
+                                <div class="w-16 h-16 border-l-4 border-b-4 border-on-surface relative">
+                                    <div class="absolute bottom-2 left-2 w-2 h-2 bg-on-surface rounded-full"></div>
+                                </div>
+                                <div class="w-16 h-16 border-4 border-on-surface relative"></div>
+                                <div class="w-16 h-16 border-t-4 border-r-4 border-on-surface relative"></div>
+                                <div class="w-16 h-16 border-l-4 border-r-4 border-b-4 border-on-surface relative">
+                                    <div
+                                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-on-surface rounded-full">
+                                    </div>
+                                </div>
+                                <div class="w-16 h-16 border-t-4 border-on-surface relative"></div>
+                                <div class="w-16 h-16 border-l-4 border-t-4 border-on-surface relative">
+                                    <div class="absolute top-2 left-2 w-2 h-2 bg-on-surface rounded-full"></div>
+                                </div>
+                                <!-- Second Row Mock -->
+                                <div class="w-16 h-16 rotate-45 border-r-4 border-b-4 border-on-surface"></div>
+                                <div class="w-16 h-16 rotate-45 border-l-4 border-t-4 border-on-surface relative">
+                                    <div class="absolute top-2 left-2 w-2 h-2 bg-on-surface rounded-full"></div>
+                                </div>
+                                <div class="w-16 h-16 border-r-4 border-on-surface relative"></div>
+                                <div class="w-16 h-16 border-4 border-primary relative opacity-30"></div>
+                                <div class="w-16 h-16 border-b-4 border-on-surface relative"></div>
+                                <div class="w-16 h-16 border-l-4 border-b-4 border-on-surface relative"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Right Column: Sidebar -->
+                <aside class="w-1/3 pt-24">
+                    <div
+                        class="bg-tertiary-container p-8 rounded-xl shadow-lg rotate-[3deg] relative overflow-hidden group">
+                        <!-- Sticky note texture effect -->
+                        <div
+                            class="absolute top-0 right-0 w-12 h-12 bg-white/20 rotate-45 translate-x-6 -translate-y-6">
+                        </div>
+                        <div class="flex items-center gap-2 mb-6 border-b-4 border-on-tertiary-container pb-2">
+                            <span class="material-symbols-outlined text-on-tertiary-container font-black"
+                                data-icon="lightbulb">lightbulb</span>
+                            <h3 class="font-headline text-3xl font-extrabold text-on-tertiary-container">MASTERMIND TIPS
+                            </h3>
+                        </div>
+                        <ul class="space-y-6 font-body text-xl font-bold text-on-tertiary-container">
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">●</span>
+                                <span>The dots are the key! Each dot shifts the symbol to a new letter.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">●</span>
+                                <span>Don't let the heroes see this! They have no imagination.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="text-primary mt-1">●</span>
+                                <span>Grid A-I has no dots. Grid J-R uses dots. Keep it secret!</span>
+                            </li>
+                        </ul>
+                        <div class="mt-8 pt-8 border-t-4 border-on-tertiary-container/20">
+                            <div class="flex gap-2">
+                                <div class="w-8 h-8 rounded-full bg-primary/40 animate-pulse"></div>
+                                <div class="w-8 h-8 rounded-full bg-secondary/40"></div>
+                                <div class="w-8 h-8 rounded-full bg-tertiary/40"></div>
+                            </div>
+                            <p class="mt-4 text-xs uppercase tracking-widest font-black text-on-tertiary-container/60">
+                                Property of the Chaos Guild</p>
+                        </div>
+                    </div>
+                    <!-- Decorative Card Image -->
+                    <div class="mt-12 -rotate-2">
+                        <div
+                            class="bg-surface-container-high rounded-3xl p-4 shadow-sm border-2 border-outline-variant/10">
+                            <img alt="Secret Code Manual"
+                                class="w-full rounded-2xl grayscale hover:grayscale-0 transition-all duration-700"
+                                data-alt="An ancient looking document with scribbled pigpen cipher symbols, coffee stains, and red crayon corrections on parchment paper background"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOFd6LqE7Dej3TMtdMA59flugQ0Hy-_H0x3k3_5HyXULlBBfV_PPbqTmWGELpsoM2Jzfkqj4BKD4J68CXQB_vVqn-_N2XqZ-RDfndTOLrqUoikelFKXkcl3TomCYVlpRM25_q6NuPddvm9KtPF-j1QSUNFdv-ru24pxgS-y8_rML2GZ_jx__jp0Yt1fx-rPxDg7cmDbvzFD5Vi95yg5T0I2AM4MgBnexLTNWPaVIdSFvn2IWZjx-_dPs56B0VywEvWGysEmNiZwUk" />
+                            <p class="mt-4 font-headline text-center italic text-secondary">"The blueprint for ultimate
+                                chaos"</p>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </main>
+    </div>
+</body>
+
+</html>

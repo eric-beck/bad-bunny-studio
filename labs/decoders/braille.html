@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>VILLAIN_SCRAPBOOK - Braille Decoder</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;700;800;900&amp;family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,700;0,800;1,400&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-secondary-fixed": "#001e2c",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#ffb4ab",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-tertiary-container": "#544600",
+                        "secondary": "#00668a",
+                        "on-primary-fixed-variant": "#93000d",
+                        "primary-fixed": "#ffdad6",
+                        "primary-container": "#ffdad6",
+                        "tertiary-fixed": "#ffe16d",
+                        "primary": "#c00014",
+                        "surface-variant": "#e4e3d7",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e4e3d7",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "inverse-surface": "#303129",
+                        "tertiary-container": "#ffe16d",
+                        "tertiary": "#705d00",
+                        "on-error": "#ffffff",
+                        "outline": "#777777",
+                        "on-background": "#1b1c15",
+                        "secondary-container": "#c3e8ff",
+                        "surface-container-high": "#e9e9dd",
+                        "inverse-on-surface": "#f2f1e5",
+                        "surface-bright": "#fbfaee",
+                        "on-primary-fixed": "#410002",
+                        "outline-variant": "#c6c6c6",
+                        "on-secondary-container": "#004c69",
+                        "surface-tint": "#c00014",
+                        "surface-container": "#efeee3",
+                        "on-surface-variant": "#474747",
+                        "background": "#fbfaee",
+                        "surface": "#fbfaee",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "surface-container-low": "#f5f4e8",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed": "#c3e8ff",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-container": "#93000d",
+                        "on-surface": "#1b1c15",
+                        "surface-dim": "#dbdbcf",
+                        "on-tertiary-fixed": "#221b00"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+
+        .scribble-stroke {
+            text-decoration: line-through;
+            text-decoration-color: #ba1a1a;
+            text-decoration-thickness: 8px
+        }
+
+        .crooked-1 {
+            transform: rotate(-1.5deg)
+        }
+
+        .crooked-2 {
+            transform: rotate(2deg)
+        }
+
+        .crooked-3 {
+            transform: rotate(-3deg)
+        }
+
+        .paper-texture {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDmeySlFHhqmS22SLQVP6qa0bgXbjeI_EA897mBX_bBBjZKdCapgjIzfGVh61mVvDuKbFSSqbK_VjxHIfl-coeui8f1lJw5ay7TBfJtcpP11YM06t-0aV25G9v86qghiNgwGx_0FrESVCtD4o0kP-No6wueXB824l09bDHDShP9_neXdUlc1AgN4PqUmwGsCOSjH5wLwUDA3mqAxoPY4I3l63X9jFKLDCPRDvVE6RCtaPfCwFt6pxsPn3XUB-WgX-sBPbwbGW846g0)
+        }
+
+        .smudge-overlay {
+            background: radial-gradient(circle at 30% 20%, rgba(27, 28, 21, 0.05) 0%, transparent 50%)
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background text-on-background font-body selection:bg-tertiary-container selection:text-on-tertiary-container overflow-x-hidden paper-texture">
+    <!-- TopAppBar -->
+    <header
+        class="bg-[#fbfaee] dark:bg-stone-900 border-b-[6px] border-[#f5f4e8] dark:border-stone-800 shadow-[10px_10px_0px_0px_rgba(0,0,0,0.05)] flex justify-between items-center w-full px-6 py-4 fixed top-0 z-50">
+        <div class="flex items-center gap-4">
+            <span
+                class="text-3xl font-black text-[#c00014] rotate-[-2deg] underline decoration-wavy font-headline uppercase tracking-tighter italic">badbunny.studio</span>
+        </div>
+        <div class="flex items-center gap-6">
+            <button class="text-[#00668a] opacity-70 hover:rotate-3 hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined" data-icon="edit_square">edit_square</span>
+            </button>
+            <button class="text-[#00668a] opacity-70 hover:rotate-3 hover:scale-105 transition-transform">
+                <span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+            </button>
+        </div>
+    </header>
+    <main class="pt-28 pb-32 px-4 md:px-12 max-w-5xl mx-auto space-y-16">
+        <!-- Header Title Section -->
+        <div class="relative py-12">
+            <h1
+                class="font-headline font-black text-6xl md:text-8xl text-on-background leading-tight tracking-tighter uppercase crooked-1">
+                BRAILLE <br />
+                <span class="relative inline-block">
+                    <span class="scribble-stroke opacity-30">DECODER</span>
+                    <span
+                        class="absolute -top-4 -right-12 md:-right-24 text-primary font-headline italic text-4xl md:text-6xl rotate-12 drop-shadow-md">DECODER</span>
+                </span>
+            </h1>
+            <div class="absolute -top-4 right-0 opacity-20 hidden md:block">
+                <span class="material-symbols-outlined text-9xl" data-icon="gesture">gesture</span>
+            </div>
+        </div>
+        <!-- Main Workspace -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-start">
+            <!-- Input Card -->
+            <div
+                class="md:col-span-7 bg-surface-container-lowest p-8 rounded-xl shadow-xl border-4 border-surface-variant relative crooked-2 smudge-overlay">
+                <!-- Tape effect -->
+                <div
+                    class="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-10 bg-surface-variant/40 rotate-1 mix-blend-multiply border-x border-outline/10">
+                </div>
+                <label class="block font-headline font-bold text-2xl text-secondary mb-6 tracking-wide">STOLEN
+                    BRAILLE</label>
+                <div class="space-y-4">
+                    <p class="text-sm font-bold text-on-surface-variant uppercase tracking-widest opacity-60 italic">
+                        Punch the dots into the grid...</p>
+                    <div
+                        class="grid grid-cols-6 gap-3 p-6 bg-surface-container-low rounded-lg border-2 border-dashed border-outline-variant">
+                        <!-- Braille Dot Simulation -->
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center hover:bg-primary/10 cursor-pointer transition-colors group">
+                            <div
+                                class="w-4 h-4 rounded-full bg-on-background group-active:scale-150 transition-transform">
+                            </div>
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer">
+                        </div>
+                        <!-- Row 2 -->
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer shadow-inner">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer">
+                        </div>
+                        <div
+                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer">
+                        </div>
+                    </div>
+                    <textarea
+                        class="w-full bg-transparent border-b-[8px] border-surface-variant focus:border-secondary outline-none py-4 text-3xl font-bold font-headline transition-all placeholder:opacity-20"
+                        placeholder="::: .:. :::"></textarea>
+                </div>
+                <!-- Crayon Button -->
+                <button
+                    class="mt-12 w-full bg-tertiary-container text-on-tertiary-container font-headline font-black text-3xl py-6 rounded-[4rem] hover:rotate-2 hover:scale-105 active:skew-x-6 transition-all shadow-[8px_8px_0px_0px_rgba(112,93,0,0.3)] relative overflow-hidden group">
+                    <span class="relative z-10 uppercase tracking-tighter">REVEAL THE TRUTH</span>
+                    <!-- Crayon wax texture overlay -->
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-50"></div>
+                </button>
+            </div>
+            <!-- Result Section -->
+            <div class="md:col-span-5 space-y-8 relative pt-12">
+                <!-- Bunny Doodle -->
+                <div class="absolute -top-16 -right-4 flex flex-col items-center rotate-12">
+                    <div class="relative">
+                        <span class="material-symbols-outlined text-8xl text-secondary" data-icon="search">search</span>
+                        <div class="absolute -top-6 -left-2 flex gap-4">
+                            <div class="w-6 h-16 bg-secondary rounded-full -rotate-12 border-4 border-background"></div>
+                            <div class="w-6 h-16 bg-secondary rounded-full rotate-12 border-4 border-background"></div>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-surface-container-high p-10 rounded-xl border-4 border-surface-variant shadow-inner relative crooked-3 min-h-[300px] flex flex-col justify-center">
+                    <h3
+                        class="font-headline text-on-surface-variant text-xl uppercase font-bold opacity-40 absolute top-6 left-8">
+                        THE TRUTH!</h3>
+                    <div
+                        class="text-5xl md:text-6xl font-headline font-black text-on-background tracking-tighter text-center py-12 italic">
+                        "EAT ALL THE CARROTS"
+                    </div>
+                    <!-- Stamp -->
+                    <div
+                        class="absolute -bottom-4 -right-4 bg-transparent border-[6px] border-primary text-primary px-4 py-2 font-headline font-black text-2xl uppercase rounded-lg crooked-2 flex items-center gap-2 bg-background/90 backdrop-blur-sm">
+                        <span class="material-symbols-outlined" data-icon="verified" data-weight="fill">verified</span>
+                        STRICTLY YOU FOUND IT!
+                    </div>
+                </div>
+                <!-- Villain Note -->
+                <div
+                    class="bg-tertiary/10 p-6 rounded-lg relative overflow-hidden border-l-8 border-tertiary crooked-1">
+                    <p class="font-headline font-bold text-tertiary text-2xl italic">
+                        "I hope you didn't just guess."
+                    </p>
+                    <div class="mt-4 flex gap-2">
+                        <div class="w-4 h-4 bg-tertiary rounded-full opacity-30"></div>
+                        <div class="w-4 h-4 bg-tertiary rounded-full opacity-10"></div>
+                        <div class="w-4 h-4 bg-tertiary rounded-full opacity-5"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative Elements -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-40 py-8">
+            <img alt="Crinkled paper texture" class="grayscale w-full aspect-square object-cover rounded-xl rotate-3"
+                data-alt="extreme close up of white crinkled paper texture with sharp shadows and paper fiber details"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5Gr7Y8grHB-lHXCg5hA0kK3rLozYRLbnEGMC1ofV-_L6Pv8Zw5Z4ThQ77PkIbBLdZUlUfUPRUq8rhile4sFeIEGGWS_YZsTVJEMgBIsTrxHE40hE6iLOjsdJd4T_oPCRokgOQvlNK_3E7oH7sXxx0tIBrCRLDAARZbeHo10Vmg-oxEjFKSeQaf2V84mZXeAJ1UQCazJuBY-89nL7afQ2crktvTPWToFuQ0P_zJfH0MZhHCH8KiIloTjm4Utkf0RxargS4b51FMLI" />
+            <img alt="Ink smudges" class="grayscale w-full aspect-square object-cover rounded-xl -rotate-6"
+                data-alt="abstract black ink splatters and smudges on aged parchment paper with high contrast lighting"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9qRFkwPd1Dhe8tZnPOm5zZJ-O3PSN2UVtydfW1_OpwMapodyGU1dI3II6u8InWeox4i6QkFuB-S1ikkZHYVaL01_mcKo89DQkypJgACmira1-tQ0UONEAyZnuIkwtaIwgCyAyTQ3RduZdBPYxikFFKR2gDzvvUxvZLHQ-38ThRdlKkhWFelqdrS2TNdQrehAvbJVdye2Fd_YA-LxAcIfBjX-pszYww_s4ZWS1-qaUsz0-gieEiH7Um0lzRj3R4dkXFx-gtABeaWY" />
+            <img alt="Crayon drawings" class="w-full aspect-square object-cover rounded-xl rotate-1"
+                data-alt="childlike primitive drawings of a rabbit in red crayon on off-white textured paper background"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBldrewxJyjPK_mWUUM_f2C1UuKi5TdQfhoj2W9MxgpMWhzq8oXQE4OKXG-cXG3RY1RKMG2mOorB2QNfYxGGj4Gyzn1fKc8bKcByhjT1tvw9h2uU01-wHG-2QJ50KURPwlBPdZJgZVEL0zkO2t0BaY_lGh06tp5uGXPtlsG2A9xlRtiqbiHGXYcQMtoqlOg0s-1JQw7a395IeMU3m4kaKSR4DaFbwbmgoUwlTxJOfUw9KDN5SJ1MJT6iQBz8Qu5pJnUWox2LcgyjJo" />
+            <img alt="Vintage scrapbook" class="grayscale w-full aspect-square object-cover rounded-xl -rotate-3"
+                data-alt="overhead shot of a messy open vintage scrapbook with torn edges and faded hand-written notes"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwA52xP5TeVac_iBQ9Zqj6dX8xcwkNVA781O7iFs1WQX78hDrEz3nfd0QGIJA3BqytPJpfwKYR5NpCdJRU4QBgQtGwPBNftRppV3JhVZlEMskNJZyGTKX-3ES5j_lLSmzlOQLFo5_iHMp4LI0QFeiECHtXtkdWiqV8VKqqSZ6TM3oXSNZUji5RzGouSrMQ7GxaPW1KdEqKawXoHmcAWaMdJFyUzzXKk6f5dT2gfZOa8SGEv7_vYQQstf5b7uO3caXkMIQN63T7pBc" />
+        </div>
+    </main>
+    <!-- BottomNavBar -->
+    <nav
+        class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#fbfaee] dark:bg-stone-900 border-t-[8px] border-[#f5f4e8] shadow-[0_-15px_30px_rgba(0,0,0,0.08)]">
+        <a class="flex flex-col items-center justify-center text-[#00668a] p-2 opacity-60 hover:bg-[#ffe16d] hover:text-[#1b1c15] transition-all"
+            href="#">
+            <span class="material-symbols-outlined text-2xl" data-icon="record_voice_over">record_voice_over</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-[10px] uppercase tracking-widest mt-1">Normal
+                Talk</span>
+        </a>
+        <a class="flex flex-col items-center justify-center bg-[#c00014] text-white rounded-[2rem] px-6 py-2 rotate-1 shadow-lg"
+            href="#">
+            <span class="material-symbols-outlined text-2xl" data-icon="visibility_off">visibility_off</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-[10px] uppercase tracking-widest mt-1">Stolen
+                Braille</span>
+        </a>
+        <a class="flex flex-col items-center justify-center text-[#00668a] p-2 opacity-60 hover:bg-[#ffe16d] hover:text-[#1b1c15] transition-all"
+            href="#">
+            <span class="material-symbols-outlined text-2xl" data-icon="inventory_2">inventory_2</span>
+            <span class="font-['Plus_Jakarta_Sans'] font-bold text-[10px] uppercase tracking-widest mt-1">My
+                Vault</span>
+        </a>
+    </nav>
+</body>
+
+</html>

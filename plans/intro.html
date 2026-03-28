@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>THE_PLANS | Master Detail</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@300;400;500;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-bright": "#fbfaee",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#303129",
+                        "primary-fixed": "#ffdad6",
+                        "on-primary-container": "#93000d",
+                        "background": "#fbfaee",
+                        "surface": "#fbfaee",
+                        "tertiary-container": "#ffe16d",
+                        "on-primary-fixed-variant": "#93000d",
+                        "on-primary-fixed": "#410002",
+                        "surface-container": "#efeee3",
+                        "on-surface-variant": "#474747",
+                        "surface-container-high": "#e9e9dd",
+                        "on-secondary-container": "#004c69",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "secondary-fixed": "#c3e8ff",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "outline-variant": "#c6c6c6",
+                        "on-primary": "#ffffff",
+                        "inverse-primary": "#ffb4ab",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-container": "#544600",
+                        "secondary-container": "#c3e8ff",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-secondary": "#ffffff",
+                        "primary-container": "#ffdad6",
+                        "inverse-on-surface": "#f2f1e5",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#777777",
+                        "on-surface": "#1b1c15",
+                        "primary": "#c00014",
+                        "surface-container-highest": "#e4e3d7",
+                        "tertiary-fixed": "#ffe16d",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e4e3d7",
+                        "tertiary": "#705d00",
+                        "secondary": "#00668a",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "surface-tint": "#c00014",
+                        "surface-dim": "#dbdbcf",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#f5f4e8",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#1b1c15",
+                        "on-secondary-fixed": "#001e2c"
+                    },
+                    fontFamily: {
+                        "headline": ["Spline Sans"],
+                        "body": ["Plus Jakarta Sans"],
+                        "label": ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { "DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
+        }
+
+        .scribble-border {
+            border: 6px solid #c00014;
+            border-style: solid;
+            border-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 5C20 10 10 40 30 35C50 30 40 10 60 15C80 20 70 50 90 45C110 40 100 95 95 95C90 95 60 85 55 65C50 45 20 55 15 75C10 95 5 95 5 95C5 95 0 70 5 5Z' stroke='%23c00014' stroke-width='4'/%3E%3C/svg%3E") 30 stretch
+        }
+
+        .paper-texture {
+            background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuC7H8JFNSjdeMrWNexGbgqORWqylsnhaqgdEPRIAi8pUkZCL1ZfkpmZkG4Ed0iLNAo-jCZvWd0K7V0cQBpUXwQoIfKNOkB9ohFiKkArBN1Si0EQkdx2o4Tjxx1TXOYeDkxBZboXtLIATs4P_0wC1JdkOsgJEDSKTje5FF3JRnlDyk_DVKbHqeQnGmMUfIiWWwe-Bk12VngnmHY3v9Eq92vocueIDGtgX4Sgdy0udzBZzYhadq6p2_eic6t4xnDot8Y03HuS3SBmK0w)
+        }
+
+        .rotated-card {
+            transform: rotate(var(--tw-rotate))
+        }
+    </style>
+</head>
+
+<body
+    class="bg-surface text-on-surface font-body paper-texture selection:bg-tertiary-container selection:text-on-tertiary-container overflow-x-hidden">
+    <!-- TopAppBar -->
+    <header
+        class="bg-[#fbfaee] dark:bg-stone-900 border-b-[6px] border-[#f5f4e8] dark:border-stone-800 shadow-[0_20px_40px_rgba(27,28,21,0.06)] docked full-width top-0 h-24 flex justify-between items-center px-10 w-full max-w-none z-50 fixed">
+        <div class="flex items-center gap-4">
+            <span
+                class="text-4xl font-black text-[#c00014] rotate-[-2deg] underline decoration-wavy font-['Spline_Sans'] uppercase tracking-tighter italic">badbunny.studio</span>
+        </div>
+        <nav class="hidden md:flex gap-12">
+            <a class="text-[#00668a] opacity-70 font-bold font-['Spline_Sans'] uppercase tracking-tighter italic hover:rotate-[-5deg] hover:scale-105 transition-transform"
+                href="#">SCRAPBOOK</a>
+            <a class="text-[#c00014] font-black scale-110 rotate-3 font-['Spline_Sans'] uppercase tracking-tighter italic hover:rotate-[-5deg] hover:scale-105 transition-transform"
+                href="#">MUSEUM</a>
+            <a class="text-[#00668a] opacity-70 font-bold font-['Spline_Sans'] uppercase tracking-tighter italic hover:rotate-[-5deg] hover:scale-105 transition-transform"
+                href="#">DOOMSDAY</a>
+        </nav>
+        <div class="flex items-center gap-6">
+            <span
+                class="material-symbols-outlined text-[#00668a] text-3xl cursor-pointer hover:rotate-[-5deg] hover:scale-105 transition-transform"
+                data-icon="settings">settings</span>
+            <span
+                class="material-symbols-outlined text-[#00668a] text-3xl cursor-pointer hover:rotate-[-5deg] hover:scale-105 transition-transform"
+                data-icon="skull">skull</span>
+            <div class="w-12 h-12 rounded-full border-4 border-[#c00014] overflow-hidden rotate-6">
+                <img alt="Villain's portrait with a mustache scribbled on" class="w-full h-full object-cover"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo9vbE4DvDeVnD2D_ZvbXAQm6e7XnYp_6T-V_zD-O_Kb4F8sxtc1E2N7t8uuB2akKRfkeZTIGLTfoonuWYojv3kpWRSq4EwFFETkIvmMcaqXa6cGaJFIX9SlfL3g88HTKeclfmJFHM_LQrkMyiHaTuQAm6JUiwTOZMILv6ZnMMb71BDkKlhjViKGBsVwpfnE-r4nfNAZQ8WvX0QGNxl0nTGl7airtwYdOhdGxwCHjpUZzXW5wNtecv4J4s3HEDTmlS_bOLDm3h-Yc" />
+            </div>
+        </div>
+    </header>
+    <!-- SideNavBar (Desktop Only) -->
+    <aside
+        class="hidden lg:flex flex-col gap-6 pt-12 fixed left-0 top-24 h-full w-72 rounded-tr-[3rem] bg-[#f5f4e8] dark:bg-stone-800/80 backdrop-blur-xl border-r-[8px] border-[#c00014] border-dashed shadow-xl z-40">
+        <div class="px-8 mb-4">
+            <div
+                class="w-20 h-20 bg-white rounded-xl mb-4 p-2 shadow-inner rotate-[-4deg] border-2 border-dashed border-tertiary">
+                <img alt="Crayon doodle of a burning world" class="w-full h-full object-contain"
+                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgNuyFQg2ZNeDsEerq8cxL_QooYmbonvwCoNkLavR6VGfBUdArgrsQ9-R25uIJOj7E3KI8KlM7fZgveFNmYE8OBhSiWbcM1DHoYAx-tTqQcbggtfwKZwZWD6IXbKFPDwxn0mpSb-0lgbagsnxj65BaPm13kuG69jWV6sEg6Eh4ZH_m2ojcgGB739RAa3gtG2vMXniVyxX9KnARfrcZ7WZifGTUSXKZr7NQuB0ldovJH5ysrpy-N65Wq7vPBrIvdm5FWisIQpQWncI" />
+            </div>
+            <h2 class="text-2xl font-bold text-[#705d00] font-['Plus_Jakarta_Sans'] tracking-widest">CATEGORIES</h2>
+            <p class="text-xs text-[#00668a] font-bold tracking-widest opacity-60">PICK YOUR POISON</p>
+        </div>
+        <nav class="flex flex-col gap-2 px-4">
+            <a class="text-[#00668a] px-6 py-3 hover:translate-x-2 transition-transform font-['Plus_Jakarta_Sans'] text-lg font-bold tracking-widest flex items-center gap-4"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="payments">payments</span> HEISTS
+            </a>
+            <a class="bg-[#ffe16d] text-[#1b1c15] rounded-full rotate-1 px-6 py-3 shadow-lg font-['Plus_Jakarta_Sans'] text-lg font-bold tracking-widest flex items-center gap-4"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="priority_high">priority_high</span> TRAPS
+            </a>
+            <a class="text-[#00668a] px-6 py-3 hover:translate-x-2 transition-transform font-['Plus_Jakarta_Sans'] text-lg font-bold tracking-widest flex items-center gap-4"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="fort">fort</span> LAIRS
+            </a>
+            <a class="text-[#00668a] px-6 py-3 hover:translate-x-2 transition-transform font-['Plus_Jakarta_Sans'] text-lg font-bold tracking-widest flex items-center gap-4"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="groups">groups</span> HENCHMEN
+            </a>
+            <a class="text-[#00668a] px-6 py-3 hover:translate-x-2 transition-transform font-['Plus_Jakarta_Sans'] text-lg font-bold tracking-widest flex items-center gap-4"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="construction">construction</span> GADGETS
+            </a>
+        </nav>
+        <div class="mt-auto p-8 flex flex-col gap-4">
+            <button
+                class="bg-[#c00014] text-white font-black py-4 rounded-xl shadow-[6px_6px_0px_#705d00] hover:translate-y-1 hover:shadow-none transition-all uppercase italic">EXECUTE
+                PLAN</button>
+            <a class="text-[#00668a] px-6 py-3 hover:translate-x-2 transition-transform font-['Plus_Jakarta_Sans'] text-sm font-bold tracking-widest flex items-center gap-2 opacity-50"
+                href="#">
+                <span class="material-symbols-outlined" data-icon="delete_forever">delete_forever</span> ARCHIVE
+            </a>
+        </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="pt-32 pb-20 px-6 lg:ml-80 min-h-screen relative overflow-hidden">
+        <!-- Background Scribble Art -->
+        <div class="absolute top-40 right-10 opacity-20 pointer-events-none rotate-12">
+            <span class="material-symbols-outlined text-[200px] text-tertiary" data-icon="toys_fan">toys_fan</span>
+        </div>
+        <!-- The Header Section -->
+        <div class="mb-16 relative">
+            <h1
+                class="text-7xl md:text-9xl font-headline font-black text-on-surface uppercase tracking-tighter leading-none -rotate-2 mix-blend-multiply">
+                MASTER <span class="text-primary underline decoration-double">PLANS</span>
+            </h1>
+            <p
+                class="text-2xl font-body font-bold text-secondary max-w-xl mt-4 rotate-1 bg-tertiary-container px-4 py-2 inline-block">
+                OPERATION: THE BIG BUNNY BOOM!
+            </p>
+        </div>
+        <!-- Bento Scrapbook Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start relative">
+            <!-- Red Rock Note (Clue 1) -->
+            <div
+                class="md:col-span-4 bg-white p-6 shadow-xl rotate-[-3deg] border-b-8 border-r-8 border-surface-container-highest relative">
+                <div
+                    class="absolute -top-6 -left-2 bg-secondary/20 w-16 h-8 -rotate-12 backdrop-blur-sm border border-white/50">
+                </div> <!-- Tape effect -->
+                <div
+                    class="aspect-square bg-primary-fixed rounded-lg mb-4 flex items-center justify-center overflow-hidden">
+                    <img class="w-full h-full object-cover grayscale brightness-125 contrast-150 mix-blend-overlay"
+                        data-alt="extreme close up of a bright red rugged desert rock with dramatic shadows and harsh sunlight"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGygMIzdAU99LNbeSgfC2h1OCCsrSeEEOeM88ukoV4IQwVU7UwGYGjUraEP9yGDW0MhStFcp5WET6WObuCaFeh0OkZKiV1dOJEJgqxsgXpIVX6F5767YNUcKRtPgYgstJTw8CD3uUroCVFYRKk0rpq0eF42ZioRqxYBL1aNOvsY-520Q-WK-hM2w-M6YQpoqq18iuiK_WyK1VKVVtwaMDtqwv8oo0poF6_mhLugRSWoe3Az-wIWT6hDgLFgX3zsojj_YUqZibqeZc" />
+                    <div class="absolute inset-0 bg-primary/40 mix-blend-multiply"></div>
+                </div>
+                <p class="font-headline font-black text-2xl text-primary uppercase text-center">THE ROCK IS TOO RED!
+                    (HIDE IT!)</p>
+                <div class="mt-2 flex justify-center">
+                    <span class="material-symbols-outlined text-4xl text-primary" data-icon="brightness_5"
+                        data-weight="fill">brightness_5</span>
+                </div>
+            </div>
+            <!-- Gazebo Sketch (Clue 3) -->
+            <div
+                class="md:col-span-8 bg-surface-container-low p-8 rounded-xl border-4 border-dashed border-outline-variant rotate-1 relative">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="w-full md:w-1/2">
+                        <img class="w-full h-64 object-cover rounded-xl border-4 border-white shadow-lg rotate-[-2deg]"
+                            data-alt="architectural sketch of an ornate victorian gazebo in a garden setting, hand drawn style on aged parchment"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3vrOR418RYqdElgkBG79mu9H4ujwcRLYEqM0s8OIe3L1RX3h7UdZVY2HGXNOasLQT5SD4qfZ4HXWTS5uY1RVQELHglOv2BRl0_NyNe899HkwK9tCAfRYa1qwhDdIKyMV1S1tgWfXIrO45W1anjswJwY0ttrv5gVXu7-xcw5UW2qAXsubaTco8QzkOKkRmRPFSRyqJoc0OSeCO1u7GhWjtlpkzmA_faGIetRmafTYxxqEt1QKPAJIq_TEYZMhGsVemLAyS02RxTyk" />
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <span class="material-symbols-outlined text-6xl text-secondary mb-2"
+                            data-icon="north_east">north_east</span>
+                        <h3 class="text-4xl font-headline font-black text-on-surface leading-tight uppercase">FOUND THE
+                            GAZEBO! <span class="text-secondary">(EMPTY?)</span></h3>
+                        <p class="font-body text-xl mt-4 text-on-surface-variant font-bold leading-relaxed">Check the
+                            floorboards for the secret vault. If empty, the squirrels have already looted it. <span
+                                class="text-error line-through decoration-wavy">DO NOT FEED SQUIRRELS.</span></p>
+                    </div>
+                </div>
+            </div>
+            <!-- Bunny Park/Spanish Note (Clue 5) -->
+            <div
+                class="md:col-span-5 bg-tertiary-container p-10 rounded-3xl shadow-2xl -rotate-2 border-t-8 border-tertiary relative overflow-hidden">
+                <div class="absolute top-2 right-2 opacity-10">
+                    <span class="material-symbols-outlined text-9xl" data-icon="rabbit">pets</span>
+                </div>
+                <h4 class="text-3xl font-headline font-black text-on-tertiary-container uppercase mb-4">CONFUSING INTEL
+                </h4>
+                <p class="text-2xl font-body font-bold text-on-tertiary-container italic leading-snug">
+                    "El parque de los conejos está cerrado por vacaciones..."
+                </p>
+                <div class="mt-6 border-t-4 border-dashed border-tertiary pt-4">
+                    <p class="text-xl font-headline font-black text-error uppercase">NOT CALLED [REDACTED] IN ENGLISH!
+                    </p>
+                    <p class="mt-2 text-sm text-tertiary font-black tracking-widest uppercase">TRANSLATION FAILED: BRAIN
+                        HURTS</p>
+                </div>
+            </div>
+            <!-- Famous Friends List (Clue 4) -->
+            <div class="md:col-span-7 bg-white p-8 border-[10px] border-[#f5f4e8] rotate-2 shadow-inner relative">
+                <div
+                    class="absolute -top-4 right-10 bg-primary w-24 h-24 rounded-full flex items-center justify-center -rotate-12 shadow-lg">
+                    <span class="material-symbols-outlined text-white text-5xl" data-icon="crown"
+                        data-weight="fill">crown</span>
+                </div>
+                <h4
+                    class="text-4xl font-headline font-black text-on-surface mb-8 border-b-4 border-primary inline-block">
+                    FAMOUS FRIENDS</h4>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-6">
+                        <span class="material-symbols-outlined text-primary text-3xl"
+                            data-icon="check_box_outline_blank">check_box_outline_blank</span>
+                        <span class="text-3xl font-body font-black uppercase text-secondary">Mr. Whiskers</span>
+                        <span class="text-xs font-bold text-outline uppercase ml-auto">(THE BRAINS)</span>
+                    </li>
+                    <li class="flex items-center gap-6">
+                        <span class="material-symbols-outlined text-primary text-3xl"
+                            data-icon="check_box_outline_blank">check_box_outline_blank</span>
+                        <span class="text-3xl font-body font-black uppercase text-secondary">The Carrot King</span>
+                        <span class="text-xs font-bold text-outline uppercase ml-auto">(SUPPLY CHAIN)</span>
+                    </li>
+                    <li class="flex items-center gap-6 opacity-30">
+                        <span class="material-symbols-outlined text-error text-3xl" data-icon="close">close</span>
+                        <span
+                            class="text-3xl font-body font-black uppercase line-through decoration-error decoration-4">The
+                            Mayor</span>
+                        <span class="text-xs font-bold text-error uppercase ml-auto">(SNITCH!)</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- Park Sign (Clue 2) -->
+            <div class="md:col-span-12 mt-12 relative">
+                <div
+                    class="bg-surface-container-highest p-12 rounded-[4rem] border-8 border-on-surface/5 flex flex-col items-center justify-center text-center rotate-[-1deg]">
+                    <div class="relative inline-block mb-6">
+                        <img class="w-96 h-64 object-cover rounded-2xl shadow-2xl grayscale"
+                            data-alt="a rustic wooden park sign in a green forest with sun rays, with a giant red X scribbled over it in crayon"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ4C8PZEZM089nYKoSMMCZQuRPsrmxZGLN1N0MKdXHA6g6xOUquwgx3hv6mfXF1_4uunzUwDJrqevyRJvAgXZ49OMxvlVaOWjIfe1M9LVjsJILu14TcU6nrQhMrttY9gUFsUhcJhaK6YGWTGNOiur8LHqEis9Hf2O6u8jsy-iYG0_AsSyDNW2cewnKeXYhbd8w5BN9DzhSdZiKy-8gZy4RhT0K537mQsZkcBgtXOEkKH84GTDSa-JifTZlKlmLVX3MRjlMb9oVOTI" />
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                            <span
+                                class="text-[300px] text-primary/80 font-black leading-none rotate-12 opacity-90">X</span>
+                        </div>
+                    </div>
+                    <h2
+                        class="text-6xl md:text-8xl font-headline font-black text-primary uppercase italic tracking-tighter">
+                        PARK RULES = STUPID!</h2>
+                    <p class="text-2xl font-body font-bold text-on-surface-variant mt-4">NO RUNNING? NO SCREAMING? NO
+                        GIANT ROBOTS? PSH!</p>
+                </div>
+            </div>
+        </div>
+        <!-- Hidden Golden Egg (Clue 6) -->
+        <div class="fixed bottom-10 right-10 z-50 group">
+            <div class="relative">
+                <span
+                    class="material-symbols-outlined text-tertiary text-4xl opacity-0 group-hover:opacity-100 transition-opacity absolute -top-12 -left-12 -rotate-45"
+                    data-icon="north_west" data-weight="fill">north_west</span>
+                <span
+                    class="material-symbols-outlined text-tertiary-fixed-dim text-2xl cursor-help hover:scale-150 transition-transform"
+                    data-icon="egg" data-weight="fill">egg</span>
+            </div>
+        </div>
+    </main>
+    <!-- Bottom Nav (Mobile Only) -->
+    <nav
+        class="md:hidden fixed bottom-0 left-0 right-0 bg-surface-container-low h-20 flex justify-around items-center px-6 z-50 border-t-4 border-[#c00014]">
+        <button class="flex flex-col items-center text-primary font-black scale-110">
+            <span class="material-symbols-outlined text-3xl" data-icon="grid_view">grid_view</span>
+            <span class="text-[10px] uppercase font-['Spline_Sans']">PLANS</span>
+        </button>
+        <button class="flex flex-col items-center text-secondary opacity-70">
+            <span class="material-symbols-outlined text-3xl" data-icon="skull">skull</span>
+            <span class="text-[10px] uppercase font-['Spline_Sans']">DOOM</span>
+        </button>
+        <button class="flex flex-col items-center text-secondary opacity-70">
+            <span class="material-symbols-outlined text-3xl" data-icon="museum">museum</span>
+            <span class="text-[10px] uppercase font-['Spline_Sans']">VAULT</span>
+        </button>
+        <button class="flex flex-col items-center text-secondary opacity-70">
+            <span class="material-symbols-outlined text-3xl" data-icon="settings">settings</span>
+            <span class="text-[10px] uppercase font-['Spline_Sans']">FIX IT</span>
+        </button>
+    </nav>
+    <!-- Contextual FAB (Only on relevant screens) -->
+    <button
+        class="fixed bottom-24 right-8 lg:bottom-12 lg:right-12 w-20 h-20 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 border-4 border-white rotate-12">
+        <span class="material-symbols-outlined text-4xl" data-icon="bolt">bolt</span>
+    </button>
+</body>
+
+</html>
