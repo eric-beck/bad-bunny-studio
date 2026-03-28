@@ -170,9 +170,12 @@
                     <p class="font-bold text-sm uppercase tracking-widest text-on-tertiary-fixed-variant font-label">
                         PHOTO HERE!</p>
                 </div>
-                <div
-                    class="aspect-video bg-surface-container-highest rounded-lg flex flex-col items-center justify-center border-4 border-on-surface/5 overflow-hidden group">
-                    <img class="w-full h-full object-cover opacity-40 mix-blend-multiply group-hover:scale-110 transition-transform duration-700"
+                <div id="encodeDropZone"
+                    class="aspect-video bg-surface-container-highest rounded-lg flex flex-col items-center justify-center border-4 border-on-surface/5 overflow-hidden group cursor-pointer relative"
+                    role="button" tabindex="0" aria-label="Upload image to encode message">
+                    <img id="encodePreviewImage"
+                        class="w-full h-full object-cover opacity-40 mix-blend-multiply group-hover:scale-110 transition-transform duration-700"
+                        alt="Preview of selected image for steganography encoding"
                         data-alt="grungy textured wall with peeling paint and street art posters in a moody cinematic urban setting with harsh shadows"
                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrhIMLS_DG6T3pQel__rgGJxwmIYV-7UjVqgqyFXlxF3qxdL4loQu9m__ge3DTJriyXOwvF_BSJ75NlTPB_Btk31b57WJLxPHbqx9yMKt6PVohhT_MwtofbX0PJ1RSrC7aNYdxchbZy6991--wCR8RpqLAdCttzlZ1dZrbCouIkJGUid5CXYPtQi5VoMZ-EtxGpXIrxX1BvprqjFYJgvdI-5l7IBaqCkqs8JU5oC_HW_CyYYRzQPM42BxuTDylgfViTB0w0Wrnk3o" />
                     <div
@@ -184,6 +187,7 @@
                         <p class="text-on-surface-variant font-medium mt-2">Feed me an image to corrupt...</p>
                     </div>
                 </div>
+                <input id="encodeImageInput" type="file" accept="image/*" class="hidden" aria-label="Choose image to encode message" title="Choose image to encode message" />
                 <div class="mt-6 flex justify-between items-center">
                     <div class="flex gap-2">
                         <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
@@ -206,7 +210,7 @@
                     <h4 class="font-headline font-black text-2xl text-on-tertiary-container mb-4 uppercase">MESSAGE BOX
                     </h4>
                     <div class="relative">
-                        <textarea
+                        <textarea id="secretMessage"
                             class="w-full bg-transparent border-none border-b-4 border-tertiary/30 focus:border-tertiary focus:ring-0 text-xl font-bold text-on-tertiary-container placeholder:text-on-tertiary-container/40 min-h-[200px] resize-none"
                             placeholder="TYPE YOUR SECRETS HERE (DON'T LET THE HEROES SEE!)"></textarea>
                         <!-- Crayon Underline -->
@@ -220,7 +224,7 @@
                     </div>
                 </div>
                 <!-- Primary Action -->
-                <button class="w-full group relative">
+                <button id="encodeButton" type="button" class="w-full group relative">
                     <div class="absolute inset-0 bg-on-surface translate-x-2 translate-y-2 rounded-xl"></div>
                     <div
                         class="relative bg-primary text-white p-8 rounded-xl font-headline font-black text-4xl uppercase tracking-tighter italic flex items-center justify-center gap-4 hover:-translate-x-1 hover:-translate-y-1 transition-transform active:scale-95 duration-100 scribble-mask">
@@ -237,7 +241,9 @@
                     </div>
                     <div>
                         <p class="font-black text-xs uppercase tracking-tighter text-secondary">Encryption Strength</p>
-                        <p class="font-bold text-lg text-on-surface">"Better than nothing"</p>
+                        <p id="encodeStatus" class="font-bold text-lg text-on-surface">Upload an image and hide a message.</p>
+                        <a id="downloadEncodedImage" href="#" class="hidden text-sm text-primary font-bold underline mt-1 inline-block"
+                            download="encoded-secret.png">Download encoded image</a>
                     </div>
                 </div>
             </div>
@@ -285,6 +291,101 @@
                 WHATEVER</span>
         </div>
     </div>
+    <canvas id="encodeCanvas" class="hidden"></canvas>
+    <script src="../../scripts/steganography-helper.js"></script>
+    <script>
+        (() => {
+            const stego = window.BadBunnyStego;
+            const imageInput = document.getElementById("encodeImageInput");
+            const dropZone = document.getElementById("encodeDropZone");
+            const previewImage = document.getElementById("encodePreviewImage");
+            const messageInput = document.getElementById("secretMessage");
+            const encodeButton = document.getElementById("encodeButton");
+            const statusLabel = document.getElementById("encodeStatus");
+            const downloadLink = document.getElementById("downloadEncodedImage");
+            const canvas = document.getElementById("encodeCanvas");
+
+            let loadedImage = null;
+
+            function setStatus(message, isError = false) {
+                statusLabel.textContent = message;
+                statusLabel.classList.toggle("text-error", isError);
+                statusLabel.classList.toggle("text-on-surface", !isError);
+            }
+
+            async function handleFile(file) {
+                if (!file || !file.type.startsWith("image/")) {
+                    setStatus("Please upload a valid image file.", true);
+                    return;
+                }
+
+                const dataUrl = await stego.readFileAsDataUrl(file);
+                const image = await stego.loadImage(dataUrl);
+                loadedImage = image;
+                previewImage.src = dataUrl;
+                previewImage.classList.remove("opacity-40");
+                setStatus(`Image ready: ${file.name}`);
+                downloadLink.classList.add("hidden");
+                downloadLink.href = "#";
+            }
+
+            async function encodeMessage() {
+                if (!loadedImage) {
+                    setStatus("Upload an image first.", true);
+                    return;
+                }
+
+                const message = messageInput.value.trim();
+                if (!message) {
+                    setStatus("Type a secret message before encoding.", true);
+                    return;
+                }
+
+                try {
+                    const result = stego.encodeImageToDataUrl(loadedImage, message, canvas);
+                    downloadLink.href = result.dataUrl;
+                    downloadLink.classList.remove("hidden");
+
+                    previewImage.src = result.dataUrl;
+                    previewImage.classList.remove("opacity-40");
+                    setStatus(`Encoded ${result.messageBytes} bytes. Capacity: ${result.capacityBytes} bytes.`);
+                } catch (error) {
+                    setStatus(error.message || "Failed to encode message.", true);
+                }
+            }
+
+            dropZone.addEventListener("click", () => imageInput.click());
+            dropZone.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    imageInput.click();
+                }
+            });
+
+            dropZone.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                dropZone.classList.add("ring-4", "ring-primary");
+            });
+
+            dropZone.addEventListener("dragleave", () => {
+                dropZone.classList.remove("ring-4", "ring-primary");
+            });
+
+            dropZone.addEventListener("drop", async (event) => {
+                event.preventDefault();
+                dropZone.classList.remove("ring-4", "ring-primary");
+                const [file] = event.dataTransfer.files;
+                await handleFile(file);
+            });
+
+            imageInput.addEventListener("change", async (event) => {
+                const [file] = event.target.files;
+                await handleFile(file);
+            });
+
+            encodeButton.addEventListener("click", encodeMessage);
+        })();
+    </script>
 </body>
 
 </html>

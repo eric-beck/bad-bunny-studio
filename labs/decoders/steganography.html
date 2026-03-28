@@ -211,9 +211,11 @@
                     <div class="absolute top-1/2 -right-4 w-10 h-32 masking-tape z-10 rotate-90"></div>
                     <h2 class="font-headline text-3xl font-black mb-8 italic uppercase text-secondary">UPLOAD EVIDENCE
                     </h2>
-                    <div
-                        class="relative aspect-video bg-surface-container-highest rounded-lg border-4 border-dashed border-outline-variant flex flex-col items-center justify-center overflow-hidden group hover:bg-surface-container transition-colors cursor-pointer">
-                        <img class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-multiply"
+                    <div id="decodeDropZone"
+                        class="relative aspect-video bg-surface-container-highest rounded-lg border-4 border-dashed border-outline-variant flex flex-col items-center justify-center overflow-hidden group hover:bg-surface-container transition-colors cursor-pointer"
+                        role="button" tabindex="0" aria-label="Upload image to decode secret message">
+                        <img id="decodePreviewImage" class="absolute inset-0 w-full h-full object-cover opacity-20 mix-blend-multiply"
+                            alt="Preview of selected image for steganography decoding"
                             data-alt="grungy texture of old crumpled paper with faint blue and red ink stains, moody lighting, dark corner shadows"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY_RVPlkVvbSqYYAng6eF-z88VLJ3koB_QqphVNuLZcaaEgvqgzYV-Eoz56Nfu3XlF2bNaolwDCXvvooHPRSIZOoi8KtanJAxeodzp_HtC3jXcw3RHG6qvWF5a4p2MxGYmK5HJodlXLzAFi1odAKgVZ_ETk-cWbwarS2ZM8v9ghwU4BHn9dAhYPbL-HwHzmb6nF10OZMvjMTiUgUaYwRT9RnVy-E4hn7Lp_8Zz1urOckm3YqRZOJPIgX1ZllqfVWlA_5CQikORBaQ" />
                         <div class="relative z-20 flex flex-col items-center gap-4">
@@ -223,6 +225,7 @@
                                 proof here...</p>
                         </div>
                     </div>
+                    <input id="decodeImageInput" type="file" accept="image/*" class="hidden" aria-label="Choose image to decode message" title="Choose image to decode message" />
                     <!-- Decorative Scribbles -->
                     <div class="absolute -bottom-10 -left-6 transform -rotate-12">
                         <span class="material-symbols-outlined text-6xl text-tertiary opacity-40"
@@ -231,7 +234,7 @@
                 </section>
                 <!-- Decode Button Area -->
                 <div class="flex justify-center md:justify-start pt-4">
-                    <button
+                    <button id="decodeButton" type="button"
                         class="group relative bg-primary text-on-primary px-12 py-6 rounded-full font-headline text-2xl font-black uppercase tracking-tighter italic transform hover:scale-110 hover:rotate-2 active:scale-95 transition-all shadow-2xl flex items-center gap-4">
                         <span class="bunny-ear-magnifier">
                             <span class="material-symbols-outlined text-4xl" data-icon="search_insights"
@@ -255,14 +258,13 @@
                     </h3>
                     <div class="space-y-4 font-bold text-xl leading-relaxed text-on-tertiary-container italic">
                         <p>IT SAYS:</p>
-                        <div class="black-crayon-block w-full h-16 relative">
-                            <div
-                                class="absolute inset-0 flex items-center px-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <span class="text-white font-black tracking-widest uppercase">THE BUNNY KNOWS
-                                    EVERYTHING</span>
+                        <div class="black-crayon-block w-full min-h-16 relative">
+                            <div id="decodedMessage"
+                                class="absolute inset-0 flex items-center px-4 text-white font-black tracking-widest break-words py-3 text-sm">
+                                NO MESSAGE FOUND YET
                             </div>
                         </div>
-                        <p class="text-sm mt-4 text-tertiary opacity-70">Decoded with 99.2% certainty of mischief.</p>
+                        <p id="decodeStatus" class="text-sm mt-4 text-tertiary opacity-70">Upload an image and click FIND THE SECRET MESSAGE.</p>
                     </div>
                     <!-- Stamp -->
                     <div class="absolute -bottom-10 -right-6 transform rotate-[-15deg]">
@@ -278,6 +280,7 @@
                     <div
                         class="bg-surface-container-highest p-4 rounded-xl transform -rotate-2 hover:rotate-0 transition-transform cursor-pointer overflow-hidden relative">
                         <img class="absolute inset-0 w-full h-full object-cover opacity-40"
+                            alt="Decorative thumbnail for previous decoded image"
                             data-alt="abstract bright red and orange paint swirls, heavy impasto texture, dramatic lighting"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkOOxeYgyQ1DLxTyEdmwq_AuHnjQHpTClDvCO4RDOwDULlGgrwP3JAioubXeAlUJntGQ3ARNVuzgznJaKBOo-kbVKstpudZS-mnDZoEvghDveeD38N0MGarGGpvYeomovKs68wClqZjakt-pw8tdM_DRCIRU_qkqJ8-N6ep-f3_HJiqSbjeMzcOqXxapLKY8ia1K9A_x_c6x2tlDsN8pwYPwlJAeeCh2eh27goLRYncOIeGtvwZidm5dyHU954DEj2C-l7DWq2InI" />
                         <div class="relative z-10">
@@ -288,6 +291,7 @@
                     <div
                         class="bg-surface-container-highest p-4 rounded-xl transform rotate-3 hover:rotate-0 transition-transform cursor-pointer overflow-hidden relative">
                         <img class="absolute inset-0 w-full h-full object-cover opacity-40"
+                            alt="Decorative thumbnail for recent evidence image"
                             data-alt="vibrant blue ink splatters on textured off-white background, energetic and messy aesthetic"
                             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDU-MOENT0MfujEdXdlseiACea9FzzLl4Riv0zK2HCgTcjQjBz3zRF_wRa3qfPaLIv_Lfcgi66l474q1jOcRxArIL5LMkknkniAoa8R9mMcmFasFFuWAqe9YbZ8vDf6z9YK4S7MatkAcmY_peNgmyBKZAO3M_UFk1eq3-LuvknHgURFMWZ-8xUoYWbESbZBZuiRx60ax7uD3dDYQLtYxGwPvMda8musqkUR2PtDhdoy6tuovfTOeJo_1fH3hyCvaxsfZCJtNmAPxXs" />
                         <div class="relative z-10">
@@ -333,6 +337,91 @@
     <div class="fixed bottom-24 right-8 pointer-events-none opacity-20 hidden md:block">
         <span class="material-symbols-outlined text-8xl text-secondary" data-icon="ink_eraser">ink_eraser</span>
     </div>
+    <canvas id="decodeCanvas" class="hidden"></canvas>
+    <script src="../../scripts/steganography-helper.js"></script>
+    <script>
+        (() => {
+            const stego = window.BadBunnyStego;
+            const imageInput = document.getElementById("decodeImageInput");
+            const dropZone = document.getElementById("decodeDropZone");
+            const previewImage = document.getElementById("decodePreviewImage");
+            const decodeButton = document.getElementById("decodeButton");
+            const decodedMessage = document.getElementById("decodedMessage");
+            const statusLabel = document.getElementById("decodeStatus");
+            const canvas = document.getElementById("decodeCanvas");
+
+            let loadedImage = null;
+
+            function setStatus(message, isError = false) {
+                statusLabel.textContent = message;
+                statusLabel.classList.toggle("text-error", isError);
+                statusLabel.classList.toggle("text-tertiary", !isError);
+            }
+
+            async function handleFile(file) {
+                if (!file || !file.type.startsWith("image/")) {
+                    setStatus("Please upload a valid image file.", true);
+                    return;
+                }
+
+                const dataUrl = await stego.readFileAsDataUrl(file);
+                const image = await stego.loadImage(dataUrl);
+                loadedImage = image;
+                previewImage.src = dataUrl;
+                previewImage.classList.remove("opacity-20");
+                decodedMessage.textContent = "READY TO DECODE";
+                setStatus(`Image loaded: ${file.name}`);
+            }
+
+            function decodeMessage() {
+                if (!loadedImage) {
+                    setStatus("Upload an image first.", true);
+                    return;
+                }
+
+                try {
+                    const message = stego.decodeMessageFromImage(loadedImage, canvas);
+
+                    decodedMessage.textContent = message;
+                    setStatus(`Decoded ${message.length} characters of hidden text.`);
+                } catch (error) {
+                    decodedMessage.textContent = "NO MESSAGE FOUND";
+                    setStatus(error.message || "Failed to decode image.", true);
+                }
+            }
+
+            dropZone.addEventListener("click", () => imageInput.click());
+            dropZone.addEventListener("keydown", (event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    imageInput.click();
+                }
+            });
+
+            dropZone.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                dropZone.classList.add("ring-4", "ring-primary");
+            });
+
+            dropZone.addEventListener("dragleave", () => {
+                dropZone.classList.remove("ring-4", "ring-primary");
+            });
+
+            dropZone.addEventListener("drop", async (event) => {
+                event.preventDefault();
+                dropZone.classList.remove("ring-4", "ring-primary");
+                const [file] = event.dataTransfer.files;
+                await handleFile(file);
+            });
+
+            imageInput.addEventListener("change", async (event) => {
+                const [file] = event.target.files;
+                await handleFile(file);
+            });
+
+            decodeButton.addEventListener("click", decodeMessage);
+        })();
+    </script>
 </body>
 
 </html>
