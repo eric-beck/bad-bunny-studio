@@ -220,17 +220,21 @@
                         <p class="font-bold text-on-surface-variant mb-6">Visual tools for the discerning eye. Hide
                             messages in plain sight.</p>
                         <ul class="space-y-4">
-                            <li
-                                class="flex items-center gap-3 p-3 bg-white rounded-lg border-b-4 border-primary/30 hover:bg-primary hover:text-white transition-colors cursor-pointer group/item">
-                                <span
-                                    class="material-symbols-outlined text-secondary group-hover/item:text-white transition-colors">image_search</span>
-                                <span class="font-black">Steganography Encoder</span>
+                            <li>
+                                <a href="encoders/steganography.html"
+                                    class="flex items-center gap-3 p-3 bg-white rounded-lg border-b-4 border-primary/30 hover:bg-primary hover:text-white transition-colors cursor-pointer group/item">
+                                    <span
+                                        class="material-symbols-outlined text-secondary group-hover/item:text-white transition-colors">image_search</span>
+                                    <span class="font-black">Steganography Encoder</span>
+                                </a>
                             </li>
-                            <li
-                                class="flex items-center gap-3 p-3 bg-white rounded-lg border-b-4 border-primary/30 hover:bg-primary hover:text-white transition-colors cursor-pointer group/item">
-                                <span
-                                    class="material-symbols-outlined text-secondary group-hover/item:text-white transition-colors">magnification_large</span>
-                                <span class="font-black">Steganography Decoder</span>
+                            <li>
+                                <a href="decoders/steganography.html"
+                                    class="flex items-center gap-3 p-3 bg-white rounded-lg border-b-4 border-primary/30 hover:bg-primary hover:text-white transition-colors cursor-pointer group/item">
+                                    <span
+                                        class="material-symbols-outlined text-secondary group-hover/item:text-white transition-colors">magnification_large</span>
+                                    <span class="font-black">Steganography Decoder</span>
+                                </a>
                             </li>
                         </ul>
                         <div
@@ -259,10 +263,10 @@
                                     <span class="material-symbols-outlined text-secondary">radio</span> Morse Code
                                 </h4>
                                 <div class="flex gap-2">
-                                    <button
-                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg">ENCODE</button>
-                                    <button
-                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg">DECODE</button>
+                                    <a href="encoders/morse-code.html"
+                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg text-center">ENCODE</a>
+                                    <a href="decoders/morse-code.html"
+                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg text-center">DECODE</a>
                                 </div>
                             </div>
                             <div
@@ -271,10 +275,10 @@
                                     <span class="material-symbols-outlined text-secondary">mobile_dots</span> Braille
                                 </h4>
                                 <div class="flex gap-2">
-                                    <button
-                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg">ENCODE</button>
-                                    <button
-                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg">DECODE</button>
+                                    <a href="encoders/braille.html"
+                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg text-center">ENCODE</a>
+                                    <a href="decoders/braille.html"
+                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg text-center">DECODE</a>
                                 </div>
                             </div>
                             <div
@@ -283,10 +287,10 @@
                                     <span class="material-symbols-outlined text-secondary">numbers</span> Hexadecimal
                                 </h4>
                                 <div class="flex gap-2">
-                                    <button
-                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg">ENCODE</button>
-                                    <button
-                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg">DECODE</button>
+                                    <a href="encoders/hexadecimal.html"
+                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg text-center">ENCODE</a>
+                                    <a href="decoders/hexadecimal.html"
+                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg text-center">DECODE</a>
                                 </div>
                             </div>
                             <div
@@ -296,10 +300,10 @@
                                     Cipher
                                 </h4>
                                 <div class="flex gap-2">
-                                    <button
-                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg">ENCODE</button>
-                                    <button
-                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg">DECODE</button>
+                                    <a href="encoders/pigpen.html"
+                                        class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg text-center">ENCODE</a>
+                                    <a href="decoders/pigpen.html"
+                                        class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg text-center">DECODE</a>
                                 </div>
                             </div>
                         </div>
@@ -323,16 +327,16 @@
                         <p class="font-bold text-on-surface mb-6 italic opacity-80 leading-snug">"Listen closely. The
                             frequencies speak to those who know how to watch."</p>
                         <div class="space-y-3">
-                            <div
-                                class="p-4 bg-white/60 backdrop-blur rounded-lg border-l-8 border-tertiary hover:translate-x-2 transition-transform cursor-pointer">
+                            <a href="encoders/spectrogram.html"
+                                class="block p-4 bg-white/60 backdrop-blur rounded-lg border-l-8 border-tertiary hover:translate-x-2 transition-transform">
                                 <div class="text-xs font-black text-tertiary uppercase">Audio to Vis</div>
                                 <div class="font-bold">Spectrogram Encoder</div>
-                            </div>
-                            <div
-                                class="p-4 bg-white/60 backdrop-blur rounded-lg border-l-8 border-tertiary hover:translate-x-2 transition-transform cursor-pointer">
+                            </a>
+                            <a href="decoders/spectrogram.html"
+                                class="block p-4 bg-white/60 backdrop-blur rounded-lg border-l-8 border-tertiary hover:translate-x-2 transition-transform">
                                 <div class="text-xs font-black text-tertiary uppercase">Vis to Audio</div>
                                 <div class="font-bold">Spectrogram Decoder</div>
-                            </div>
+                            </a>
                         </div>
                         <!-- Scribble mark -->
                         <div class="absolute -bottom-4 -right-2 text-error text-2xl font-black rotate-[-10deg]">
