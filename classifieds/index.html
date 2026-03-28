@@ -5,9 +5,10 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>CLASSIFIEDS: TOP SECRET | badbunny.studio</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Spline+Sans:ital,wght@0,300..800;1,300..800&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap"
+        href="https://fonts.googleapis.com/css2?family=Spline+Sans:ital,wght@0,300..900;1,300..900&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap"
         rel="stylesheet" />
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
@@ -21,53 +22,53 @@
             theme: {
                 extend: {
                     colors: {
-                        "surface-dim": "#dbdbcf",
-                        "tertiary-fixed-dim": "#e9c400",
-                        "on-primary-container": "#93000d",
-                        "background": "#fbfaee",
-                        "surface-bright": "#fbfaee",
-                        "surface-container-highest": "#e4e3d7",
-                        "on-primary-fixed": "#410002",
-                        "surface-tint": "#c00014",
-                        "inverse-surface": "#303129",
-                        "on-background": "#1b1c15",
-                        "primary": "#c00014",
-                        "tertiary-fixed": "#ffe16d",
-                        "on-secondary-fixed-variant": "#004c69",
-                        "on-secondary-container": "#004c69",
-                        "surface-container-lowest": "#ffffff",
-                        "secondary-container": "#c3e8ff",
-                        "primary-fixed-dim": "#ffb4ab",
-                        "on-tertiary-container": "#544600",
-                        "on-secondary": "#ffffff",
-                        "on-surface": "#1b1c15",
-                        "on-error": "#ffffff",
                         "tertiary-container": "#ffe16d",
-                        "primary-container": "#ffdad6",
-                        "surface": "#fbfaee",
-                        "surface-container-high": "#e9e9dd",
-                        "on-tertiary-fixed-variant": "#544600",
-                        "on-surface-variant": "#474747",
-                        "surface-variant": "#e4e3d7",
-                        "error": "#ba1a1a",
-                        "secondary-fixed": "#c3e8ff",
-                        "outline": "#777777",
-                        "outline-variant": "#c6c6c6",
-                        "on-secondary-fixed": "#001e2c",
-                        "on-tertiary-fixed": "#221b00",
-                        "inverse-on-surface": "#f2f1e5",
+                        "on-secondary-container": "#004c69",
                         "error-container": "#ffdad6",
                         "surface-container-low": "#f5f4e8",
-                        "tertiary": "#705d00",
-                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#e9e9dd",
+                        "outline": "#777777",
+                        "on-surface-variant": "#474747",
+                        "primary-fixed-dim": "#ffb4ab",
+                        "on-surface": "#1b1c15",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#c00014",
+                        "error": "#ba1a1a",
+                        "background": "#fbfaee",
+                        "on-primary-fixed": "#410002",
+                        "surface-dim": "#dbdbcf",
+                        "on-background": "#1b1c15",
+                        "primary": "#c00014",
+                        "inverse-on-surface": "#f2f1e5",
+                        "surface": "#fbfaee",
+                        "on-primary-container": "#93000d",
+                        "on-error": "#ffffff",
+                        "surface-bright": "#fbfaee",
+                        "inverse-surface": "#303129",
+                        "on-secondary-fixed": "#001e2c",
+                        "surface-variant": "#e4e3d7",
+                        "on-tertiary-container": "#544600",
+                        "surface-container-highest": "#e4e3d7",
                         "primary-fixed": "#ffdad6",
-                        "inverse-primary": "#ffb4ab",
-                        "secondary-fixed-dim": "#7ad0ff",
-                        "secondary": "#00668a",
-                        "on-primary": "#ffffff",
+                        "tertiary": "#705d00",
                         "on-primary-fixed-variant": "#93000d",
-                        "surface-container": "#efeee3",
-                        "on-error-container": "#93000a"
+                        "inverse-primary": "#ffb4ab",
+                        "secondary-container": "#c3e8ff",
+                        "secondary": "#00668a",
+                        "primary-container": "#ffdad6",
+                        "on-tertiary-fixed": "#221b00",
+                        "outline-variant": "#c6c6c6",
+                        "on-primary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#7ad0ff",
+                        "secondary-fixed": "#c3e8ff",
+                        "on-secondary-fixed-variant": "#004c69",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "tertiary-fixed": "#ffe16d",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container": "#efeee3"
                     },
                     fontFamily: {
                         "headline": ["Spline Sans"],
@@ -84,213 +85,244 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        .scribble-stroke {
-            text-decoration: line-through;
-            text-decoration-style: double;
-            text-decoration-color: #1b1c15;
-            text-decoration-thickness: 8px;
+        .scribble-mask {
+            mask-image: url('https://www.transparenttextures.com/patterns/natural-paper.png');
         }
 
         .crayon-border {
-            box-shadow: 8px 8px 0px #705d00;
+            box-shadow: 0 0 0 4px #c00014, 2px 2px 0 6px #fbfaee, 4px 4px 0 8px #c00014;
         }
 
-        .rough-edge {
-            clip-path: polygon(2% 0%, 98% 1%, 100% 4%, 99% 95%, 97% 100%, 3% 98%, 0% 96%, 1% 5%);
-        }
-
-        .marker-circle {
-            border: 6px solid #705d00;
-            border-radius: 45% 55% 50% 50% / 55% 50% 50% 45%;
+        .tape {
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(2px);
+            transform: rotate(-2deg);
         }
     </style>
 </head>
 
-<body class="bg-background text-on-background font-body selection:bg-tertiary-container overflow-x-hidden">
+<body class="bg-background font-body text-on-background selection:bg-tertiary-container overflow-x-hidden">
     <!-- TopAppBar -->
     <header
-        class="fixed top-0 z-50 w-full h-24 bg-[#fbfaee] dark:bg-stone-900 border-b-[6px] border-[#f5f4e8] dark:border-stone-800 skew-y-1 flex justify-between items-center px-6 py-4">
-        <h1
-            class="text-4xl font-black text-[#c00014] dark:text-red-600 rotate-[-2deg] drop-shadow-[2px_2px_0px_rgba(112,93,0,0.3)] font-['Spline_Sans'] uppercase tracking-tighter italic">
+        class="bg-[#fbfaee] dark:bg-stone-900 border-b-[6px] border-[#c00014] dark:border-red-900/30 border-dashed shadow-[10px_10px_0px_0px_rgba(192,0,20,0.1)] docked full-width top-0 z-50 flex flex-col md:flex-row justify-between items-center w-full px-8 py-6 gap-6 sticky">
+        <div
+            class="text-4xl md:text-5xl font-['Spline_Sans'] font-black text-[#c00014] dark:text-red-600 -rotate-3 hover:rotate-2 transition-transform italic uppercase tracking-tighter">
             badbunny.studio
-        </h1>
-        <div class="flex items-center gap-6">
-            <nav class="hidden md:flex gap-8 font-['Spline_Sans'] uppercase tracking-tighter italic text-stone-600">
-                <a class="text-[#c00014] underline decoration-wavy decoration-4 hover:rotate-2 hover:scale-110 transition-transform cursor-pointer active:skew-x-6"
-                    href="#">Missions</a>
-                <a class="hover:rotate-2 hover:scale-110 transition-transform cursor-pointer active:skew-x-6"
-                    href="#">Loot</a>
-                <a class="hover:rotate-2 hover:scale-110 transition-transform cursor-pointer active:skew-x-6"
-                    href="#">Hideout</a>
-            </nav>
-            <span
-                class="material-symbols-outlined text-[#c00014] text-3xl cursor-pointer hover:rotate-12 transition-transform">menu</span>
+        </div>
+        <nav class="flex gap-8">
+            <a class="font-['Spline_Sans'] font-black tracking-tighter uppercase italic text-[#c00014] dark:text-red-400 underline decoration-double decoration-4 transition-all duration-150 hover:scale-105 hover:skew-x-2"
+                href="case001.html">Case File 001</a>
+            <a class="font-['Spline_Sans'] font-black tracking-tighter uppercase italic text-[#1b1c15] dark:text-stone-300 hover:text-[#00668a] dark:hover:text-blue-400 transition-all duration-150 hover:scale-105 hover:skew-x-2"
+                href="case002.html">Case File 002</a>
+        </nav>
+        <div class="flex items-center gap-4">
+            <button class="p-2 hover:scale-105 transition-all"><span
+                    class="material-symbols-outlined text-[#c00014]">search</span></button>
+            <button class="p-2 hover:scale-105 transition-all"><span
+                    class="material-symbols-outlined text-[#c00014]">lock_open</span></button>
         </div>
     </header>
-    <main class="pt-32 pb-40 px-6 max-w-5xl mx-auto min-h-screen relative">
-        <!-- Background Doodle Hint -->
-        <div class="absolute top-48 right-10 opacity-20 rotate-12 pointer-events-none">
-            <span class="material-symbols-outlined text-8xl text-tertiary">subdirectory_arrow_right</span>
-            <p class="font-headline font-bold text-xl uppercase tracking-widest mt-2">Look Here, Dummy</p>
-        </div>
-        <section class="relative mb-20 mt-12">
-            <h2 class="font-headline font-black text-6xl md:text-8xl text-primary -rotate-1 tracking-tighter mb-4">
-                TOP SECRET <br />
-                <span class="text-surface-dim line-through decoration-on-background decoration-[12px]">PLANS FOR
-                    GLORY</span>
-            </h2>
-            <p class="text-2xl font-bold bg-tertiary-container inline-block px-4 py-2 rotate-2 mb-12">
-                "Obviously, I'm going to win. Why do I even write these down?"
+    <main class="max-w-7xl mx-auto px-6 pt-20 pb-40">
+        <!-- Hero Section -->
+        <section class="relative mb-32 flex flex-col items-start">
+            <div class="absolute -top-10 -left-10 opacity-20 rotate-12 pointer-events-none">
+                <span class="material-symbols-outlined text-9xl text-primary">edit</span>
+            </div>
+            <h1
+                class="font-headline font-black text-7xl md:text-9xl tracking-tighter uppercase italic text-primary leading-[0.8] mb-6 transform -rotate-1 relative">
+                CLASSIFIEDS:<br />TOP SECRET
+                <div class="absolute -bottom-2 left-0 w-full h-4 bg-tertiary-container -z-10 opacity-60 skew-x-12">
+                </div>
+            </h1>
+            <p
+                class="font-headline font-bold text-2xl md:text-4xl text-on-surface-variant italic bg-surface-container-highest px-4 py-2 transform rotate-1 border-2 border-dashed border-primary">
+                KEEP OUT! (or don't, I dare you)
             </p>
         </section>
-        <!-- Bento Grid Mission List -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 relative">
-            <!-- Mission Card 1: Scribbled -->
-            <div
-                class="md:col-span-7 bg-surface-container-low p-8 rounded-xl rough-edge border-4 border-dashed border-outline-variant -rotate-1 relative group">
-                <span
-                    class="absolute -top-4 -left-4 bg-primary text-white font-black px-6 py-2 text-xl rotate-[-5deg]">TASK
-                    01</span>
-                <div class="mt-8">
-                    <h3 class="font-headline text-4xl font-extrabold scribbled-stroke opacity-40">INVADE THE GARDEN
-                        PARTY</h3>
-                    <p class="mt-4 text-on-surface-variant font-medium text-lg">Too easy. Boring. Did it in my sleep.
-                    </p>
-                </div>
-                <div class="mt-8 flex gap-2">
-                    <span class="w-8 h-8 rounded-full bg-error"></span>
-                    <span class="w-8 h-8 rounded-full bg-surface-dim"></span>
-                </div>
-            </div>
-            <!-- Mission Card 2: Smudge -->
-            <div class="md:col-span-5 bg-surface-container-highest p-8 rounded-xl rotate-1 relative overflow-hidden">
-                <div class="absolute inset-0 bg-gradient-to-br from-transparent to-surface-dim opacity-50"></div>
-                <span
-                    class="absolute top-2 right-4 text-6xl font-black text-on-background/10 select-none">REDACTED</span>
-                <div class="relative z-10">
-                    <h3 class="font-headline text-3xl font-extrabold scribbled-stroke mb-4">NAP FOR THREE HOURS</h3>
-                    <p class="text-on-surface-variant italic">The hero needs his rest. Do not disturb or face the
-                        consequences.</p>
-                </div>
-                <div class="mt-6 flex justify-end">
-                    <span class="material-symbols-outlined text-4xl text-secondary"
-                        style="font-variation-settings: 'FILL' 1;">bedtime</span>
-                </div>
-            </div>
-            <!-- Mission Card 3: THE GOLDEN CARROT -->
-            <div
-                class="md:col-span-12 bg-surface-container-lowest p-12 rounded-xl border-[10px] border-tertiary/20 rotate-[-0.5deg] relative shadow-2xl">
+        <!-- Main Content: Dossier Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-32 items-start">
+            <!-- Case File 001 -->
+            <div class="relative group">
                 <div
-                    class="absolute -top-10 right-10 w-32 h-32 marker-circle flex items-center justify-center bg-tertiary-container rotate-12 z-20">
-                    <span class="font-headline font-black text-center text-on-tertiary-container leading-none">DO
-                        THIS<br />NOW</span>
+                    class="absolute -inset-4 bg-surface-container-high rounded-xl transform -rotate-2 group-hover:rotate-0 transition-transform">
                 </div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <span class="material-symbols-outlined text-5xl text-tertiary"
-                            style="font-variation-settings: 'FILL' 1;">nutrition</span>
-                        <span class="h-2 flex-grow bg-tertiary/10 rounded-full"></span>
-                    </div>
-                    <h3
-                        class="font-headline text-5xl md:text-7xl font-black text-on-background tracking-tight relative inline-block">
-                        STEAL THE GOLDEN CARROT
-                        <svg class="absolute -inset-4 w-full h-full scale-125 pointer-events-none opacity-80"
-                            preserveaspectratio="none" viewbox="0 0 100 100">
-                            <path d="M5,50 Q5,5 50,5 Q95,5 95,50 Q95,95 50,95 Q5,95 5,50" fill="none" stroke="#705d00"
-                                stroke-dasharray="2,4" stroke-width="2"></path>
-                        </svg>
-                    </h3>
-                    <p class="mt-8 text-2xl font-body max-w-2xl leading-relaxed">
-                        It is kept in the <span class="bg-primary text-white px-2">Crystal Vault</span>. Bring the
-                        explosive gum. No witnesses. Especially not that squirrel.
-                    </p>
-                    <div class="mt-12 flex flex-wrap gap-4">
-                        <button
-                            class="bg-primary text-on-primary font-headline font-black text-2xl px-12 py-6 rounded-xl rotate-[-2deg] hover:rotate-2 hover:scale-105 transition-all shadow-xl active:scale-95">
-                            EXECUTE MISSION
-                        </button>
-                        <button
-                            class="border-4 border-on-background font-headline font-black text-2xl px-12 py-6 rounded-xl rotate-[1deg] hover:bg-on-background hover:text-background transition-all">
-                            LATER...
-                        </button>
-                    </div>
-                </div>
-                <img alt="Secret Map"
-                    class="absolute bottom-4 right-4 w-48 h-48 object-cover rounded-full opacity-30 grayscale mix-blend-multiply pointer-events-none"
-                    data-alt="Abstract hand drawn map with rough edges and scribbles"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKozerMLJvQnHHW8fMCqQLTEsxfHoxsnzDTvFfEVKyN23bRk3cwr8aKmXdesN1-3hG2CHwhb_0g2q4KdVFjekvGqCGBYovYHJMpiXrNeCZfLN12S8015VBsi6m3nt595t7yo1F2OXzXtWWPCXb-2q4VU7XErq1uOQuH_3Kl9xd16fchcE9dHEnajI3Xh2-NYNbCaEDf1EFGXUtPjn0qz6L7JD8uQfT9t_JSC2Wh_H6oG0EYLT076BYvx_6zm7fA7GUoIDY1mm9dDw" />
-            </div>
-            <!-- Mission Card 4: Scribbled 3 -->
-            <div class="md:col-span-6 bg-surface-container-low p-8 rounded-xl rotate-2 border-t-8 border-primary">
-                <h3 class="font-headline text-3xl font-extrabold scribbled-stroke mb-2">LEARN TO COOK</h3>
-                <p class="text-on-surface-variant font-medium">Why cook when I can just take what I want? Stupid plan.
-                </p>
-                <div class="mt-4 flex gap-4">
-                    <span class="material-symbols-outlined text-4xl text-primary opacity-20">close</span>
-                    <span class="material-symbols-outlined text-4xl text-primary opacity-20">close</span>
-                    <span class="material-symbols-outlined text-4xl text-primary opacity-20">close</span>
-                </div>
-            </div>
-            <!-- Mission Card 5: The Hint -->
-            <div class="md:col-span-6 bg-secondary-container p-8 rounded-xl -rotate-2 flex flex-col justify-between">
-                <div>
-                    <h3 class="font-headline text-3xl font-black text-on-secondary-container mb-4 italic">HIDDEN
-                        PROTOCOL</h3>
-                    <p class="text-on-secondary-container/80 text-lg">In case of emergency, eat the paper. The ink is
-                        strawberry flavored.</p>
-                </div>
-                <div class="mt-8 flex items-center justify-between">
-                    <span class="material-symbols-outlined text-6xl text-on-secondary-container">priority_high</span>
+                <div
+                    class="relative bg-surface p-10 rounded-lg shadow-xl border-l-[12px] border-primary flex flex-col gap-6 overflow-hidden">
                     <div
-                        class="w-16 h-16 bg-on-secondary-container rounded-full flex items-center justify-center text-white font-black text-xl">
-                        !</div>
+                        class="absolute top-4 right-4 bg-error text-on-error px-4 py-1 font-headline font-black uppercase text-xl -rotate-12 border-4 border-on-error outline outline-2 outline-error">
+                        REDACTED</div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="font-headline font-black text-primary text-5xl uppercase italic block">Case
+                                File 001</span>
+                            <span class="text-sm font-bold opacity-60">ID: BB-001-ALPHA</span>
+                        </div>
+                        <div class="w-24 h-24 transform -rotate-6">
+                            <span class="material-symbols-outlined text-7xl text-primary"
+                                style="font-variation-settings: 'FILL' 1;">pets</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="h-8 bg-on-surface-variant w-3/4 opacity-10 rounded-sm"></div>
+                        <div class="h-8 bg-on-surface-variant w-1/2 opacity-10 rounded-sm"></div>
+                        <p class="font-headline text-2xl font-bold text-tertiary transform rotate-1 mt-4">"You'll never
+                            guess what's inside"</p>
+                        <div class="relative inline-block mt-4">
+                            <span
+                                class="bg-primary text-on-primary line-through px-4 py-1 text-xl font-bold decoration-4 decoration-on-primary">THE
+                                RABBIT HOLE INCIDENT</span>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex justify-end">
+                        <a href="case001.html"
+                            class="bg-primary text-on-primary px-10 py-5 rounded-[40%_60%_70%_30%/40%_50%_60%_40%] font-headline font-black text-2xl uppercase italic hover:scale-110 hover:rotate-3 transition-all active:scale-95 shadow-lg flex items-center gap-3">
+                            OPEN FILE
+                            <span class="material-symbols-outlined">key</span>
+                        </a>
+                    </div>
+                    <!-- Scribble Overlay -->
+                    <div class="absolute bottom-0 left-0 w-full h-1/2 opacity-10 pointer-events-none">
+                        <img class="w-full h-full object-cover"
+                            data-alt="rough hand-drawn crayon scribbles and messy artistic lines in a charcoal grey color over a paper texture"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCW4epx-xcS5LxWbkM57plhx7Jump0eUtF8j5zkp5i-yNHnJdtTNXX5MZ8F6SduXrMHDyETb-TQJHDE_cYB96o1wKE_lwNMrtR9N75D_2xByxpSRmWkIVAEePt_DF81OrVuOKBBQZX2sWC2B6tiiQHFjIU5jmsXbcHTD2gn0BFLxDlLTLLnlObnwFfaXxf3nUL_bXUqlvg8WzaiuXHAFGwX8xbzrvTz97kXfeDEHm2qAL8QfOFocOZYivEU8zODPnWhKGbhlIW5ITw" />
+                    </div>
+                </div>
+                <!-- Taped Scraps -->
+                <div class="absolute -top-6 left-1/2 -translate-x-1/2 w-32 h-10 tape border border-white/40"></div>
+            </div>
+            <!-- Case File 002 -->
+            <div class="relative group lg:mt-32">
+                <div
+                    class="absolute -inset-4 bg-surface-container-low rounded-xl transform rotate-3 group-hover:rotate-0 transition-transform">
+                </div>
+                <div
+                    class="relative bg-surface p-10 rounded-lg shadow-2xl border-r-[12px] border-secondary flex flex-col gap-6 overflow-hidden">
+                    <div class="absolute top-10 left-1/4 opacity-15 rotate-45">
+                        <span class="material-symbols-outlined text-[12rem] text-primary">priority_high</span>
+                    </div>
+                    <div class="flex justify-between items-start z-10">
+                        <div>
+                            <span class="font-headline font-black text-secondary text-5xl uppercase italic block">Case
+                                File 002</span>
+                            <span class="text-sm font-bold opacity-60">ID: BB-002-OMEGA</span>
+                        </div>
+                        <div class="w-24 h-24 transform rotate-12">
+                            <span class="material-symbols-outlined text-7xl text-tertiary"
+                                style="font-variation-settings: 'FILL' 1;">nutrition</span>
+                        </div>
+                    </div>
+                    <div class="space-y-4 z-10">
+                        <p class="font-headline text-3xl font-black text-primary leading-tight transform -rotate-2">
+                            STOLEN FROM THE GARDEN</p>
+                        <div
+                            class="bg-tertiary-container/30 p-4 rounded-lg transform rotate-1 border-2 border-dashed border-tertiary">
+                            <p class="font-body font-bold text-on-tertiary-container italic">The target was orange. The
+                                target was crunchy. The target is now... GONE.</p>
+                        </div>
+                        <div class="relative inline-block mt-4">
+                            <span class="bg-secondary text-on-secondary px-4 py-1 text-xl font-bold decoration-4">CARROT
+                                HEIST #44</span>
+                        </div>
+                    </div>
+                    <div class="mt-8 flex justify-start z-10">
+                        <a href="case002.html"
+                            class="bg-tertiary text-on-tertiary px-10 py-5 rounded-[70%_30%_50%_50%/50%_40%_60%_50%] font-headline font-black text-2xl uppercase italic hover:scale-110 hover:-rotate-3 transition-all active:scale-95 shadow-lg flex items-center gap-3">
+                            OPEN FILE
+                            <span class="material-symbols-outlined">folder_open</span>
+                        </a>
+                    </div>
+                </div>
+                <!-- Taped Scraps -->
+                <div class="absolute -bottom-4 right-10 w-24 h-12 tape rotate-12 border border-white/40"></div>
+            </div>
+        </div>
+        <!-- Latest Heists Section -->
+        <section class="mt-40">
+            <h2
+                class="font-headline font-black text-5xl md:text-7xl uppercase italic text-on-surface mb-16 transform -rotate-1">
+                LATEST <span class="text-primary underline decoration-8 decoration-tertiary-container">HEISTS</span>
+            </h2>
+            <div class="flex flex-wrap gap-12 justify-center lg:justify-start">
+                <!-- Polaroid 1 -->
+                <div
+                    class="bg-white p-4 pb-12 shadow-xl transform rotate-3 hover:rotate-0 transition-all hover:-translate-y-4 w-64">
+                    <div class="aspect-square bg-surface-variant mb-4 overflow-hidden grayscale contrast-125">
+                        <img class="w-full h-full object-cover"
+                            data-alt="Grainy surveillance style black and white photo of a garden gate swinging open in the dark with motion blur"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7i4bnElt7w4o3g2zzdxHUyYBMToI-WELcuFW6CPKBha4BE76ycFMvIAH6nlm0X9rJmloElMDZ0av9zwBAUH0M8RsMfSr2k6qhK8q1npEFzFPYd9x04qK_37r-cj7XybGo5VkJNv0S7KxT7tXhC8cEIhAUmLEulaWP53MsPNwebylE3GIilWXT8InWM6QbGrJh1QBAg2sG8jB5DNKx77ZChIVgP6IRjjsCvhnMDib5UryZAME1F8h13s99TMGGU_HSSVbHNTjmduk" />
+                    </div>
+                    <p
+                        class="font-headline font-bold text-center text-on-surface/60 uppercase tracking-widest text-xs italic">
+                        Evidence 08.12</p>
+                </div>
+                <!-- Polaroid 2 -->
+                <div
+                    class="bg-white p-4 pb-12 shadow-xl transform -rotate-2 hover:rotate-0 transition-all hover:-translate-y-4 w-64">
+                    <div class="aspect-square bg-surface-variant mb-4 overflow-hidden grayscale contrast-125">
+                        <img class="w-full h-full object-cover"
+                            data-alt="Macro photo of a single half-eaten carrot left on a wooden floor with dramatic shadows and high contrast"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4wFr7EpOMCwzvDXMb7tS7P4o8Czljha3N_a2-yPsg5npSqwqsGI_uM3o9K4kQzQdptfrq_3iCx6kuaPySh33IM1AAq2VfMZ9EarDWio9sqQBeyN-0y59VZgIurKtgWtRLyYiErfLRblSUoyEzX4NGDnC3Fl3mg2xguyu5MOwzQXg2CHNzhRZPTmWAp7KHp3enNwvF35d4sP-JW_FEWcAxP_ZsPTpUruE1P_EiYozqzvxQVOgL3IY8QyFI_yW-O4wW_iQs70ObjrU" />
+                    </div>
+                    <p
+                        class="font-headline font-bold text-center text-on-surface/60 uppercase tracking-widest text-xs italic">
+                        Evidence 08.14</p>
+                </div>
+                <!-- Polaroid 3 -->
+                <div
+                    class="bg-white p-4 pb-12 shadow-xl transform rotate-6 hover:rotate-0 transition-all hover:-translate-y-4 w-64">
+                    <div class="aspect-square bg-surface-variant mb-4 overflow-hidden grayscale contrast-125">
+                        <img class="w-full h-full object-cover"
+                            data-alt="CCTV style shot of a dark hallway with a fuzzy white shape moving rapidly across the frame"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBznK4X9af7OaiHfdzk957Q-XMsbBcAinxzUxbOolhmfqRcGITZdXTdC180r07WZthl3mVE_Y3wwNNaakK-2NQANQiP7aZr6O9Js8kZlTyIuf0Mk55aIbOD8tt8GB0bSs8Y2QQhSwLfFOUJ9H-3QCZ96VLc4TZcbSh4-RnZ7MzEuo9HXqnUTJ50eZIdKXYTQxJtdAhmMoK032CUiKaKbD9m7laTcqaY04RYKzcu1Ivyf9CcvZp1vlFRIUHsIfIs0hdhVHUEVkx7QR8" />
+                    </div>
+                    <p
+                        class="font-headline font-bold text-center text-on-surface/60 uppercase tracking-widest text-xs italic">
+                        Evidence 08.15</p>
+                </div>
+                <!-- Empty "Add" Card -->
+                <div
+                    class="w-64 h-[20rem] border-4 border-dashed border-outline-variant rounded-xl flex items-center justify-center transform -rotate-1 hover:rotate-0 transition-transform cursor-pointer">
+                    <div class="text-center group">
+                        <span
+                            class="material-symbols-outlined text-6xl text-outline-variant group-hover:text-primary transition-colors">add_a_photo</span>
+                        <p
+                            class="font-headline font-black text-outline-variant uppercase mt-2 group-hover:text-primary">
+                            New Heist</p>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- Corner Doodle with Arrow Hint -->
-        <div
-            class="mt-32 p-12 bg-surface-container border-4 border-on-background/5 rounded-full w-max mx-auto relative group cursor-help">
-            <span
-                class="material-symbols-outlined text-9xl text-on-surface group-hover:scale-110 transition-transform">pest_control_rodent</span>
-            <div
-                class="absolute -top-10 -right-20 bg-tertiary p-4 rounded-lg text-white font-black text-sm rotate-12 opacity-0 group-hover:opacity-100 transition-opacity">
-                THE KEY IS UNDER <br /> THE MAT!
-            </div>
-            <div
-                class="absolute -bottom-12 -left-4 font-headline text-primary font-black uppercase tracking-widest text-xl">
-                <span class="material-symbols-outlined align-middle">north_east</span> DON'T TOUCH MY STUFF
-            </div>
-        </div>
+        </section>
     </main>
-    <!-- BottomNavBar -->
-    <nav
-        class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-8 pt-4 bg-[#fbfaee]/90 dark:bg-stone-900/90 backdrop-blur-xl z-50 rounded-t-[3rem] border-t-8 border-[#c00014] shadow-[0_-10px_40px_rgba(27,28,21,0.06)] md:hidden">
-        <a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 opacity-70 hover:-translate-y-2 hover:rotate-[-5deg] transition-all"
-            href="#">
-            <span class="material-symbols-outlined">nutrition</span>
-            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs tracking-widest mt-1">Carrot</span>
-        </a>
-        <a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 opacity-70 hover:-translate-y-2 hover:rotate-[-5deg] transition-all"
-            href="#">
-            <span class="material-symbols-outlined">egg</span>
-            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs tracking-widest mt-1">Egg</span>
-        </a>
-        <a class="flex flex-col items-center justify-center bg-[#705d00] dark:bg-yellow-700 text-white rounded-[2rem] p-3 rotate-3 scale-110 shadow-lg"
-            href="#">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
-            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs tracking-widest mt-1">Chaos</span>
-        </a>
-        <a class="flex flex-col items-center justify-center text-stone-500 dark:text-stone-400 p-2 opacity-70 hover:-translate-y-2 hover:rotate-[-5deg] transition-all"
-            href="#">
-            <span class="material-symbols-outlined">person</span>
-            <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs tracking-widest mt-1">Me</span>
-        </a>
-    </nav>
-    <!-- FAB (Suppressed based on logic for details-focused view, but rendered here as a "chaos" element per theme) -->
-    <button
-        class="fixed bottom-24 right-8 w-20 h-20 bg-primary text-white rounded-full flex items-center justify-center shadow-2xl rotate-12 hover:rotate-0 hover:scale-110 transition-all z-40 border-4 border-on-background">
-        <span class="material-symbols-outlined text-4xl">add</span>
-    </button>
+    <!-- Footer -->
+    <footer
+        class="bg-[#f5f4e8] dark:bg-stone-800 w-full rounded-t-[4rem] mt-20 flex flex-col items-center justify-center w-full py-16 px-4 space-y-8">
+        <div
+            class="text-lg font-['Plus_Jakarta_Sans'] font-black text-[#1b1c15] dark:text-stone-100 uppercase tracking-[0.1em]">
+            © BADBUNNY.STUDIO - CLASSIFIED PROPERTY
+        </div>
+        <nav class="flex flex-wrap justify-center gap-12">
+            <a class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-[0.1em] text-[#1b1c15] dark:text-stone-400 hover:bg-[#ffe16d] dark:hover:bg-yellow-900/30 p-2 rounded-lg transition-transform duration-300 hover:-translate-y-2"
+                href="#">Evidence</a>
+            <a class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-[0.1em] text-[#1b1c15] dark:text-stone-400 hover:bg-[#ffe16d] dark:hover:bg-yellow-900/30 p-2 rounded-lg transition-transform duration-300 hover:-translate-y-2"
+                href="#">Suspects</a>
+            <a class="font-['Plus_Jakarta_Sans'] text-xl font-bold tracking-[0.1em] text-[#c00014] dark:text-red-500 line-through p-2 rounded-lg transition-transform duration-300 hover:-translate-y-2"
+                href="#">Shredder</a>
+        </nav>
+        <div class="flex gap-4">
+            <span class="material-symbols-outlined text-tertiary">warning</span>
+            <span class="material-symbols-outlined text-tertiary">visibility_off</span>
+            <span class="material-symbols-outlined text-tertiary">lock</span>
+        </div>
+    </footer>
+    <!-- Decorative floating doodles -->
+    <div class="fixed top-1/4 right-10 opacity-20 pointer-events-none transform rotate-12 hidden lg:block">
+        <span class="material-symbols-outlined text-[10rem] text-tertiary"
+            style="font-variation-settings: 'FILL' 1;">eco</span>
+    </div>
+    <div class="fixed bottom-1/4 left-10 opacity-10 pointer-events-none transform -rotate-12 hidden lg:block">
+        <span class="material-symbols-outlined text-[15rem] text-primary"
+            style="font-variation-settings: 'FILL' 1;">gesture</span>
+    </div>
 </body>
 
 </html>
