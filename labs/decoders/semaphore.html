@@ -31,6 +31,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <script src="../../scripts/semaphore-helper.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -164,77 +165,53 @@
             <section
                 class="lg:col-span-8 bg-surface-container-low p-8 rounded-xl rotated-card border-b-8 border-r-8 border-surface-variant relative shadow-sm">
                 <div class="flex items-center gap-4 mb-8">
-                    <h2 class="text-3xl font-headline font-extrabold text-secondary tracking-tight">STOLEN FLAG GRID
+                    <h2 class="text-3xl font-headline font-extrabold text-secondary tracking-tight">POSITION THE ARMS
                     </h2>
                     <span class="material-symbols-outlined text-secondary text-4xl">ads_click</span>
                 </div>
-                <div class="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
-                    <!-- Flag Grid Items -->
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span
-                            class="material-symbols-outlined text-4xl text-on-surface-variant group-hover:scale-125 transition-transform"
-                            data-icon="accessibility">accessibility</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-secondary rounded-lg flex items-center justify-center p-2 relative">
-                        <span class="material-symbols-outlined text-4xl text-secondary"
-                            data-icon="accessibility_new">accessibility_new</span>
-                        <div
-                            class="absolute -top-2 -right-2 bg-primary text-white text-[10px] rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                            1</div>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="boy">boy</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="directions_walk">directions_walk</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="directions_run">directions_run</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="skateboarding">skateboarding</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="sports_kabaddi">sports_kabaddi</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="surfing">surfing</span>
-                    </button>
-                    <!-- Repeating for visual density -->
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="snowboarding">snowboarding</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="self_care">self_care</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="nordic_walking">nordic_walking</span>
-                    </button>
-                    <button
-                        class="aspect-square bg-surface border-4 border-surface-variant rounded-lg hover:bg-secondary-container transition-all flex items-center justify-center p-2 group">
-                        <span class="material-symbols-outlined text-4xl text-on-surface-variant"
-                            data-icon="kayaking">kayaking</span>
-                    </button>
+                
+                <!-- Semaphore Arm Positioning Tool -->
+                <div class="space-y-8">
+                    <div class="bg-surface p-6 rounded-lg border-2 border-outline-variant">
+                        <p class="text-sm font-bold text-on-surface-variant uppercase mb-4">Left Arm (Red)</p>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button class="arm-btn left-arm" data-angle="0" data-label="Up">↑</button>
+                            <button class="arm-btn left-arm" data-angle="45" data-label="↗">↗</button>
+                            <button class="arm-btn left-arm" data-angle="90" data-label="→">→</button>
+                            <button class="arm-btn left-arm" data-angle="135" data-label="↙">↙</button>
+                            <button class="arm-btn left-arm" data-angle="180" data-label="↓">↓</button>
+                            <button class="arm-btn left-arm" data-angle="225" data-label="↙">↙</button>
+                            <button class="arm-btn left-arm" data-angle="270" data-label="←">←</button>
+                            <button class="arm-btn left-arm" data-angle="315" data-label="↖">↖</button>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-surface p-6 rounded-lg border-2 border-outline-variant">
+                        <p class="text-sm font-bold text-on-surface-variant uppercase mb-4">Right Arm (Blue)</p>
+                        <div class="grid grid-cols-4 gap-2">
+                            <button class="arm-btn right-arm" data-angle="0" data-label="Up">↑</button>
+                            <button class="arm-btn right-arm" data-angle="45" data-label="↗">↗</button>
+                            <button class="arm-btn right-arm" data-angle="90" data-label="→">→</button>
+                            <button class="arm-btn right-arm" data-angle="135" data-label="↙">↙</button>
+                            <button class="arm-btn right-arm" data-angle="180" data-label="↓">↓</button>
+                            <button class="arm-btn right-arm" data-angle="225" data-label="↙">↙</button>
+                            <button class="arm-btn right-arm" data-angle="270" data-label="←">←</button>
+                            <button class="arm-btn right-arm" data-angle="315" data-label="↖">↖</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Preview -->
+                    <div id="preview-container" class="bg-surface-container-lowest p-6 rounded-lg border-2 border-secondary flex items-center justify-center min-h-32">
+                        <svg id="preview-svg" width="150" height="150" viewBox="0 0 150 150" style="display: none;">
+                            <!-- Will be populated by JavaScript -->
+                        </svg>
+                        <p id="preview-text" class="text-center text-on-surface-variant italic">Select arm positions...</p>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button id="add-char-btn" class="flex-1 bg-secondary text-white font-bold py-3 rounded-lg hover:bg-secondary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">ADD CHARACTER</button>
+                        <button id="clear-btn" class="flex-1 bg-error text-white font-bold py-3 rounded-lg hover:bg-error/90 transition-colors">CLEAR ALL</button>
+                    </div>
                 </div>
             </section>
             <!-- Output Section -->
@@ -243,35 +220,29 @@
                     class="bg-surface-container-highest p-8 rounded-xl rotated-card-alt border-4 border-dashed border-primary relative overflow-hidden">
                     <div
                         class="absolute top-0 right-0 p-2 bg-primary text-white text-xs font-bold uppercase tracking-widest -rotate-45 translate-x-6 translate-y-2">
-                        Top Secret</div>
-                    <h2 class="text-2xl font-headline font-black text-on-surface mb-6 uppercase">THE TRUTH!</h2>
-                    <div class="space-y-4 font-label">
-                        <div class="relative inline-block">
-                            <span
-                                class="text-2xl text-on-surface-variant line-through decoration-error decoration-[6px]">THE
-                                CAKE IS A LIE</span>
-                            <div class="absolute -top-2 -left-2 rotate-12">
-                                <span class="material-symbols-outlined text-error opacity-50">close</span>
-                            </div>
-                        </div>
-                        <div class="p-4 bg-white/60 backdrop-blur-sm rounded-lg border-l-8 border-primary">
-                            <p class="text-4xl font-black text-primary leading-tight font-headline italic">I STOLE THE
-                                CARROTS</p>
-                        </div>
-                    </div>
-                    <div class="mt-8 flex justify-end gap-2">
-                        <span class="material-symbols-outlined text-primary" data-weight="fill">egg</span>
-                        <span class="material-symbols-outlined text-primary" data-weight="fill">egg</span>
-                        <span class="material-symbols-outlined text-primary" data-weight="fill">egg</span>
+                        Decoded</div>
+                    <h2 class="text-2xl font-headline font-black text-on-surface mb-6 uppercase">YOUR MESSAGE</h2>
+                    <div id="decoded-output" class="space-y-4 font-label min-h-32">
+                        <p class="text-on-surface-variant italic opacity-70">Decoded text will appear here...</p>
                     </div>
                 </div>
-                <!-- Primary CTA -->
-                <button
-                    class="w-full bg-tertiary-container py-8 px-4 rounded-full border-b-[12px] border-tertiary-fixed-dim text-tertiary font-headline font-black text-4xl italic hover:rotate-2 hover:scale-105 transition-all shadow-xl flex items-center justify-center gap-4 relative group">
-                    <span
-                        class="bg-tertiary/20 absolute inset-0 rounded-full blur-xl group-hover:blur-2xl transition-all"></span>
-                    <span class="relative">FIND THE LIES</span>
-                    <span class="material-symbols-outlined relative text-5xl">search</span>
+                
+                <!-- Character History -->
+                <div class="bg-surface-container p-6 rounded-xl border-2 border-secondary">
+                    <h3 class="text-xl font-headline font-black text-secondary mb-4 uppercase flex items-center gap-2">
+                        <span class="material-symbols-outlined">history</span>
+                        Characters
+                    </h3>
+                    <div id="char-history" class="flex flex-wrap gap-2 min-h-12">
+                        <p class="text-on-surface-variant text-sm italic">No characters decoded yet</p>
+                    </div>
+                </div>
+                
+                <!-- Copy Button -->
+                <button id="copy-btn"
+                    class="w-full bg-tertiary-container py-4 px-4 rounded-lg border-b-[6px] border-tertiary-fixed-dim text-tertiary font-headline font-black text-xl italic hover:rotate-1 hover:scale-105 transition-all shadow-lg flex items-center justify-center gap-2 relative group disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span class="relative">COPY TO CLIPBOARD</span>
+                    <span class="material-symbols-outlined relative text-2xl">content_copy</span>
                 </button>
             </aside>
         </div>
@@ -320,3 +291,151 @@
 </body>
 
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    let leftArmAngle = null;
+    let rightArmAngle = null;
+    let decodedCharacters = [];
+    
+    const leftArmBtns = document.querySelectorAll('.arm-btn.left-arm');
+    const rightArmBtns = document.querySelectorAll('.arm-btn.right-arm');
+    const addCharBtn = document.getElementById('add-char-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const previewContainer = document.getElementById('preview-container');
+    const previewSvg = document.getElementById('preview-svg');
+    const previewText = document.getElementById('preview-text');
+    const decodedOutput = document.getElementById('decoded-output');
+    const charHistory = document.getElementById('char-history');
+
+    function drawArms(svg, leftAngle, rightAngle) {
+        const centerX = 75, centerY = 75;
+        const armLength = 40;
+        
+        const getCoords = (angle) => {
+            const rad = (angle - 90) * Math.PI / 180;
+            return {
+                x: centerX + armLength * Math.cos(rad),
+                y: centerY + armLength * Math.sin(rad)
+            };
+        };
+        
+        svg.innerHTML = `
+            <circle cx="${centerX}" cy="${centerY}" r="6" fill="#333"/>
+            ${leftAngle !== null ? `
+                <g>
+                    <line x1="${centerX}" y1="${centerY}" x2="${getCoords(leftAngle).x}" y2="${getCoords(leftAngle).y}" stroke="#c00014" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="${getCoords(leftAngle).x}" cy="${getCoords(leftAngle).y}" r="4" fill="#c00014"/>
+                </g>
+            ` : ''}
+            ${rightAngle !== null ? `
+                <g>
+                    <line x1="${centerX}" y1="${centerY}" x2="${getCoords(rightAngle).x}" y2="${getCoords(rightAngle).y}" stroke="#00668a" stroke-width="3" stroke-linecap="round"/>
+                    <circle cx="${getCoords(rightAngle).x}" cy="${getCoords(rightAngle).y}" r="4" fill="#00668a"/>
+                </g>
+            ` : ''}
+        `;
+    }
+
+    function updatePreview() {
+        if (leftArmAngle !== null && rightArmAngle !== null) {
+            const key = `${leftArmAngle},${rightArmAngle}`;
+            const decodedChar = SEMAPHORE_REVERSE[key] || '?';
+            
+            drawArms(previewSvg, leftArmAngle, rightArmAngle);
+            previewSvg.style.display = 'block';
+            previewText.style.display = 'none';
+            
+            addCharBtn.disabled = false;
+            addCharBtn.textContent = `ADD CHARACTER: "${decodedChar}"`;
+        } else {
+            previewText.style.display = 'block';
+            previewSvg.style.display = 'none';
+            previewText.textContent = leftArmAngle !== null ? 'Select right arm position...' : 
+                                     rightArmAngle !== null ? 'Select left arm position...' : 
+                                     'Select arm positions...';
+            addCharBtn.disabled = true;
+            addCharBtn.textContent = 'ADD CHARACTER';
+        }
+    }
+
+    function addCharacter() {
+        if (leftArmAngle !== null && rightArmAngle !== null) {
+            const key = `${leftArmAngle},${rightArmAngle}`;
+            const decodedChar = SEMAPHORE_REVERSE[key] || '?';
+            decodedCharacters.push(decodedChar);
+            
+            // Reset arm selection
+            leftArmAngle = null;
+            rightArmAngle = null;
+            
+            leftArmBtns.forEach(btn => btn.classList.remove('bg-primary', 'text-white'));
+            rightArmBtns.forEach(btn => btn.classList.remove('bg-secondary', 'text-white'));
+            
+            updatePreview();
+            updateOutput();
+        }
+    }
+
+    function updateOutput() {
+        const message = decodedCharacters.join('');
+        decodedOutput.innerHTML = message ? 
+            `<p class="text-3xl font-black text-primary font-headline break-words">${message}</p>` : 
+            '<p class="text-on-surface-variant italic opacity-70">Decoded text will appear here...</p>';
+        
+        if (decodedCharacters.length > 0) {
+            charHistory.innerHTML = decodedCharacters.map(char => `
+                <span class="bg-secondary text-white font-bold py-2 px-3 rounded-lg">${char}</span>
+            `).join('');
+            copyBtn.disabled = false;
+        } else {
+            charHistory.innerHTML = '<p class="text-on-surface-variant text-sm italic">No characters decoded yet</p>';
+            copyBtn.disabled = true;
+        }
+    }
+
+    // Arm button event listeners
+    leftArmBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            leftArmAngle = parseInt(this.dataset.angle);
+            leftArmBtns.forEach(b => b.classList.remove('bg-primary', 'text-white'));
+            this.classList.add('bg-primary', 'text-white');
+            updatePreview();
+        });
+    });
+
+    rightArmBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            rightArmAngle = parseInt(this.dataset.angle);
+            rightArmBtns.forEach(b => b.classList.remove('bg-secondary', 'text-white'));
+            this.classList.add('bg-secondary', 'text-white');
+            updatePreview();
+        });
+    });
+
+    addCharBtn.addEventListener('click', addCharacter);
+    clearBtn.addEventListener('click', function() {
+        decodedCharacters = [];
+        leftArmAngle = null;
+        rightArmAngle = null;
+        leftArmBtns.forEach(btn => btn.classList.remove('bg-primary', 'text-white'));
+        rightArmBtns.forEach(btn => btn.classList.remove('bg-secondary', 'text-white'));
+        updatePreview();
+        updateOutput();
+    });
+
+    copyBtn.addEventListener('click', function() {
+        const text = decodedCharacters.join('');
+        navigator.clipboard.writeText(text).then(() => {
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'COPIED!';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        });
+    });
+
+    // Initialize
+    updatePreview();
+});
+</script>

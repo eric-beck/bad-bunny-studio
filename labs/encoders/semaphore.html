@@ -31,6 +31,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
         rel="stylesheet" />
+    <script src="../../scripts/semaphore-helper.js"></script>
     <script id="tailwind-config">
         tailwind.config = {
             darkMode: "class",
@@ -165,6 +166,7 @@
                     <span class="material-symbols-outlined text-primary" data-icon="edit_square">edit_square</span>
                 </h2>
                 <textarea
+                    id="input-text"
                     class="w-full bg-transparent border-none focus:ring-0 text-4xl font-headline italic placeholder:opacity-30 text-secondary resize-none h-48"
                     placeholder="Write your sneaky message..."></textarea>
                 <div class="crayon-stroke w-full mt-2"></div>
@@ -173,7 +175,7 @@
         </section>
         <!-- Action Button -->
         <div class="flex justify-center mb-20">
-            <button class="group relative py-8 px-16 transition-all active:scale-95">
+            <button id="encode-btn" class="group relative py-8 px-16 transition-all active:scale-95">
                 <div
                     class="absolute inset-0 bg-primary rounded-[30%_70%_70%_30%_/_30%_30%_70%_70%] rotate-2 group-hover:rotate-6 group-hover:scale-105 transition-transform shadow-xl">
                 </div>
@@ -200,55 +202,9 @@
                     <span class="material-symbols-outlined" data-icon="visibility_lock">visibility_lock</span>
                 </h2>
                 <!-- Grid of Flag Figures -->
-                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
-                    <!-- Character Card 1 -->
-                    <div
-                        class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg -rotate-2 hover:rotate-0 transition-transform border-2 border-outline-variant">
-                        <div class="h-24 w-24 flex items-center justify-center mb-4 relative">
-                            <span class="material-symbols-outlined text-6xl text-on-surface"
-                                data-icon="accessibility_new">accessibility_new</span>
-                            <!-- Flag doodles -->
-                            <div class="absolute top-0 right-0 h-8 w-8 bg-primary rotate-45"></div>
-                            <div class="absolute bottom-0 left-0 h-8 w-8 bg-tertiary rotate-[-20deg]"></div>
-                        </div>
-                        <span class="font-headline font-bold text-2xl text-primary">A</span>
-                    </div>
-                    <!-- Character Card 2 -->
-                    <div
-                        class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg rotate-3 hover:rotate-0 transition-transform border-2 border-outline-variant">
-                        <div class="h-24 w-24 flex items-center justify-center mb-4 relative">
-                            <span class="material-symbols-outlined text-6xl text-on-surface"
-                                data-icon="accessibility_new">accessibility_new</span>
-                            <div class="absolute top-4 left-0 h-8 w-8 bg-primary -rotate-12"></div>
-                            <div class="absolute top-4 right-0 h-8 w-8 bg-tertiary rotate-12"></div>
-                        </div>
-                        <span class="font-headline font-bold text-2xl text-primary">B</span>
-                    </div>
-                    <!-- Character Card 3 (Messy/Smudged) -->
-                    <div
-                        class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg -rotate-1 hover:rotate-0 transition-transform border-2 border-outline-variant">
-                        <div class="h-24 w-24 flex items-center justify-center mb-4 relative overflow-hidden">
-                            <span class="material-symbols-outlined text-6xl text-on-surface blur-[1px]"
-                                data-icon="accessibility_new">accessibility_new</span>
-                            <div class="absolute inset-0 bg-primary opacity-20 mix-blend-multiply rounded-full"></div>
-                        </div>
-                        <span class="font-headline font-bold text-2xl text-primary">C?</span>
-                    </div>
-                    <!-- Placeholder for extra character -->
-                    <div
-                        class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg rotate-2 hover:rotate-0 transition-transform border-2 border-outline-variant">
-                        <div class="h-24 w-24 flex items-center justify-center mb-4 relative">
-                            <span class="material-symbols-outlined text-6xl text-on-surface opacity-30"
-                                data-icon="question_mark">question_mark</span>
-                        </div>
-                        <span class="font-headline font-bold text-2xl text-outline">_</span>
-                    </div>
-                    <!-- Hidden Note -->
-                    <div class="hidden md:flex flex-col items-center justify-center p-4">
-                        <span class="material-symbols-outlined text-5xl text-tertiary-fixed-dim rotate-12"
-                            data-icon="ink_eraser">ink_eraser</span>
-                        <p class="text-[10px] font-black uppercase text-center mt-2 opacity-40">Oops! <br /> Smudged it.
-                        </p>
+                <div id="output-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 min-h-24">
+                    <div class="col-span-full flex items-center justify-center text-on-surface-variant opacity-50 py-12">
+                        <p class="text-xl italic">Type a message and click "WAVE THE FLAGS!" to encode it...</p>
                     </div>
                 </div>
             </div>
@@ -292,3 +248,47 @@
 </body>
 
 </html>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const inputText = document.getElementById('input-text');
+    const encodeBtn = document.getElementById('encode-btn');
+    const outputGrid = document.getElementById('output-grid');
+
+    function renderOutput() {
+        const text = inputText.value;
+        
+        if (!text) {
+            outputGrid.innerHTML = '<div class="col-span-full flex items-center justify-center text-on-surface-variant opacity-50 py-12"><p class="text-xl italic">Type a message and click "WAVE THE FLAGS!" to encode it...</p></div>';
+            return;
+        }
+
+        const encoded = encodeSemaphore(text);
+        
+        outputGrid.innerHTML = encoded.map((char, index) => {
+            const originalChar = text[index];
+            const rotation = ['-rotate-2', 'rotate-3', '-rotate-1', 'rotate-2'][index % 4];
+            
+            return `
+                <div class="flex flex-col items-center bg-surface-container-low p-4 rounded-lg ${rotation} hover:rotate-0 transition-transform border-2 border-outline-variant cursor-help" title="${getPositionDescription(char)}">
+                    <div class="h-24 w-24 flex items-center justify-center mb-4 relative">
+                        <svg width="100" height="100" viewBox="0 0 100 100" style="font-size: 0;">
+                            <!-- Body -->
+                            <circle cx="50" cy="50" r="5" fill="#333"/>
+                            <!-- Left arm (red) -->
+                            <line x1="50" y1="50" x2="${50 + 30 * Math.cos((char.left - 90) * Math.PI / 180)}" y2="${50 + 30 * Math.sin((char.left - 90) * Math.PI / 180)}" stroke="#c00014" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="${50 + 30 * Math.cos((char.left - 90) * Math.PI / 180)}" cy="${50 + 30 * Math.sin((char.left - 90) * Math.PI / 180)}" r="4" fill="#c00014"/>
+                            <!-- Right arm (blue) -->
+                            <line x1="50" y1="50" x2="${50 + 30 * Math.cos((char.right - 90) * Math.PI / 180)}" y2="${50 + 30 * Math.sin((char.right - 90) * Math.PI / 180)}" stroke="#00668a" stroke-width="3" stroke-linecap="round"/>
+                            <circle cx="${50 + 30 * Math.cos((char.right - 90) * Math.PI / 180)}" cy="${50 + 30 * Math.sin((char.right - 90) * Math.PI / 180)}" r="4" fill="#00668a"/>
+                        </svg>
+                    </div>
+                    <span class="font-headline font-bold text-2xl text-primary">${originalChar === ' ' ? '·' : originalChar}</span>
+                </div>
+            `;
+        }).join('');
+    }
+
+    encodeBtn.addEventListener('click', renderOutput);
+    inputText.addEventListener('input', renderOutput);
+});
+</script>
