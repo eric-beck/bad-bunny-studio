@@ -197,6 +197,7 @@
                     STOLEN HEX CODE
                 </div>
                 <textarea
+                    id="hexInput"
                     class="w-full bg-transparent border-none focus:ring-0 text-3xl font-headline font-bold text-on-surface placeholder:text-outline-variant min-h-[150px] resize-none pt-4"
                     placeholder="44 4f 20 4e 4f 54 20 4f 50 45 4e..."></textarea>
                 <!-- Messy Underline -->
@@ -204,7 +205,7 @@
                 <div class="mt-8 flex justify-end items-center gap-8">
                     <span class="text-tertiary font-bold italic -rotate-2">Wait for the pop!</span>
                     <!-- FIND THE TRUTH Button -->
-                    <button class="relative group">
+                    <button id="decodeButton" type="button" class="relative group">
                         <div
                             class="absolute inset-0 bg-tertiary rounded-full rotate-3 group-hover:rotate-0 transition-transform">
                         </div>
@@ -229,11 +230,11 @@
                     <h3 class="relative text-stone-500 font-black uppercase tracking-widest text-sm mb-6">REVEALED
                         MESSAGE</h3>
                     <div class="relative">
-                        <p
+                        <p id="decodedOutput"
                             class="text-5xl font-headline font-black text-on-surface tracking-tight leading-tight mix-blend-darken">
-                            THE <span class="line-through decoration-primary decoration-[12px]">VAULT</span> IS BURIED
-                            UNDER THE OLD OAK TREE. BRING NO ONE.
+                            DECODED TEXT SHOWS UP HERE WHEN THE HEX IS CLEAN.
                         </p>
+                        <p id="decodeStatus" class="mt-8 text-lg font-bold text-on-surface-variant">Paste spaced bytes, a continuous hex string, or values with 0x prefixes.</p>
                     </div>
                     <!-- Doodle: Magnifying glass with bunny ears -->
                     <div class="absolute bottom-8 right-12 flex items-baseline opacity-30 rotate-[-15deg]">
@@ -269,6 +270,122 @@
         class="fixed bottom-12 right-12 bg-primary text-on-primary w-20 h-20 rounded-full shadow-2xl hover:scale-110 active:scale-90 transition-all z-50 flex items-center justify-center">
         <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">add</span>
     </button>
+    <script>
+        (() => {
+            const input = document.getElementById("hexInput");
+            const decodeButton = document.getElementById("decodeButton");
+            const output = document.getElementById("decodedOutput");
+            const status = document.getElementById("decodeStatus");
+            const [copyButton, shareButton] = document.querySelectorAll(".mt-8.flex.justify-end.gap-4 button");
+            const textDecoder = new TextDecoder("utf-8");
+
+            function normalizeHex(value) {
+                const trimmed = value.trim();
+
+                if (!trimmed) {
+                    return "";
+                }
+
+                const withoutPrefixes = trimmed.replace(/0x/gi, "");
+                const compact = withoutPrefixes.replace(/[\s,]+/g, "");
+
+                if (/[^\da-f]/i.test(compact)) {
+                    throw new Error("Hex input can only contain 0-9, A-F, spaces, commas, or 0x prefixes.");
+                }
+
+                if (compact.length % 2 !== 0) {
+                    throw new Error("Hex input must contain an even number of characters.");
+                }
+
+                return compact;
+            }
+
+            function decodeHex(value) {
+                const normalized = normalizeHex(value);
+
+                if (!normalized) {
+                    return "";
+                }
+
+                const bytes = new Uint8Array(normalized.match(/.{2}/g).map((pair) => Number.parseInt(pair, 16)));
+                return {
+                    text: textDecoder.decode(bytes),
+                    byteCount: bytes.length
+                };
+            }
+
+            function renderResult() {
+                try {
+                    const decoded = decodeHex(input.value);
+
+                    if (!decoded) {
+                        output.textContent = "DECODED TEXT SHOWS UP HERE WHEN THE HEX IS CLEAN.";
+                        status.textContent = "Paste spaced bytes, a continuous hex string, or values with 0x prefixes.";
+                        output.classList.remove("text-error");
+                        return "";
+                    }
+
+                    output.textContent = decoded.text || "[Decoded to an empty string]";
+                    status.textContent = `Decoded ${decoded.byteCount} bytes into readable text.`;
+                    output.classList.remove("text-error");
+                    return decoded.text;
+                } catch (error) {
+                    output.textContent = "INVALID HEX";
+                    status.textContent = error.message;
+                    output.classList.add("text-error");
+                    return "";
+                }
+            }
+
+            async function copyResult() {
+                const decoded = renderResult();
+
+                if (!decoded) {
+                    status.textContent = "Nothing valid to copy yet.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(decoded);
+                status.textContent = "Decoded message copied to the clipboard.";
+            }
+
+            async function shareResult() {
+                const decoded = renderResult();
+
+                if (!decoded) {
+                    status.textContent = "Nothing valid to share yet.";
+                    return;
+                }
+
+                if (navigator.share) {
+                    await navigator.share({
+                        title: document.title,
+                        text: decoded
+                    });
+                    status.textContent = "Decoded message shared.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(decoded);
+                status.textContent = "Share is unavailable here, so the decoded text was copied instead.";
+            }
+
+            decodeButton.addEventListener("click", renderResult);
+            input.addEventListener("input", renderResult);
+            copyButton.addEventListener("click", () => {
+                copyResult().catch(() => {
+                    status.textContent = "Clipboard access failed. Copy the decoded message manually.";
+                });
+            });
+            shareButton.addEventListener("click", () => {
+                shareResult().catch(() => {
+                    status.textContent = "Share failed. Copy the decoded message manually.";
+                });
+            });
+
+            renderResult();
+        })();
+    </script>
 </body>
 
 </html>

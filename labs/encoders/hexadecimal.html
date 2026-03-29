@@ -263,10 +263,13 @@
                         class="block font-headline font-black text-3xl mb-6 text-[#705d00] uppercase tracking-tight">TYPE
                         YOUR SECRETS HERE</label>
                     <textarea
+                        id="plainTextInput"
                         class="w-full h-64 bg-transparent border-none focus:ring-0 text-3xl font-body font-bold text-stone-700 placeholder:text-stone-300 resize-none p-4"
                         placeholder="My plan to take over the local bakery begins at dawn..."></textarea>
                     <div class="mt-8 flex justify-end">
                         <button
+                            id="encodeButton"
+                            type="button"
                             class="group relative flex items-center gap-4 bg-primary text-on-primary px-10 py-6 rounded-full font-headline font-black text-2xl uppercase tracking-tighter hover:rotate-3 transition-transform shadow-[10px_10px_0px_#705d00] active:scale-95 active:shadow-none">
                             <span>TURN INTO VILLAIN CODE</span>
                             <span
@@ -339,11 +342,10 @@
                         </div>
                         <div
                             class="font-mono text-4xl md:text-6xl font-black text-on-surface leading-tight break-all p-4 border-l-8 border-tertiary">
-                            <span class="text-primary">4D 79 20 70 6C 61 6E 20 74 6F 20 74 61 6B 65 20 6F 76 65 72 20 74
-                                68 65 20 6C 6F 63 61 6C 20 62 61 6B 65 72 79 20 62 65 67 69 6E 73 20 61 74 20 64 61 77
-                                6E 2E 2E 2E</span>
-                            <span class="opacity-10">0F 2A 11 99 FF 42 01</span>
+                            <span id="hexOutput" class="text-primary">TYPE A MESSAGE, THEN CONVERT IT INTO HEX.</span>
+                            <span id="hexGhostOutput" class="opacity-10">20 4B 45 45 50 20 49 54 20 53 45 43 52 45 54</span>
                         </div>
+                        <p id="encodeStatus" class="mt-6 p-4 font-bold text-on-surface-variant">Ready to turn plain text into uppercase UTF-8 hex bytes.</p>
                         <!-- Manual Scribble Note -->
                         <div class="mt-12 flex items-center gap-6">
                             <div class="flex -space-x-4">
@@ -380,6 +382,87 @@
             class="absolute -top-12 right-0 bg-on-surface text-surface text-xs font-black py-1 px-3 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
             NEW SCHEME</div>
     </button>
+    <script>
+        (() => {
+            const input = document.getElementById("plainTextInput");
+            const encodeButton = document.getElementById("encodeButton");
+            const output = document.getElementById("hexOutput");
+            const ghostOutput = document.getElementById("hexGhostOutput");
+            const status = document.getElementById("encodeStatus");
+            const [copyButton, shareButton] = document.querySelectorAll(".md\\:col-span-12 .flex.gap-4 button");
+            const textEncoder = new TextEncoder();
+
+            function toHex(value) {
+                const bytes = textEncoder.encode(value);
+                return Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0").toUpperCase()).join(" ");
+            }
+
+            function renderResult() {
+                const value = input.value;
+
+                if (!value) {
+                    output.textContent = "TYPE A MESSAGE, THEN CONVERT IT INTO HEX.";
+                    ghostOutput.textContent = "20 4B 45 45 50 20 49 54 20 53 45 43 52 45 54";
+                    status.textContent = "Ready to turn plain text into uppercase UTF-8 hex bytes.";
+                    return "";
+                }
+
+                const encoded = toHex(value);
+                output.textContent = encoded;
+                ghostOutput.textContent = `${textEncoder.encode(value).length.toString()} BYTES`;
+                status.textContent = `Encoded ${value.length} characters into ${encoded.split(" ").length} hex bytes.`;
+                return encoded;
+            }
+
+            async function copyResult() {
+                const encoded = renderResult();
+
+                if (!encoded) {
+                    status.textContent = "Nothing to copy yet. Encode a message first.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(encoded);
+                status.textContent = "Hex output copied to the clipboard.";
+            }
+
+            async function shareResult() {
+                const encoded = renderResult();
+
+                if (!encoded) {
+                    status.textContent = "Nothing to share yet. Encode a message first.";
+                    return;
+                }
+
+                if (navigator.share) {
+                    await navigator.share({
+                        title: document.title,
+                        text: encoded
+                    });
+                    status.textContent = "Hex output shared.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(encoded);
+                status.textContent = "Share is unavailable here, so the hex output was copied instead.";
+            }
+
+            encodeButton.addEventListener("click", renderResult);
+            input.addEventListener("input", renderResult);
+            copyButton.addEventListener("click", () => {
+                copyResult().catch(() => {
+                    status.textContent = "Clipboard access failed. Copy the result manually.";
+                });
+            });
+            shareButton.addEventListener("click", () => {
+                shareResult().catch(() => {
+                    status.textContent = "Share failed. Copy the result manually.";
+                });
+            });
+
+            renderResult();
+        })();
+    </script>
 </body>
 
 </html>
