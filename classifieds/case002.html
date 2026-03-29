@@ -137,8 +137,10 @@
                     <div class="relative">
                         <input
                             id="secret-key-input"
-                            class="w-full bg-transparent border-none scribble-border focus:ring-0 text-3xl font-bold placeholder:text-stone-300 py-4"
+                            class="w-full bg-transparent border-none scribble-border focus:ring-0 text-3xl font-bold placeholder:text-stone-300 py-4 pr-12"
                             placeholder="type here..." type="text" />
+                        <span id="lock-status-icon"
+                            class="material-symbols-outlined absolute right-1 top-1/2 -translate-y-1/2 text-error text-3xl pointer-events-none">lock</span>
                         <span class="absolute -bottom-10 left-0 text-error font-bold flex items-center gap-2 rotate-1">
                             <span class="material-symbols-outlined" data-icon="help">help</span>
                             HINT: What do you do when you're caught?
@@ -275,6 +277,7 @@
             const keyInput = document.getElementById("secret-key-input");
             const downloadButton = document.getElementById("download-audio-btn");
             const statusLabel = document.getElementById("download-status");
+            const lockStatusIcon = document.getElementById("lock-status-icon");
 
             function isPasswordValid() {
                 return keyInput.value.trim().toLowerCase() === REQUIRED_PASSWORD;
@@ -288,6 +291,9 @@
                     : "Locked: enter the correct key to unlock audio.";
                 statusLabel.classList.toggle("text-error", !unlocked);
                 statusLabel.classList.toggle("text-secondary", unlocked);
+                lockStatusIcon.textContent = unlocked ? "lock_open" : "lock";
+                lockStatusIcon.classList.toggle("text-error", !unlocked);
+                lockStatusIcon.classList.toggle("text-secondary", unlocked);
             }
 
             keyInput.addEventListener("input", updateDownloadState);
