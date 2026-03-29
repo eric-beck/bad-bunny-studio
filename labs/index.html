@@ -198,6 +198,7 @@
                     <div
                         class="md:col-span-7 bg-surface-container-highest rounded-xl p-8 rotate-[1.5deg] shadow-2xl relative overflow-hidden border-4 border-on-surface/5">
                         <div class="absolute top-0 left-0 w-full h-2 bg-primary"></div>
+                        <div class="absolute -right-10 top-24 text-primary/10 text-8xl font-black rotate-12 pointer-events-none">#</div>
                         <div class="flex justify-between items-start mb-8">
                             <div>
                                 <h3 class="text-5xl font-black font-headline text-secondary leading-none mb-2">SCRIBBLES
@@ -255,6 +256,24 @@
                                         class="flex-1 py-2 bg-secondary text-white text-xs font-black rounded-lg text-center">ENCODE</a>
                                     <a href="decoders/pigpen.html"
                                         class="flex-1 py-2 border-2 border-secondary text-secondary text-xs font-black rounded-lg text-center">DECODE</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6 rounded-[2rem] border-4 border-dashed border-primary/30 bg-tertiary-container/40 p-5 rotate-[-1deg] relative overflow-hidden">
+                            <div class="absolute -left-3 top-3 bg-primary text-white text-[10px] font-black uppercase tracking-[0.3em] px-3 py-2 rotate-[-8deg] shadow-lg">
+                                New Signal
+                            </div>
+                            <div class="absolute right-4 bottom-3 text-tertiary/30 text-5xl font-black rotate-[8deg] pointer-events-none">/\\/\\</div>
+                            <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between pt-6">
+                                <div class="max-w-md">
+                                    <h4 class="font-headline text-3xl font-black uppercase italic text-primary leading-none">Semaphore Panic</h4>
+                                    <p class="mt-2 text-sm font-bold text-on-surface-variant uppercase tracking-wide">Wave the flags, confuse the witnesses, and pass messages across the hideout.</p>
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-3 sm:min-w-[18rem]">
+                                    <a href="encoders/semaphore.html"
+                                        class="flex-1 rounded-[1.5rem] bg-primary px-5 py-3 text-center text-xs font-black uppercase tracking-[0.2em] text-white shadow-[4px_4px_0px_rgba(112,93,0,0.35)] hover:-rotate-2 transition-transform">Encode Flags</a>
+                                    <a href="decoders/semaphore.html"
+                                        class="flex-1 rounded-[1.5rem] border-4 border-primary bg-white px-5 py-3 text-center text-xs font-black uppercase tracking-[0.2em] text-primary shadow-[4px_4px_0px_rgba(192,0,20,0.12)] hover:rotate-2 transition-transform">Decode Flags</a>
                                 </div>
                             </div>
                         </div>
