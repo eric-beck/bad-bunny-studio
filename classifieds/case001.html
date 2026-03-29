@@ -153,6 +153,7 @@
                     </label>
                     <div class="relative max-w-md">
                         <input
+                            id="secret-key-input"
                             class="w-full bg-transparent border-none scribble-border focus:ring-0 text-3xl font-black text-secondary tracking-tighter placeholder:opacity-30"
                             placeholder="type here..." type="text" />
                         <!-- The "Canceled" Word -->
@@ -210,8 +211,8 @@
                             <p class="font-bold max-w-[200px] text-sm leading-tight opacity-70 italic">Click the
                                 scribble to claim your prize, villain...</p>
                         </div>
-                        <button
-                            class="relative px-8 py-5 bg-primary text-white font-black text-xl rounded-[2rem_0.5rem_3rem_1rem] transform hover:scale-105 hover:-rotate-2 transition-all group overflow-hidden shadow-2xl">
+                        <button id="download-intel-btn" type="button" disabled
+                            class="relative px-8 py-5 bg-primary text-white font-black text-xl rounded-[2rem_0.5rem_3rem_1rem] transform hover:scale-105 hover:-rotate-2 transition-all group overflow-hidden shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 disabled:hover:rotate-0">
                             <span class="relative z-10">DOWNLOAD INTEL (FOR EVIL ONLY)</span>
                             <!-- Scribble SVG overlay effect -->
                             <div
@@ -219,6 +220,7 @@
                             </div>
                         </button>
                     </div>
+                    <p id="download-status" class="mt-4 text-sm font-bold text-error uppercase tracking-wide">Locked: enter the correct key to unlock download.</p>
                 </section>
                 <!-- Footer Doodles -->
                 <div class="flex justify-center gap-20 py-12">
@@ -258,6 +260,48 @@
             <span class="text-[10px] uppercase font-bold">Burn</span>
         </button>
     </nav>
+    <script>
+        (() => {
+            const REQUIRED_PASSWORD = "stagecoach";
+            const DOWNLOAD_PATH = "secrets/bad-bunny.png";
+            const DOWNLOAD_NAME = "bad-bunny.png";
+
+            const keyInput = document.getElementById("secret-key-input");
+            const downloadButton = document.getElementById("download-intel-btn");
+            const statusLabel = document.getElementById("download-status");
+
+            function isPasswordValid() {
+                return keyInput.value.trim().toLowerCase() === REQUIRED_PASSWORD;
+            }
+
+            function updateDownloadState() {
+                const unlocked = isPasswordValid();
+                downloadButton.disabled = !unlocked;
+                statusLabel.textContent = unlocked
+                    ? "Access granted. Download unlocked."
+                    : "Locked: enter the correct key to unlock download.";
+                statusLabel.classList.toggle("text-error", !unlocked);
+                statusLabel.classList.toggle("text-secondary", unlocked);
+            }
+
+            keyInput.addEventListener("input", updateDownloadState);
+
+            downloadButton.addEventListener("click", () => {
+                if (!isPasswordValid()) {
+                    return;
+                }
+
+                const link = document.createElement("a");
+                link.href = DOWNLOAD_PATH;
+                link.download = DOWNLOAD_NAME;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            });
+
+            updateDownloadState();
+        })();
+    </script>
 </body>
 
 </html>

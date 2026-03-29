@@ -136,6 +136,7 @@
                     </label>
                     <div class="relative">
                         <input
+                            id="secret-key-input"
                             class="w-full bg-transparent border-none scribble-border focus:ring-0 text-3xl font-bold placeholder:text-stone-300 py-4"
                             placeholder="type here..." type="text" />
                         <span class="absolute -bottom-10 left-0 text-error font-bold flex items-center gap-2 rotate-1">
@@ -212,8 +213,8 @@
                         <p class="font-bold opacity-80 uppercase text-sm">Harmonic frequencies may cause spontaneous
                             urge to rob banks.</p>
                     </div>
-                    <button
-                        class="wax-gradient h-full min-h-[200px] text-white rounded-[3rem_1rem_4rem_2rem] p-8 flex flex-col items-center justify-center gap-4 hover:rotate-3 transition-transform active:scale-95 group relative overflow-hidden">
+                    <button id="download-audio-btn" type="button" disabled
+                        class="wax-gradient h-full min-h-[200px] text-white rounded-[3rem_1rem_4rem_2rem] p-8 flex flex-col items-center justify-center gap-4 hover:rotate-3 transition-transform active:scale-95 group relative overflow-hidden disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:rotate-0 disabled:active:scale-100">
                         <div class="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity">
                         </div>
                         <span class="material-symbols-outlined text-6xl" data-icon="download">download</span>
@@ -224,6 +225,7 @@
                             <span class="material-symbols-outlined text-5xl" data-icon="volume_off">volume_off</span>
                         </div>
                     </button>
+                    <p id="download-status" class="text-sm font-bold uppercase tracking-wide text-error">Locked: enter the correct key to unlock audio.</p>
                 </div>
             </div>
             <!-- Footer Decorative Scribbles -->
@@ -264,6 +266,48 @@
             <span class="font-plus-jakarta text-[12px] font-black uppercase">ESCAPE</span>
         </a>
     </nav>
+    <script>
+        (() => {
+            const REQUIRED_PASSWORD = "scream";
+            const DOWNLOAD_PATH = "secrets/bad-bunny.wav";
+            const DOWNLOAD_NAME = "bad-bunny.wav";
+
+            const keyInput = document.getElementById("secret-key-input");
+            const downloadButton = document.getElementById("download-audio-btn");
+            const statusLabel = document.getElementById("download-status");
+
+            function isPasswordValid() {
+                return keyInput.value.trim().toLowerCase() === REQUIRED_PASSWORD;
+            }
+
+            function updateDownloadState() {
+                const unlocked = isPasswordValid();
+                downloadButton.disabled = !unlocked;
+                statusLabel.textContent = unlocked
+                    ? "Access granted. Audio download unlocked."
+                    : "Locked: enter the correct key to unlock audio.";
+                statusLabel.classList.toggle("text-error", !unlocked);
+                statusLabel.classList.toggle("text-secondary", unlocked);
+            }
+
+            keyInput.addEventListener("input", updateDownloadState);
+
+            downloadButton.addEventListener("click", () => {
+                if (!isPasswordValid()) {
+                    return;
+                }
+
+                const link = document.createElement("a");
+                link.href = DOWNLOAD_PATH;
+                link.download = DOWNLOAD_NAME;
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            });
+
+            updateDownloadState();
+        })();
+    </script>
 </body>
 
 </html>
