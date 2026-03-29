@@ -203,6 +203,7 @@
                     </label>
                     <div class="relative">
                         <textarea
+                            id="plainTextInput"
                             class="w-full bg-transparent border-none focus:ring-0 text-2xl font-body font-bold text-on-surface placeholder:text-outline-variant italic leading-relaxed"
                             placeholder="I am planning to steal the moon..." rows="6"></textarea>
                         <!-- Crayon Underline -->
@@ -212,6 +213,8 @@
                     </div>
                     <div class="mt-8 flex justify-end">
                         <button
+                            id="encodeButton"
+                            type="button"
                             class="bg-primary text-white px-10 py-6 rounded-full font-black text-2xl uppercase tracking-widest shadow-xl hover:scale-105 active:scale-95 transition-all transform rotate-[-2deg] flex items-center gap-4 group relative">
                             ENCODE!
                             <span class="material-symbols-outlined text-4xl" data-icon="bolt">bolt</span>
@@ -229,65 +232,29 @@
                 </div>
                 <!-- Output Area -->
                 <div class="bg-surface-container-low p-10 rounded-xl border-l-[12px] border-primary relative">
-                    <h3 class="font-headline text-3xl font-black text-on-surface mb-8 italic">VILLAIN BRAILLE</h3>
-                    <div
-                        class="grid grid-cols-4 md:grid-cols-8 gap-6 min-h-[160px] bg-surface p-6 rounded-lg border-2 border-dashed border-outline-variant">
-                        <!-- Braille Block 1 -->
-                        <div class="flex flex-col gap-1 items-center">
-                            <div class="grid grid-cols-2 gap-1">
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot"></div>
-                            </div>
-                        </div>
-                        <!-- Braille Block 2 -->
-                        <div class="flex flex-col gap-1 items-center">
-                            <div class="grid grid-cols-2 gap-1">
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                            </div>
-                        </div>
-                        <!-- Braille Block 3 -->
-                        <div class="flex flex-col gap-1 items-center">
-                            <div class="grid grid-cols-2 gap-1">
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                            </div>
-                        </div>
-                        <!-- Braille Block 4 -->
-                        <div class="flex flex-col gap-1 items-center">
-                            <div class="grid grid-cols-2 gap-1">
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot-empty"></div>
-                            </div>
-                        </div>
-                        <!-- Decorative overflow dots -->
-                        <div class="hidden md:flex flex-col gap-1 items-center opacity-40">
-                            <div class="grid grid-cols-2 gap-1">
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot-empty"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                                <div class="braille-dot"></div>
-                            </div>
+                    <div class="flex items-center justify-between gap-4 mb-8">
+                        <h3 class="font-headline text-3xl font-black text-on-surface italic">VILLAIN BRAILLE</h3>
+                        <div class="flex items-center gap-3">
+                            <button id="copyBrailleButton" type="button"
+                                class="p-3 rounded-full bg-surface text-on-surface hover:bg-tertiary-container transition-colors">
+                                <span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
+                            </button>
+                            <button id="shareBrailleButton" type="button"
+                                class="p-3 rounded-full bg-surface text-on-surface hover:bg-error-container transition-colors">
+                                <span class="material-symbols-outlined" data-icon="share">share</span>
+                            </button>
                         </div>
                     </div>
+                    <div
+                        id="brailleGridOutput"
+                        class="grid grid-cols-4 md:grid-cols-8 gap-6 min-h-[160px] bg-surface p-6 rounded-lg border-2 border-dashed border-outline-variant">
+                        <div class="col-span-4 md:col-span-8 text-on-surface-variant font-bold uppercase tracking-widest opacity-60">
+                            Your encoded braille cells will appear here.
+                        </div>
+                    </div>
+                    <p id="brailleTextOutput"
+                        class="mt-6 text-4xl font-headline font-black text-primary tracking-[0.2em] break-all">⠠⠏⠇⠕⠞⠀⠞⠊⠍⠑</p>
+                    <p id="encodeStatus" class="mt-4 font-bold text-on-surface-variant">Ready to encode plain text into Grade 1 braille.</p>
                     <!-- Scribble Overlay -->
                     <div class="absolute -bottom-6 -right-6">
                         <span class="material-symbols-outlined text-6xl text-tertiary rotate-12"
@@ -359,6 +326,136 @@
         class="fixed right-6 bottom-32 bg-tertiary text-on-tertiary w-16 h-16 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-transform z-40 lg:hidden">
         <span class="material-symbols-outlined text-3xl" data-icon="add">add</span>
     </button>
+    <script src="../../scripts/braille-helper.js"></script>
+    <script>
+        (() => {
+            const input = document.getElementById("plainTextInput");
+            const encodeButton = document.getElementById("encodeButton");
+            const gridOutput = document.getElementById("brailleGridOutput");
+            const textOutput = document.getElementById("brailleTextOutput");
+            const status = document.getElementById("encodeStatus");
+            const copyButton = document.getElementById("copyBrailleButton");
+            const shareButton = document.getElementById("shareBrailleButton");
+
+            function createDotElement(isFilled) {
+                const dot = document.createElement("div");
+                dot.className = isFilled ? "braille-dot" : "braille-dot-empty";
+                return dot;
+            }
+
+            function createCell(character) {
+                if (character === "\n") {
+                    const lineBreak = document.createElement("div");
+                    lineBreak.className = "col-span-4 md:col-span-8 h-0";
+                    return lineBreak;
+                }
+
+                if (character === " ") {
+                    const spacer = document.createElement("div");
+                    spacer.className = "flex items-center justify-center rounded-lg border border-dashed border-outline-variant/50 text-xs font-black uppercase tracking-widest text-on-surface-variant/60 min-h-[84px]";
+                    spacer.textContent = "space";
+                    return spacer;
+                }
+
+                const cell = document.createElement("div");
+                cell.className = "flex flex-col gap-2 items-center";
+
+                if (/^[\u2800-\u28ff]$/u.test(character)) {
+                    const dots = window.BrailleCodec.brailleCharToDots(character);
+                    const grid = document.createElement("div");
+                    grid.className = "grid grid-cols-2 gap-1";
+
+                    [1, 4, 2, 5, 3, 6].forEach((dotNumber) => {
+                        grid.appendChild(createDotElement(dots.includes(dotNumber)));
+                    });
+
+                    const label = document.createElement("div");
+                    label.className = "text-2xl font-black text-primary";
+                    label.textContent = character;
+                    cell.appendChild(grid);
+                    cell.appendChild(label);
+                    return cell;
+                }
+
+                cell.className = "flex items-center justify-center rounded-lg border border-error/30 bg-error-container/30 text-xl font-black text-error min-h-[84px]";
+                cell.textContent = character;
+                return cell;
+            }
+
+            function renderResult() {
+                const value = input.value;
+
+                if (!value) {
+                    gridOutput.innerHTML = "";
+                    const placeholder = document.createElement("div");
+                    placeholder.className = "col-span-4 md:col-span-8 text-on-surface-variant font-bold uppercase tracking-widest opacity-60";
+                    placeholder.textContent = "Your encoded braille cells will appear here.";
+                    gridOutput.appendChild(placeholder);
+                    textOutput.textContent = "⠠⠏⠇⠕⠞⠀⠞⠊⠍⠑";
+                    status.textContent = "Ready to encode plain text into Grade 1 braille.";
+                    return "";
+                }
+
+                const result = window.BrailleCodec.encodeText(value);
+                gridOutput.innerHTML = "";
+                Array.from(result.braille).forEach((character) => {
+                    gridOutput.appendChild(createCell(character));
+                });
+                textOutput.textContent = result.braille;
+
+                status.textContent = result.unsupportedCharacters.length
+                    ? `Encoded ${result.cellCount} braille cells. Unsupported characters were left as-is: ${result.unsupportedCharacters.join(" ")}`
+                    : `Encoded ${result.cellCount} braille cells from ${value.length} characters.`;
+
+                return result.braille;
+            }
+
+            async function copyBraille() {
+                const braille = renderResult();
+
+                if (!braille) {
+                    status.textContent = "Nothing to copy yet. Encode a message first.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(braille);
+                status.textContent = "Braille output copied to the clipboard.";
+            }
+
+            async function shareBraille() {
+                const braille = renderResult();
+
+                if (!braille) {
+                    status.textContent = "Nothing to share yet. Encode a message first.";
+                    return;
+                }
+
+                if (navigator.share) {
+                    await navigator.share({ title: document.title, text: braille });
+                    status.textContent = "Braille output shared.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(braille);
+                status.textContent = "Share is unavailable here, so the braille output was copied instead.";
+            }
+
+            encodeButton.addEventListener("click", renderResult);
+            input.addEventListener("input", renderResult);
+            copyButton.addEventListener("click", () => {
+                copyBraille().catch(() => {
+                    status.textContent = "Clipboard access failed. Copy the braille output manually.";
+                });
+            });
+            shareButton.addEventListener("click", () => {
+                shareBraille().catch(() => {
+                    status.textContent = "Share failed. Copy the braille output manually.";
+                });
+            });
+
+            renderResult();
+        })();
+    </script>
 </body>
 
 </html>

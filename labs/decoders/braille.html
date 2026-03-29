@@ -100,6 +100,12 @@
             font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24
         }
 
+        .braille-toggle-active {
+            background: #1b1c15;
+            border-color: #c00014;
+            box-shadow: inset 0 0 0 4px rgba(192, 0, 20, 0.18)
+        }
+
         .scribble-stroke {
             text-decoration: line-through;
             text-decoration-color: #ba1a1a;
@@ -177,55 +183,39 @@
                     <p class="text-sm font-bold text-on-surface-variant uppercase tracking-widest opacity-60 italic">
                         Punch the dots into the grid...</p>
                     <div
-                        class="grid grid-cols-6 gap-3 p-6 bg-surface-container-low rounded-lg border-2 border-dashed border-outline-variant">
-                        <!-- Braille Dot Simulation -->
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center hover:bg-primary/10 cursor-pointer transition-colors group">
-                            <div
-                                class="w-4 h-4 rounded-full bg-on-background group-active:scale-150 transition-transform">
-                            </div>
+                        class="p-6 bg-surface-container-low rounded-lg border-2 border-dashed border-outline-variant">
+                        <div id="brailleBuilderGrid" class="grid grid-cols-2 gap-3 max-w-[12rem] mx-auto">
+                            <button type="button" data-braille-dot="1" aria-label="Toggle braille dot 1" title="Toggle braille dot 1"
+                                class="aspect-square rounded-full border-4 border-surface-variant bg-surface hover:bg-primary/10 transition-colors"></button>
+                            <button type="button" data-braille-dot="4" aria-label="Toggle braille dot 4" title="Toggle braille dot 4"
+                                class="aspect-square rounded-full border-4 border-surface-variant bg-surface hover:bg-primary/10 transition-colors"></button>
+                            <button type="button" data-braille-dot="2" aria-label="Toggle braille dot 2" title="Toggle braille dot 2"
+                                class="aspect-square rounded-full border-4 border-surface-variant bg-surface hover:bg-primary/10 transition-colors"></button>
+                            <button type="button" data-braille-dot="5" aria-label="Toggle braille dot 5" title="Toggle braille dot 5"
+                                class="aspect-square rounded-full border-4 border-surface-variant bg-surface hover:bg-primary/10 transition-colors"></button>
+                            <button type="button" data-braille-dot="3" aria-label="Toggle braille dot 3" title="Toggle braille dot 3"
+                                class="aspect-square rounded-full border-4 border-surface-variant bg-surface hover:bg-primary/10 transition-colors"></button>
+                            <button type="button" data-braille-dot="6" aria-label="Toggle braille dot 6" title="Toggle braille dot 6"
+                                class="aspect-square rounded-full border-4 border-surface-variant bg-surface hover:bg-primary/10 transition-colors"></button>
                         </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer">
-                        </div>
-                        <!-- Row 2 -->
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer shadow-inner">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-surface-variant cursor-pointer">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer">
-                        </div>
-                        <div
-                            class="aspect-square rounded-full border-4 border-surface-variant flex items-center justify-center bg-on-background cursor-pointer">
+                        <div class="mt-6 flex flex-wrap justify-center gap-3">
+                            <button id="appendBrailleCellButton" type="button"
+                                class="px-4 py-2 rounded-full bg-primary text-white font-black uppercase tracking-wide">Add Cell</button>
+                            <button id="appendBrailleSpaceButton" type="button"
+                                class="px-4 py-2 rounded-full bg-secondary text-white font-black uppercase tracking-wide">Add Space</button>
+                            <button id="backspaceBrailleButton" type="button"
+                                class="px-4 py-2 rounded-full bg-surface-variant text-on-surface font-black uppercase tracking-wide">Backspace</button>
+                            <button id="clearBrailleBuilderButton" type="button"
+                                class="px-4 py-2 rounded-full bg-error-container text-on-error-container font-black uppercase tracking-wide">Clear Dots</button>
                         </div>
                     </div>
                     <textarea
+                        id="brailleInput"
                         class="w-full bg-transparent border-b-[8px] border-surface-variant focus:border-secondary outline-none py-4 text-3xl font-bold font-headline transition-all placeholder:opacity-20"
-                        placeholder="::: .:. :::"></textarea>
+                        placeholder="⠠⠎⠞⠕⠇⠑⠝ ⠃⠗⠁⠊⠇⠇⠑ or 234 135 123"></textarea>
                 </div>
                 <!-- Crayon Button -->
-                <button
+                <button id="decodeButton" type="button"
                     class="mt-12 w-full bg-tertiary-container text-on-tertiary-container font-headline font-black text-3xl py-6 rounded-[4rem] hover:rotate-2 hover:scale-105 active:skew-x-6 transition-all shadow-[8px_8px_0px_0px_rgba(112,93,0,0.3)] relative overflow-hidden group">
                     <span class="relative z-10 uppercase tracking-tighter">REVEAL THE TRUTH</span>
                     <!-- Crayon wax texture overlay -->
@@ -249,9 +239,20 @@
                     <h3
                         class="font-headline text-on-surface-variant text-xl uppercase font-bold opacity-40 absolute top-6 left-8">
                         THE TRUTH!</h3>
-                    <div
+                    <div id="decodedTextOutput"
                         class="text-5xl md:text-6xl font-headline font-black text-on-background tracking-tighter text-center py-12 italic">
-                        "EAT ALL THE CARROTS"
+                        DECODED TEXT SHOWS UP HERE.
+                    </div>
+                    <p id="decodeStatus" class="text-center font-bold text-on-surface-variant px-4">Paste Unicode braille or dot numbers like 145 15 123.</p>
+                    <div class="mt-6 flex items-center justify-center gap-3">
+                        <button id="copyDecodedTextButton" type="button"
+                            class="p-3 rounded-full bg-surface text-on-surface hover:bg-tertiary-container transition-colors">
+                            <span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
+                        </button>
+                        <button id="shareDecodedTextButton" type="button"
+                            class="p-3 rounded-full bg-surface text-on-surface hover:bg-error-container transition-colors">
+                            <span class="material-symbols-outlined" data-icon="share">share</span>
+                        </button>
                     </div>
                     <!-- Stamp -->
                     <div
@@ -312,6 +313,151 @@
                 Vault</span>
         </a>
     </nav>
+    <script src="../../scripts/braille-helper.js"></script>
+    <script>
+        (() => {
+            const input = document.getElementById("brailleInput");
+            const decodeButton = document.getElementById("decodeButton");
+            const decodedTextOutput = document.getElementById("decodedTextOutput");
+            const decodeStatus = document.getElementById("decodeStatus");
+            const copyButton = document.getElementById("copyDecodedTextButton");
+            const shareButton = document.getElementById("shareDecodedTextButton");
+            const appendCellButton = document.getElementById("appendBrailleCellButton");
+            const appendSpaceButton = document.getElementById("appendBrailleSpaceButton");
+            const backspaceButton = document.getElementById("backspaceBrailleButton");
+            const clearBuilderButton = document.getElementById("clearBrailleBuilderButton");
+            const dotButtons = Array.from(document.querySelectorAll("[data-braille-dot]"));
+            const activeDots = new Set();
+
+            function renderBuilder() {
+                dotButtons.forEach((button) => {
+                    const dot = button.dataset.brailleDot;
+                    button.classList.toggle("braille-toggle-active", activeDots.has(dot));
+                });
+            }
+
+            function appendText(value) {
+                const start = input.selectionStart ?? input.value.length;
+                const end = input.selectionEnd ?? input.value.length;
+                input.setRangeText(value, start, end, "end");
+                input.dispatchEvent(new Event("input", { bubbles: true }));
+                input.focus();
+            }
+
+            function renderResult() {
+                const value = input.value;
+
+                if (!value.trim()) {
+                    decodedTextOutput.textContent = "DECODED TEXT SHOWS UP HERE.";
+                    decodedTextOutput.classList.remove("text-error");
+                    decodeStatus.textContent = "Paste Unicode braille or dot numbers like 145 15 123.";
+                    return "";
+                }
+
+                const result = window.BrailleCodec.decodeBraille(value);
+                decodedTextOutput.textContent = result.text || "[Decoded to an empty string]";
+                decodedTextOutput.classList.remove("text-error");
+                decodeStatus.textContent = `Decoded ${result.cellCount} braille cells.`;
+                return result.text;
+            }
+
+            async function copyDecodedText() {
+                const text = renderResult();
+
+                if (!text) {
+                    decodeStatus.textContent = "Nothing to copy yet. Decode something first.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(text);
+                decodeStatus.textContent = "Decoded text copied to the clipboard.";
+            }
+
+            async function shareDecodedText() {
+                const text = renderResult();
+
+                if (!text) {
+                    decodeStatus.textContent = "Nothing to share yet. Decode something first.";
+                    return;
+                }
+
+                if (navigator.share) {
+                    await navigator.share({ title: document.title, text });
+                    decodeStatus.textContent = "Decoded text shared.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(text);
+                decodeStatus.textContent = "Share is unavailable here, so the decoded text was copied instead.";
+            }
+
+            dotButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    const dot = button.dataset.brailleDot;
+                    if (activeDots.has(dot)) {
+                        activeDots.delete(dot);
+                    } else {
+                        activeDots.add(dot);
+                    }
+                    renderBuilder();
+                });
+            });
+
+            appendCellButton.addEventListener("click", () => {
+                if (!activeDots.size) {
+                    decodeStatus.textContent = "Pick at least one dot before adding a cell.";
+                    return;
+                }
+
+                const dots = Array.from(activeDots).sort().join("");
+                appendText(window.BrailleCodec.dotsToBrailleChar(dots));
+                activeDots.clear();
+                renderBuilder();
+                decodeStatus.textContent = `Added braille cell ${dots}.`;
+            });
+
+            appendSpaceButton.addEventListener("click", () => {
+                appendText(" ");
+                decodeStatus.textContent = "Added a space between braille cells.";
+            });
+
+            backspaceButton.addEventListener("click", () => {
+                const start = input.selectionStart ?? input.value.length;
+                const end = input.selectionEnd ?? input.value.length;
+
+                if (start !== end) {
+                    input.setRangeText("", start, end, "end");
+                } else if (start > 0) {
+                    input.setRangeText("", start - 1, start, "end");
+                }
+
+                input.dispatchEvent(new Event("input", { bubbles: true }));
+                input.focus();
+            });
+
+            clearBuilderButton.addEventListener("click", () => {
+                activeDots.clear();
+                renderBuilder();
+                decodeStatus.textContent = "Dot builder cleared.";
+            });
+
+            decodeButton.addEventListener("click", renderResult);
+            input.addEventListener("input", renderResult);
+            copyButton.addEventListener("click", () => {
+                copyDecodedText().catch(() => {
+                    decodeStatus.textContent = "Clipboard access failed. Copy the decoded text manually.";
+                });
+            });
+            shareButton.addEventListener("click", () => {
+                shareDecodedText().catch(() => {
+                    decodeStatus.textContent = "Share failed. Copy the decoded text manually.";
+                });
+            });
+
+            renderBuilder();
+            renderResult();
+        })();
+    </script>
 </body>
 
 </html>
