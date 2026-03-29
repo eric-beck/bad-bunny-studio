@@ -69,9 +69,9 @@
             <a class="text-[#1b1c15] dark:text-slate-300 opacity-70 font-['Spline_Sans'] uppercase tracking-widest italic hover:rotate-3 hover:scale-110 transition-transform"
                 href="/labs/index.html">Secret Lab</a>
             <a class="text-[#1b1c15] dark:text-slate-300 opacity-70 font-['Spline_Sans'] uppercase tracking-widest italic hover:rotate-3 hover:scale-110 transition-transform"
-                href="#">Encoder</a>
+                href="../encoders/semaphore.html">Encoder</a>
             <a class="text-[#c00014] underline decoration-wavy decoration-4 underline-offset-8 font-['Spline_Sans'] uppercase tracking-widest italic hover:rotate-3 hover:scale-110 transition-transform"
-                href="#">Decoder</a>
+                href="../decoders/semaphore.html">Decoder</a>
             <button
                 class="material-symbols-outlined text-[#c00014] dark:text-red-500 hover:rotate-3 hover:scale-110 transition-transform">settings</button>
         </nav>
@@ -104,6 +104,22 @@
                     <h2 class="text-3xl font-headline font-extrabold text-secondary tracking-tight">POSITION THE ARMS
                     </h2>
                     <span class="material-symbols-outlined text-secondary text-4xl">ads_click</span>
+                </div>
+                <div class="mb-8 rounded-xl border-4 border-dashed border-primary/30 bg-surface-container-highest p-5 rotate-[1deg]">
+                    <div class="flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">
+                        <div class="max-w-xl">
+                            <p class="font-headline text-2xl font-black uppercase italic text-primary">Paste Copied Flags</p>
+                            <p class="mt-2 text-sm font-bold uppercase tracking-wide text-on-surface-variant">Bring the payload over from the encoder and decode the whole message in one hit.</p>
+                        </div>
+                        <button id="decode-paste-btn"
+                            class="shrink-0 rounded-[1.5rem] bg-primary px-6 py-3 text-sm font-black uppercase tracking-[0.2em] text-white shadow-[4px_4px_0px_rgba(112,93,0,0.35)] hover:-rotate-2 transition-transform">
+                            Decode Paste
+                        </button>
+                    </div>
+                    <textarea id="paste-input"
+                        class="mt-4 min-h-28 w-full rounded-xl border-2 border-secondary/20 bg-white/80 p-4 font-['Plus_Jakarta_Sans'] text-sm font-bold tracking-wide text-on-surface focus:border-secondary focus:ring-secondary"
+                        placeholder="Paste payload like 45,315|0,0|90,135..."></textarea>
+                    <p id="paste-status" class="mt-3 text-xs font-bold uppercase tracking-widest text-on-surface-variant opacity-70">Manual arm picking still works below if you want the slow villain route.</p>
                 </div>
                 
                 <!-- Semaphore Arm Positioning Tool -->
@@ -213,12 +229,12 @@
     <nav
         class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-4 bg-[#fbfaee] dark:bg-slate-900 shadow-[0_-10px_40px_rgba(27,28,21,0.06)] md:hidden rounded-t-[3rem] border-t-4 border-[#c00014]">
         <a class="flex flex-col items-center justify-center text-[#1b1c15] dark:text-slate-400 opacity-60 px-6 py-2 transition-all"
-            href="#">
+            href="../encoders/semaphore.html">
             <span class="material-symbols-outlined" data-icon="emergency_recording">emergency_recording</span>
             <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase mt-1">Encoder</span>
         </a>
         <a class="flex flex-col items-center justify-center bg-[#c00014] text-white rounded-[2rem] px-6 py-2 rotate-1 transition-all"
-            href="#">
+            href="../decoders/semaphore.html">
             <span class="material-symbols-outlined" data-icon="visibility_lock"
                 style="font-variation-settings: 'FILL' 1;">visibility_lock</span>
             <span class="font-['Plus_Jakarta_Sans'] font-bold text-xs uppercase mt-1">Decoder</span>
@@ -243,6 +259,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const previewText = document.getElementById('preview-text');
     const decodedOutput = document.getElementById('decoded-output');
     const charHistory = document.getElementById('char-history');
+    const pasteInput = document.getElementById('paste-input');
+    const pasteStatus = document.getElementById('paste-status');
+    const decodePasteBtn = document.getElementById('decode-paste-btn');
+
+    function parsePayload(raw) {
+        return raw
+            .split('|')
+            .map((entry) => entry.trim())
+            .filter(Boolean)
+            .map((entry) => {
+                const [left, right] = entry.split(',').map((value) => Number(value.trim()));
+
+                if (!Number.isFinite(left) || !Number.isFinite(right)) {
+                    throw new Error('Payload format is invalid.');
+                }
+
+                return { left, right };
+            });
+    }
+
+    function setPasteStatus(message, isError = false) {
+        pasteStatus.textContent = message;
+        pasteStatus.classList.toggle('text-error', isError);
+        pasteStatus.classList.toggle('text-on-surface-variant', !isError);
+    }
 
     function drawArms(svg, leftAngle, rightAngle) {
         const centerX = 75, centerY = 75;
@@ -330,6 +371,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function decodePastedPayload() {
+        const raw = pasteInput.value.trim();
+
+        if (!raw) {
+            setPasteStatus('Paste a copied payload from the encoder first.', true);
+            return;
+        }
+
+        try {
+            const positions = parsePayload(raw);
+            decodedCharacters = decodeSemaphore(positions).split('');
+            leftArmAngle = null;
+            rightArmAngle = null;
+            leftArmBtns.forEach((btn) => btn.classList.remove('bg-primary', 'text-white'));
+            rightArmBtns.forEach((btn) => btn.classList.remove('bg-secondary', 'text-white'));
+            updatePreview();
+            updateOutput();
+            setPasteStatus(`Decoded ${decodedCharacters.length} characters from pasted flags.`);
+        } catch (error) {
+            setPasteStatus(error.message || 'Could not decode pasted payload.', true);
+        }
+    }
+
     // Arm button event listeners
     leftArmBtns.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -371,7 +435,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    decodePasteBtn.addEventListener('click', decodePastedPayload);
+
     // Initialize
     updatePreview();
+    setPasteStatus('Manual arm picking still works below if you want the slow villain route.');
 });
 </script>
