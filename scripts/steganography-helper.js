@@ -143,7 +143,7 @@
         const payloadBytes = bitsToBytes(payloadBits);
         const decoder = new TextDecoder();
 
-        return decoder.decode(payloadBytes);
+        return decoder.decode(payloadBytes).replace(/\0+$/, "");
     }
 
     window.BadBunnyStego = {
