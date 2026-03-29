@@ -100,6 +100,10 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
+        .material-symbols-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
         .crayon-border {
             box-shadow: inset 0 0 0 4px #e4e3d7;
             border: 6px solid transparent;
@@ -157,10 +161,10 @@
         <!-- Hero Section -->
         <section class="mb-20 text-left">
             <h2 class="text-error font-headline font-black text-xl mb-2 tracking-[0.2em] rotate-[-1deg]">MORSE CODE
-                ENCODER</h2>
+                DECODER</h2>
             <h1
                 class="font-headline font-black text-6xl md:text-8xl leading-tight text-on-surface tracking-tighter mb-8 max-w-4xl rotate-[0.5deg]">
-                MAKE IT ALL <span class="text-primary italic inline-block transform -rotate-1">DOTS</span> &amp; <span
+                CRACK THE <span class="text-primary italic inline-block transform -rotate-1">DOTS</span> &amp; <span
                     class="text-secondary inline-block transform rotate-2">DASHES</span>
             </h1>
         </section>
@@ -174,22 +178,23 @@
                             class="font-headline font-black text-2xl tracking-widest text-on-surface-variant flex items-center gap-2">
                             <span class="material-symbols-outlined text-secondary"
                                 data-icon="edit_note">edit_note</span>
-                            NORMAL TALK
+                            STOLEN MORSE
                         </label>
                         <span
                             class="bg-tertiary-container text-on-tertiary-container px-4 py-1 rounded-full text-xs font-bold tracking-widest uppercase rotate-2">Sticky
                             Note</span>
                     </div>
                     <textarea
+                        id="morseInput"
                         class="w-full bg-transparent border-none focus:ring-0 text-3xl md:text-4xl font-body font-bold text-on-surface placeholder:text-outline-variant min-h-[300px] resize-none leading-relaxed"
-                        placeholder="Type your secrets..."></textarea>
+                        placeholder="... --- ... / -.-. .- -. / -.-- --- ..- / .-. . .- -.. / - .... .. ... ..--.."></textarea>
                     <div class="absolute bottom-4 right-8 transform rotate-3">
                         <p class="scribble-line font-black text-error text-xl opacity-60 uppercase">TOP SECRET</p>
                     </div>
                 </div>
                 <!-- Crayon Button -->
                 <div class="flex justify-start pl-8">
-                    <button
+                    <button id="decodeButton" type="button"
                         class="group relative py-8 px-20 transform hover:-rotate-3 active:scale-95 transition-all duration-150">
                         <div
                             class="absolute inset-0 bg-primary opacity-90 rounded-[50%_40%_60%_30%] scale-110 group-hover:scale-125 transition-transform blur-sm">
@@ -197,9 +202,8 @@
                         <div class="absolute inset-0 bg-primary rounded-[40%_60%_30%_50%] transition-transform"></div>
                         <span
                             class="relative z-10 font-headline font-black text-4xl text-on-primary tracking-widest flex items-center gap-4">
-                            ENCODE!
-                            <span class="material-symbols-outlined text-5xl" data-icon="bolt" data-weight="fill"
-                                style="font-variation-settings: 'FILL' 1;">bolt</span>
+                            DECODE!
+                            <span class="material-symbols-outlined material-symbols-filled text-5xl" data-icon="bolt" data-weight="fill">bolt</span>
                         </span>
                     </button>
                 </div>
@@ -211,23 +215,24 @@
                         class="absolute top-[-20px] right-[-20px] w-32 h-32 bg-on-tertiary-container opacity-5 rounded-full">
                     </div>
                     <h3 class="font-headline font-black text-3xl mb-8 border-b-4 border-on-tertiary-container/20 pb-2">
-                        VILLAIN MORSE</h3>
+                        REVEALED MESSAGE</h3>
                     <div class="space-y-6 min-h-[250px] flex flex-col justify-center">
-                        <p
+                        <p id="decodedOutput"
                             class="text-5xl md:text-6xl font-black text-on-tertiary-container tracking-[0.3em] leading-loose break-all">
-                            ..- .-. --. . -. -
+                            DECODED TEXT SHOWS UP HERE.
                         </p>
-                        <p
+                        <p id="decodeGhostOutput"
                             class="text-5xl md:text-6xl font-black text-on-tertiary-container/30 tracking-[0.3em] leading-loose break-all">
-                            --. --- -... .-.. .. -.
+                            TRUST THE SLASHES BETWEEN WORDS.
                         </p>
                     </div>
+                    <p id="decodeStatus" class="font-bold text-on-tertiary-container/80">Paste Morse using dots, dashes, spaces, and / between words.</p>
                     <div class="mt-8 flex justify-end gap-4">
-                        <button
+                        <button id="copyDecodedTextButton" type="button"
                             class="w-14 h-14 rounded-full bg-on-tertiary-container text-tertiary-container flex items-center justify-center hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
                         </button>
-                        <button
+                        <button id="shareDecodedTextButton" type="button"
                             class="w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined" data-icon="share">share</span>
                         </button>
@@ -288,6 +293,84 @@
             </a>
         </div>
     </footer>
+    <script src="../../scripts/morse-helper.js"></script>
+    <script>
+        (() => {
+            const input = document.getElementById("morseInput");
+            const decodeButton = document.getElementById("decodeButton");
+            const output = document.getElementById("decodedOutput");
+            const ghostOutput = document.getElementById("decodeGhostOutput");
+            const status = document.getElementById("decodeStatus");
+            const copyButton = document.getElementById("copyDecodedTextButton");
+            const shareButton = document.getElementById("shareDecodedTextButton");
+
+            function renderResult() {
+                const value = input.value;
+
+                if (!value.trim()) {
+                    output.textContent = "DECODED TEXT SHOWS UP HERE.";
+                    ghostOutput.textContent = "TRUST THE SLASHES BETWEEN WORDS.";
+                    status.textContent = "Paste Morse using dots, dashes, spaces, and / between words.";
+                    output.classList.remove("text-error");
+                    return "";
+                }
+
+                const result = window.MorseCodec.decodeText(value);
+                output.textContent = result.text || "[Decoded to an empty string]";
+                ghostOutput.textContent = result.normalizedMorse || "TRUST THE SLASHES BETWEEN WORDS.";
+                status.textContent = result.invalidTokens.length
+                    ? `Unknown Morse groups were replaced with ?: ${result.invalidTokens.join(", ")}`
+                    : `Decoded ${result.normalizedMorse.split(/\s+/).filter(Boolean).length} Morse groups into text.`;
+                output.classList.toggle("text-error", result.invalidTokens.length > 0);
+                return result.text;
+            }
+
+            async function copyDecodedText() {
+                const decoded = renderResult();
+
+                if (!decoded) {
+                    status.textContent = "Nothing to copy yet. Decode a message first.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(decoded);
+                status.textContent = "Decoded text copied to the clipboard.";
+            }
+
+            async function shareDecodedText() {
+                const decoded = renderResult();
+
+                if (!decoded) {
+                    status.textContent = "Nothing to share yet. Decode a message first.";
+                    return;
+                }
+
+                if (navigator.share) {
+                    await navigator.share({ title: document.title, text: decoded });
+                    status.textContent = "Decoded text shared.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(decoded);
+                status.textContent = "Share is unavailable here, so the decoded text was copied instead.";
+            }
+
+            decodeButton.addEventListener("click", renderResult);
+            input.addEventListener("input", renderResult);
+            copyButton.addEventListener("click", () => {
+                copyDecodedText().catch(() => {
+                    status.textContent = "Clipboard access failed. Copy the decoded text manually.";
+                });
+            });
+            shareButton.addEventListener("click", () => {
+                shareDecodedText().catch(() => {
+                    status.textContent = "Share failed. Copy the decoded text manually.";
+                });
+            });
+
+            renderResult();
+        })();
+    </script>
 </body>
 
 </html>

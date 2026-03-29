@@ -100,6 +100,10 @@
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
+        .material-symbols-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
         .crayon-border {
             box-shadow: inset 0 0 0 4px #e4e3d7;
             border: 6px solid transparent;
@@ -181,6 +185,7 @@
                             Note</span>
                     </div>
                     <textarea
+                        id="plainTextInput"
                         class="w-full bg-transparent border-none focus:ring-0 text-3xl md:text-4xl font-body font-bold text-on-surface placeholder:text-outline-variant min-h-[300px] resize-none leading-relaxed"
                         placeholder="Type your secrets..."></textarea>
                     <div class="absolute bottom-4 right-8 transform rotate-3">
@@ -189,7 +194,7 @@
                 </div>
                 <!-- Crayon Button -->
                 <div class="flex justify-start pl-8">
-                    <button
+                    <button id="encodeButton" type="button"
                         class="group relative py-8 px-20 transform hover:-rotate-3 active:scale-95 transition-all duration-150">
                         <div
                             class="absolute inset-0 bg-primary opacity-90 rounded-[50%_40%_60%_30%] scale-110 group-hover:scale-125 transition-transform blur-sm">
@@ -198,8 +203,7 @@
                         <span
                             class="relative z-10 font-headline font-black text-4xl text-on-primary tracking-widest flex items-center gap-4">
                             ENCODE!
-                            <span class="material-symbols-outlined text-5xl" data-icon="bolt" data-weight="fill"
-                                style="font-variation-settings: 'FILL' 1;">bolt</span>
+                            <span class="material-symbols-outlined material-symbols-filled text-5xl" data-icon="bolt" data-weight="fill">bolt</span>
                         </span>
                     </button>
                 </div>
@@ -213,21 +217,22 @@
                     <h3 class="font-headline font-black text-3xl mb-8 border-b-4 border-on-tertiary-container/20 pb-2">
                         VILLAIN MORSE</h3>
                     <div class="space-y-6 min-h-[250px] flex flex-col justify-center">
-                        <p
+                        <p id="morseOutput"
                             class="text-5xl md:text-6xl font-black text-on-tertiary-container tracking-[0.3em] leading-loose break-all">
-                            ..- .-. --. . -. -
+                            TYPE A MESSAGE TO GENERATE MORSE.
                         </p>
-                        <p
+                        <p id="morseGhostOutput"
                             class="text-5xl md:text-6xl font-black text-on-tertiary-container/30 tracking-[0.3em] leading-loose break-all">
-                            --. --- -... .-.. .. -.
+                            .-- .- .. - / ..-. --- .-. / .. -
                         </p>
                     </div>
+                    <p id="encodeStatus" class="font-bold text-on-tertiary-container/80">Ready to encode text into dots and dashes. Words are separated with /.</p>
                     <div class="mt-8 flex justify-end gap-4">
-                        <button
+                        <button id="copyMorseButton" type="button"
                             class="w-14 h-14 rounded-full bg-on-tertiary-container text-tertiary-container flex items-center justify-center hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
                         </button>
-                        <button
+                        <button id="shareMorseButton" type="button"
                             class="w-14 h-14 rounded-full bg-primary text-on-primary flex items-center justify-center hover:scale-110 transition-transform">
                             <span class="material-symbols-outlined" data-icon="share">share</span>
                         </button>
@@ -288,6 +293,82 @@
             </a>
         </div>
     </footer>
+    <script src="../../scripts/morse-helper.js"></script>
+    <script>
+        (() => {
+            const input = document.getElementById("plainTextInput");
+            const encodeButton = document.getElementById("encodeButton");
+            const output = document.getElementById("morseOutput");
+            const ghostOutput = document.getElementById("morseGhostOutput");
+            const status = document.getElementById("encodeStatus");
+            const copyButton = document.getElementById("copyMorseButton");
+            const shareButton = document.getElementById("shareMorseButton");
+
+            function renderResult() {
+                const value = input.value;
+
+                if (!value.trim()) {
+                    output.textContent = "TYPE A MESSAGE TO GENERATE MORSE.";
+                    ghostOutput.textContent = ".-- .- .. - / ..-. --- .-. / .. -";
+                    status.textContent = "Ready to encode text into dots and dashes. Words are separated with /.";
+                    return "";
+                }
+
+                const result = window.MorseCodec.encodeText(value);
+                output.textContent = result.morse;
+                ghostOutput.textContent = `${result.symbolCount} SIGNALS`;
+                status.textContent = result.unsupportedCharacters.length
+                    ? `Encoded with unsupported characters left as-is: ${result.unsupportedCharacters.join(" ")}`
+                    : `Encoded ${value.length} characters into ${result.symbolCount} Morse signals.`;
+                return result.morse;
+            }
+
+            async function copyMorse() {
+                const morse = renderResult();
+
+                if (!morse) {
+                    status.textContent = "Nothing to copy yet. Encode a message first.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(morse);
+                status.textContent = "Morse output copied to the clipboard.";
+            }
+
+            async function shareMorse() {
+                const morse = renderResult();
+
+                if (!morse) {
+                    status.textContent = "Nothing to share yet. Encode a message first.";
+                    return;
+                }
+
+                if (navigator.share) {
+                    await navigator.share({ title: document.title, text: morse });
+                    status.textContent = "Morse output shared.";
+                    return;
+                }
+
+                await navigator.clipboard.writeText(morse);
+                status.textContent = "Share is unavailable here, so the Morse output was copied instead.";
+            }
+
+            encodeButton.addEventListener("click", renderResult);
+            input.addEventListener("input", renderResult);
+            copyButton.addEventListener("click", () => {
+                copyMorse().catch(() => {
+                    status.textContent = "Clipboard access failed. Copy the Morse output manually.";
+                });
+            });
+            shareButton.addEventListener("click", () => {
+                shareMorse().catch(() => {
+                    status.textContent = "Share failed. Copy the Morse output manually.";
+                });
+            });
+
+            renderResult();
+        })();
+    </script>
 </body>
 
 </html>
