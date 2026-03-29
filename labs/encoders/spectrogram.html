@@ -146,7 +146,7 @@
         <div class="flex flex-col items-center gap-2 mb-4">
             <div
                 class="w-20 h-20 rounded-full bg-surface-container-highest flex items-center justify-center border-4 border-[#00668a] rotate-3 overflow-hidden">
-                <img class="w-full h-full object-cover"
+                <img class="w-full h-full object-cover" alt="Mastermind avatar"
                     data-alt="Crayon-drawn villain silhouette, minimalist child-like scribble of a masked character with messy hair"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUfw2k9veOIIrTnennjxfViJ3ZnZQdVA5sYYEweNxscbV83tNuxzutILRE9hykE05bfZ8PV0SVFZ0IKmPIFWjb3xnbyBWHBmL_cUJGFe82d5Csz6BKIMdcCKgEpm8gnTwpfUdnHslDE8buzFXGGUv19CtQcLc8d3Sq565R8CtU_OCQoISXNDr4_ESeWH4wT73-urwxbzsdStZVPZFVxP5I3k_qe392W88OkxJjsy6mJyRsthn5IbHPAaQIs9kEiin6aBJuVF4Saos" />
             </div>
@@ -197,7 +197,7 @@
                 <div
                     class="absolute inset-0 bg-surface-container-high rounded-xl rotate-[-1deg] translate-x-2 translate-y-2 group-hover:rotate-0 transition-transform">
                 </div>
-                <div
+                <div id="encodeDropZone"
                     class="relative bg-surface p-8 border-4 border-dashed border-stone-400 rounded-xl min-h-[400px] flex flex-col items-center justify-center text-center cursor-pointer transition-all hover:scale-[1.01]">
                     <div class="mb-6 relative">
                         <span class="material-symbols-outlined text-9xl text-stone-300"
@@ -210,7 +210,35 @@
                     <p class="text-stone-500 font-bold mb-8">MP3, WAV, OR THE SOUND OF YOUR OWN SECRETS</p>
                     <div
                         class="w-full h-12 bg-surface-container-low border-b-4 border-primary/30 flex items-center px-4">
-                        <span class="text-stone-400 italic">No file selected... yet.</span>
+                        <span id="encodeFileName" class="text-stone-400 italic">No file selected... yet.</span>
+                    </div>
+                    <label class="mt-4 flex items-center gap-3 text-sm font-semibold text-stone-600">
+                        <input id="useCarrierEmbed" type="checkbox" class="rounded border-stone-400 text-primary" checked />
+                        Embed into uploaded carrier audio (optional)
+                    </label>
+                    <div class="mt-3 w-full">
+                        <div class="flex items-center justify-between text-xs font-bold uppercase tracking-wider text-stone-600">
+                            <span>Embed Strength</span>
+                            <span id="embedMixGainValue">28%</span>
+                        </div>
+                        <div class="mt-2 flex flex-wrap gap-2">
+                            <button type="button" data-embed-preset="15"
+                                class="embed-preset-btn px-3 py-1 rounded-full border-2 border-stone-400 text-[11px] font-black uppercase tracking-wide text-stone-600 hover:border-primary hover:text-primary transition-colors">
+                                Stealth 15%
+                            </button>
+                            <button type="button" data-embed-preset="28"
+                                class="embed-preset-btn px-3 py-1 rounded-full border-2 border-primary bg-primary text-white text-[11px] font-black uppercase tracking-wide transition-colors">
+                                Balanced 28%
+                            </button>
+                            <button type="button" data-embed-preset="40"
+                                class="embed-preset-btn px-3 py-1 rounded-full border-2 border-stone-400 text-[11px] font-black uppercase tracking-wide text-stone-600 hover:border-primary hover:text-primary transition-colors">
+                                Robust 40%
+                            </button>
+                        </div>
+                        <input id="embedMixGain" type="range" min="8" max="50" step="1" value="28"
+                            class="mt-2 w-full accent-primary"
+                            aria-label="Embed strength: lower is stealthier, higher is easier to decode" />
+                        <p class="mt-1 text-[11px] text-stone-500 font-semibold">Lower = stealthier, Higher = easier decode after compression.</p>
                     </div>
                     <!-- Decorative Scribbles -->
                     <div class="absolute bottom-4 left-4 scribble-text text-error font-black text-sm opacity-60">DO NOT
@@ -219,6 +247,7 @@
                         class="absolute top-4 right-4 rotate-6 text-tertiary font-bold text-xs uppercase tracking-widest">
                         Top Secret Lab Access</div>
                 </div>
+                <input id="encodeAudioInput" type="file" accept="audio/*" class="hidden" title="Choose optional carrier audio" aria-label="Choose optional carrier audio" />
             </div>
             <!-- Text Area / Message Hide -->
             <div class="flex flex-col gap-8">
@@ -228,7 +257,7 @@
                         <h3 class="font-headline font-black text-xl uppercase italic">HIDE THE MESSAGE</h3>
                     </div>
                     <div class="relative pt-8">
-                        <textarea
+                        <textarea id="secretMessage"
                             class="w-full h-64 bg-surface-container-low p-8 font-body font-bold text-xl border-none ring-0 focus:ring-4 focus:ring-tertiary-container rounded-xl shadow-inner placeholder:text-stone-300 placeholder:italic"
                             placeholder="Type what they aren't supposed to know..."></textarea>
                         <!-- Highlighter Effect (SVG overlay or absolute div) -->
@@ -245,7 +274,7 @@
                     <div
                         class="absolute inset-0 bg-stone-900 rounded-full translate-x-2 translate-y-2 group-active:translate-x-0 group-active:translate-y-0 transition-all">
                     </div>
-                    <button
+                    <button id="encodeButton" type="button"
                         class="relative bg-primary text-on-primary font-headline text-4xl font-black px-12 py-6 rounded-full border-4 border-primary group-hover:rotate-2 group-hover:scale-105 active:scale-95 transition-all uppercase italic tracking-tighter">
                         BURN INTO SOUND
                     </button>
@@ -262,23 +291,17 @@
                 <div class="flex items-start justify-between">
                     <div>
                         <h4 class="font-headline text-2xl font-black mb-2 italic">ENCODING LOG: 0X999</h4>
-                        <p class="text-stone-600 font-medium">Last session destroyed 4 megabytes of evidence. Clean job.
+                        <p id="encodeStatus" class="text-stone-600 font-medium">Type a message, then burn it into sound.
                         </p>
                     </div>
                     <span class="material-symbols-outlined text-4xl text-secondary" data-icon="task_alt">task_alt</span>
                 </div>
-                <div class="mt-8 flex gap-2">
-                    <div class="h-12 w-full bg-secondary/10 rounded-sm overflow-hidden flex items-end">
-                        <div class="bg-secondary h-[40%] w-4"></div>
-                        <div class="bg-secondary h-[70%] w-4 ml-1"></div>
-                        <div class="bg-secondary h-[20%] w-4 ml-1"></div>
-                        <div class="bg-secondary h-[90%] w-4 ml-1"></div>
-                        <div class="bg-secondary h-[50%] w-4 ml-1"></div>
-                        <div class="bg-secondary h-[60%] w-4 ml-1"></div>
-                        <div class="bg-secondary h-[30%] w-4 ml-1"></div>
-                    </div>
+                <div class="mt-8 space-y-4">
+                    <canvas id="encodeSpectrogramCanvas" class="w-full h-56 bg-stone-900 rounded-lg border border-stone-700"></canvas>
+                    <audio id="encodedAudioPlayer" controls class="w-full"></audio>
+                    <a id="downloadEncodedAudio" href="#" class="hidden text-primary font-bold underline" download="spectrogram-message.wav">Download encoded audio (.wav)</a>
                 </div>
-                <img class="absolute -bottom-4 -right-4 w-24 h-24 opacity-20"
+                <img class="absolute -bottom-4 -right-4 w-24 h-24 opacity-20" alt="Decorative skull scribble"
                     data-alt="Small crayon scribble of a skull with crossbones in a playful villain style"
                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAR7JF3Dc5Yig4Na9dt-x5s0aP70hKyzpsikTuh0kb4U9ThOcU_FKP2lP4tJn6abi-tcolP4UYUhvRov2FG0Az1i6hvNefTw6CKYNjrrDyMMXLD0yTS90KjzoV9S7twuqhaYzXLd3X3tz2NT1uy55y6hseAz3dAtYgOqk02e-BphBDKeufPQ_hCeWaCPObaPOPOkgJEktv0legzklLHSxIQ6BYqmsLO-gErw3Dd_ecthCtHB8nSQ059_afT0RjpNEY4K3a7OQIRrlg" />
             </div>
@@ -323,6 +346,162 @@
             </p>
         </div>
     </div>
+    <script src="../../scripts/spectrogram-helper.js"></script>
+    <script>
+        (() => {
+            const spectro = window.BadBunnySpectrogram;
+
+            const dropZone = document.getElementById("encodeDropZone");
+            const audioInput = document.getElementById("encodeAudioInput");
+            const fileName = document.getElementById("encodeFileName");
+            const messageInput = document.getElementById("secretMessage");
+            const encodeButton = document.getElementById("encodeButton");
+            const status = document.getElementById("encodeStatus");
+            const canvas = document.getElementById("encodeSpectrogramCanvas");
+            const player = document.getElementById("encodedAudioPlayer");
+            const downloadLink = document.getElementById("downloadEncodedAudio");
+            const useCarrierEmbed = document.getElementById("useCarrierEmbed");
+            const embedMixGain = document.getElementById("embedMixGain");
+            const embedMixGainValue = document.getElementById("embedMixGainValue");
+            const presetButtons = Array.from(document.querySelectorAll(".embed-preset-btn"));
+
+            let selectedAudioFile = null;
+            let carrierSamples = null;
+            let carrierSampleRate = null;
+
+            function setStatus(message, isError) {
+                status.textContent = message;
+                status.classList.toggle("text-error", Boolean(isError));
+                status.classList.toggle("text-stone-600", !isError);
+            }
+
+            function getEmbedGain() {
+                return Number(embedMixGain.value) / 100;
+            }
+
+            function syncPresetButtons() {
+                const activeValue = Number(embedMixGain.value);
+
+                presetButtons.forEach((button) => {
+                    const value = Number(button.dataset.embedPreset);
+                    const isActive = value === activeValue;
+
+                    button.setAttribute("aria-pressed", String(isActive));
+                    button.classList.toggle("border-primary", isActive);
+                    button.classList.toggle("bg-primary", isActive);
+                    button.classList.toggle("text-white", isActive);
+                    button.classList.toggle("border-stone-400", !isActive);
+                    button.classList.toggle("text-stone-600", !isActive);
+                });
+            }
+
+            function syncEmbedUi() {
+                embedMixGainValue.textContent = `${embedMixGain.value}%`;
+                embedMixGain.disabled = !useCarrierEmbed.checked;
+                embedMixGain.classList.toggle("opacity-50", embedMixGain.disabled);
+                syncPresetButtons();
+            }
+
+            async function handleAudioFile(file) {
+                if (!file || !file.type.startsWith("audio/")) {
+                    setStatus("Choose a valid audio file.", true);
+                    return;
+                }
+
+                selectedAudioFile = file;
+                fileName.textContent = file.name;
+
+                try {
+                    const { context, buffer } = await spectro.decodeAudioFile(file);
+                    const mono = spectro.toMonoSamples(buffer);
+                    carrierSamples = mono;
+                    carrierSampleRate = buffer.sampleRate;
+                    spectro.drawSpectrogramFromSamples(mono, buffer.sampleRate, canvas);
+                    await context.close();
+                    setStatus("Carrier audio loaded. Now burn your message.", false);
+                } catch (error) {
+                    carrierSamples = null;
+                    carrierSampleRate = null;
+                    setStatus(error.message || "Failed to inspect audio file.", true);
+                }
+            }
+
+            async function encodeMessage() {
+                const message = messageInput.value.trim();
+                if (!message) {
+                    setStatus("Type a message before encoding.", true);
+                    return;
+                }
+
+                try {
+                    const useCarrier = Boolean(useCarrierEmbed.checked && carrierSamples && carrierSampleRate);
+                    const gain = getEmbedGain();
+                    const encoded = spectro.createEncodedAudioFromText(message, {
+                        sampleRate: useCarrier ? carrierSampleRate : undefined,
+                        carrierSamples: useCarrier ? carrierSamples : null,
+                        embedMixGain: gain
+                    });
+                    const encodedUrl = URL.createObjectURL(encoded.blob);
+
+                    player.src = encodedUrl;
+                    downloadLink.href = encodedUrl;
+                    downloadLink.classList.remove("hidden");
+
+                    spectro.drawSpectrogramFromSamples(encoded.waveform, encoded.sampleRate, canvas);
+
+                    const carrierNote = encoded.usedCarrier && selectedAudioFile
+                        ? ` Embedded into carrier: ${selectedAudioFile.name} at ${embedMixGain.value}% strength.`
+                        : " Generated standalone encoded WAV.";
+                    setStatus(
+                        `Encoded ${encoded.messageBytes} bytes into ${encoded.symbolCount} symbols (${encoded.durationSeconds.toFixed(2)}s).${carrierNote}`,
+                        false
+                    );
+                } catch (error) {
+                    setStatus(error.message || "Encoding failed.", true);
+                }
+            }
+
+            dropZone.addEventListener("click", (event) => {
+                if (event.target.closest("input, label, button, a, textarea, select")) {
+                    return;
+                }
+                audioInput.click();
+            });
+            dropZone.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                dropZone.classList.add("ring-4", "ring-primary");
+            });
+
+            dropZone.addEventListener("dragleave", () => {
+                dropZone.classList.remove("ring-4", "ring-primary");
+            });
+
+            dropZone.addEventListener("drop", async (event) => {
+                event.preventDefault();
+                dropZone.classList.remove("ring-4", "ring-primary");
+                const [file] = event.dataTransfer.files;
+                await handleAudioFile(file);
+            });
+
+            audioInput.addEventListener("change", async (event) => {
+                const [file] = event.target.files;
+                await handleAudioFile(file);
+            });
+
+            embedMixGain.addEventListener("input", syncEmbedUi);
+            useCarrierEmbed.addEventListener("change", syncEmbedUi);
+
+            presetButtons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    embedMixGain.value = button.dataset.embedPreset;
+                    syncEmbedUi();
+                });
+            });
+
+            encodeButton.addEventListener("click", encodeMessage);
+            syncEmbedUi();
+        })();
+    </script>
 </body>
 
 </html>
