@@ -106,3 +106,11 @@ The site uses a consistent Material Design 3-inspired color token system defined
 | `tertiary-fixed` | `#ffe16d` | Bright yellow — selection, tags |
 
 Each page also includes hand-crafted CSS for texture effects: paper grain, blueprint grids, coffee stains, crayon strokes, and rough clip-path edges.
+
+## Build CSS
+
+```bash
+npm install
+npm run build:css
+npm run watch:css
+```
